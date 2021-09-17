@@ -17,7 +17,7 @@ public class UserDAO {
 			String dbURL="jdbc:mysql://localhost:3306/KProject";
 			String dbID="root";
 			String dbPassword="1234";
-			Class.forName("com.mysql.jdbc.Drvier");
+			Class.forName("com.mysql.jdbc.Driver");
 			conn=DriverManager.getConnection(dbURL,dbID,dbPassword);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -25,23 +25,23 @@ public class UserDAO {
 	}
 	
 	public int login(String userID, String userPassword) {					//로그인용
-		String SQL="SELECT userPassword FROM USER WHERE userID = ?";      //보안 때문에 ?를 사용하고 추후에 ? 위치에 특정값이 들어감, 입력한 ID의 userPassword를 가져옴
+		String SQL="SELECT user_Password FROM USER WHERE user_Id = ?";      //보안 때문에 ?를 사용하고 추후에 ? 위치에 특정값이 들어감, 입력한 ID의 userPassword를 가져옴
 		try {
 			pstmt=conn.prepareStatement(SQL);      							//SQL에 있는 문장 가져와서 넣을거임
 			pstmt.setString(1, userID);                                   //?자리에 userID의 값을 넣어주는거임
-			rs=pstmt.executeQuery();                   						//SQL에 문장 넣은 결과값을 저장
+			rs=pstmt.executeQuery();   										//SQL에 문장 넣은 결과값을 저장
 			if(rs.next()) {                               					//결과가 존재한다면
 				if(rs.getString(1).equals(userPassword)) {    				//가져온 password가 입력한 password와 같으면
 					return 1;               								//로그인성공
 				}
+				else
+					return 0;												//비밀번호 없음
 			}
 			return -1;                      								//아이디가 없음
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -2; //DB오류를 의미
-	}
-	
+		return -2; //DB오류를 의미 
+	} 
 	//회원가입 메소드
-	
 }

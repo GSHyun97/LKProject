@@ -38,4 +38,6 @@ public class dbgetset {
 	public void setUser_Email(String user_Email) {
 		this.user_Email = user_Email;
 	}
+	
+	
 }

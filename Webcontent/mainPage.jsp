@@ -33,7 +33,6 @@
 			<a> <input type="text" size="20" name="search"></a> 
 			<a><input type="submit" value="검색" ></a>
 		
-		
 		<%
 		int login_state=0;
 		if(login_state==0){ %>
@@ -41,7 +40,7 @@
 		<%} else if(login_state==1){%>
 		<a href="log.jsp">글쓰기</a>
 		<a>로그아웃</a> 
-		<%} %>
+		<% } %>
 		</form>
 	</header>
 
