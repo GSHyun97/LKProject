@@ -18,6 +18,7 @@
 			</form>
 					<a href="passwordfind.jsp">아이디/비밀번호 찾기</a>
 					<a href="addMember.jsp">회원가입</a>
+		
 	</div>
 </body>
 </html>

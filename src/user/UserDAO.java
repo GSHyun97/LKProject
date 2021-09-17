@@ -25,23 +25,36 @@ public class UserDAO {
 	}
 	
 	public int login(String userID, String userPassword) {					//로그인용
-		String SQL="SELECT user_Password FROM USER WHERE user_Id = ?";      //보안 때문에 ?를 사용하고 추후에 ? 위치에 특정값이 들어감, 입력한 ID의 userPassword를 가져옴
+		String SQL="SELECT user_Password FROM USER WHERE user_ID = ?";      //보안 때문에 ?를 사용하고 추후에 ? 위치에 특정값이 들어감, 입력한 ID의 userPassword를 가져옴
 		try {
 			pstmt=conn.prepareStatement(SQL);      							//SQL에 있는 문장 가져와서 넣을거임
 			pstmt.setString(1, userID);                                   //?자리에 userID의 값을 넣어주는거임
-			rs=pstmt.executeQuery();   										//SQL에 문장 넣은 결과값을 저장
+			rs=pstmt.executeQuery();                   						//SQL에 문장 넣은 결과값을 저장
 			if(rs.next()) {                               					//결과가 존재한다면
 				if(rs.getString(1).equals(userPassword)) {    				//가져온 password가 입력한 password와 같으면
 					return 1;               								//로그인성공
 				}
-				else
-					return 0;												//비밀번호 없음
 			}
 			return -1;                      								//아이디가 없음
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -2; //DB오류를 의미 
-	} 
+		return -2; //DB오류를 의미
+	}
 	//회원가입 메소드
+	public int addMember(dbgetset user) {					
+		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?)";     
+		try {
+			pstmt=conn.prepareStatement(SQL);      							
+			pstmt.setString(1, user.getUser_Id());   
+			pstmt.setString(2, user.getUser_Password());
+			pstmt.setString(3, user.getUser_Name());
+			pstmt.setString(4, user.getUser_Birth());
+			pstmt.setString(5, user.getUser_Email());
+			return pstmt.executeUpdate();                   				
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //DB오류를 의미
+	}
 }
