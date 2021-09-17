@@ -42,4 +42,6 @@ public class UserDAO {
 		return -2; //DB오류를 의미
 	}
 	
+	//회원가입 메소드
+	
 }

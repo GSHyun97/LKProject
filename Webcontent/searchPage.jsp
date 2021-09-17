@@ -36,7 +36,11 @@
 
 <nav id=nav>
 통합검색
-<p>~~에 대한 @@건의 검색 결과가 있습니다.
+<%
+	String search=request.getParameter("search");
+	
+%>
+<p><%out.print(search); %>에 대한 @@건의 검색 결과가 있습니다.
 </nav>
 
 <section id=section>
