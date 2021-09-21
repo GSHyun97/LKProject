@@ -49,8 +49,8 @@ public class UserDAO {
 			pstmt.setString(1, user.getUser_Id());   
 			pstmt.setString(2, user.getUser_Password());
 			pstmt.setString(3, user.getUser_Name());
-			pstmt.setString(4, user.getUser_Birth());
-			pstmt.setString(5, user.getUser_Email());
+			pstmt.setString(4, user.getUser_Birth1()+user.getUser_Birth2()+user.getUser_Birth3());
+			pstmt.setString(5, user.getUser_Email1()+"@"+user.getUser_Email2());
 			return pstmt.executeUpdate();                   				
 		}catch (Exception e) {
 			e.printStackTrace();

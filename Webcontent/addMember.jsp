@@ -13,9 +13,9 @@
 					<input name="user_Password" type="text" class="form-control" placeholder="비밀번호를 입력하세요" >
 				<p><label>성명</label>
 					<input name="user_Name" type="text" class="form-control">
-				<p><label>생일</label>
-					<input type="text" name="user_Birth" maxlength="4" placeholder="년(4자)" size="6"> 
-					<select name="birthmm">
+				<p><label>생년월일</label>
+					<input type="text" name="user_Birth1" maxlength="4" placeholder="년(4자)" size="6">
+					<select name="user_Birth2">
 						<option value="">월</option>
 						<option value="01">1</option>
 						<option value="02">2</option>
@@ -30,7 +30,7 @@
 						<option value="11">11</option>
 						<option value="12">12</option>
 					</select>
-					<select name="birthdd">
+					<select name="user_Birth3">
 						<option value="">일</option>
 						<option value="01">1</option>
 						<option value="02">2</option>
@@ -65,8 +65,8 @@
 						<option value="31">31</option>
 					</select>
 				<p><label>이메일</label>
-					<input type="text" name="user_Email" maxlength="50">@ 
-					<select name="mail2">
+					<input type="text" name="user_Email1" maxlength="50">@ 
+					<select name="user_Email2">
 						<option>naver.com</option>
 						<option>gmail.com</option>
 					</select>

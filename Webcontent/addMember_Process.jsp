@@ -6,14 +6,17 @@
 <jsp:setProperty name="user" property="user_Id" />
 <jsp:setProperty name="user" property="user_Password" />
 <jsp:setProperty name="user" property="user_Name" />
-<jsp:setProperty name="user" property="user_Birth" />
-<jsp:setProperty name="user" property="user_Email" />
+<jsp:setProperty name="user" property="user_Birth1" />
+<jsp:setProperty name="user" property="user_Birth2" />
+<jsp:setProperty name="user" property="user_Birth3" />
+<jsp:setProperty name="user" property="user_Email1" />
+<jsp:setProperty name="user" property="user_Email2" />
 <html>
 <head>
 <body>
 	<%		
 		    if(user.getUser_Id() == null ||user.getUser_Password() == null || user.getUser_Name() == null
-			|| user.getUser_Birth() == null || user.getUser_Email() == null){
+			/* || user.getUser_Birth() == null || user.getUser_Email() == null */){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('입력이 안 된 항목이 있습니다.')");
@@ -32,7 +35,7 @@
 		    else if (result == 0){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("location.href = 'mainPage.jsp'");
+				script.println("location.href='mainPage.jsp'");
 				script.println("</script>");
 			}
 		 }

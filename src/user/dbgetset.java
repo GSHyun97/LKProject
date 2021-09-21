@@ -5,8 +5,12 @@ public class dbgetset {
 	private String user_Id;
 	private String user_Password;
 	private String user_Name;
-	private String user_Birth;
-	private String user_Email;
+	private String user_Birth1;
+	private String user_Birth2;
+	private String user_Birth3;
+	private String user_Email1;
+	private String user_Email2;
+	
 	
 	public String getUser_Id() {
 		return user_Id;
@@ -26,18 +30,35 @@ public class dbgetset {
 	public void setUser_Name(String user_Name) {
 		this.user_Name = user_Name;
 	}
-	public String getUser_Birth() {
-		return user_Birth;
+	public String getUser_Birth1() {
+		return user_Birth1;
 	}
-	public void setUser_Birth(String user_Birth) {
-		this.user_Birth = user_Birth;
+	public void setUser_Birth1(String user_Birth1) {
+		this.user_Birth1 = user_Birth1;
 	}
-	public String getUser_Email() {
-		return user_Email;
+	public String getUser_Birth2() {
+		return user_Birth2;
 	}
-	public void setUser_Email(String user_Email) {
-		this.user_Email = user_Email;
+	public void setUser_Birth2(String user_Birth2) {
+		this.user_Birth2 = user_Birth2;
 	}
-	
+	public String getUser_Birth3() {
+		return user_Birth3;
+	}
+	public void setUser_Birth3(String user_Birth3) {
+		this.user_Birth3 = user_Birth3;
+	}
+	public String getUser_Email1() {
+		return user_Email1;
+	}
+	public void setUser_Email1(String user_Email1) {
+		this.user_Email1 = user_Email1;
+	}
+	public String getUser_Email2() {
+		return user_Email2;
+	}
+	public void setUser_Email2(String user_Email2) {
+		this.user_Email2 = user_Email2;
+	}
 	
 }
