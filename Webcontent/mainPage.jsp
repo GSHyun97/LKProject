@@ -21,7 +21,22 @@
 </style>
 </head>
 <body>
+<%
+	String user_Id = null;
+	if(session.getAttribute("user_Id") != null){
+		user_Id = (String) session.getAttribute("user_Id");
+	}
+	if(user_Id == null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인 후에 이용해 주세요')");
+		script.println("location.href = 'userLogin.jsp;");
+		script.println("</script>");
+		script.close();
+		return;
+	}
 
+%>
 <!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야함-->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,14 +58,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-
+<%
+	if(user_Id == null){
+%>
 		<a class="dropdown-item" href="#">로그인</a>
 	    <a class="dropdown-item" href="#">회원가입</a>
-
+<% 
+	} else {
+%>
 		<a class="dropdown-item" href="#">내가 담은글</a>
 		<a class="dropdown-item" href="#">내가 쓴글</a>
 		<a class="dropdown-item" href="#">로그아웃</a>
-
+<%	
+	} //메인페이지 확인하고 싶으면 <% 시작한 서블릿 다 없애고 돌려보면 됨~
+%>   
 
             </div>
          </div>
