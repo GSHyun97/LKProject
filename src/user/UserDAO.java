@@ -43,7 +43,7 @@ public class UserDAO {
 	}
 	//회원가입 메소드
 	public int addMember(dbgetset user) {					
-		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?)";     
+		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";     
 		try {
 			pstmt=conn.prepareStatement(SQL);      							
 			pstmt.setString(1, user.getUser_Id());   

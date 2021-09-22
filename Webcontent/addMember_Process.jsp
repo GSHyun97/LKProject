@@ -16,7 +16,8 @@
 <body>
 	<%		
 		    if(user.getUser_Id() == null ||user.getUser_Password() == null || user.getUser_Name() == null
-			/* || user.getUser_Birth() == null || user.getUser_Email() == null */){
+			|| user.getUser_Birth1() == null || user.getUser_Birth2() == null || user.getUser_Birth3() == null 
+			||user.getUser_Email1() == null ||user.getUser_Email2() == null ){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('입력이 안 된 항목이 있습니다.')");

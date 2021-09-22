@@ -11,7 +11,6 @@ public class dbgetset {
 	private String user_Email1;
 	private String user_Email2;
 	
-	
 	public String getUser_Id() {
 		return user_Id;
 	}
