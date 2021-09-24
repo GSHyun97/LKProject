@@ -9,7 +9,7 @@
 			<form method="post" action="addMember_Process.jsp"> 
 				<p><label>아이디</label>
 					<input id="user_Id" name="user_Id" type="text" class="form-control" placeholder="아이디를 입력하세요" >
-					<input type="button" value="중복확인" class="dup" onclick="winopen()">
+					<input type="button" value="중복확인" onclick="openIdChk()">
 				<p><label>비밀번호</label>
 					<input name="user_Password" id="user_Password" type="text" class="form-control" placeholder="비밀번호를 입력하세요" >
 				<p><label>성명</label>
