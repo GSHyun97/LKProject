@@ -8,11 +8,12 @@
 			<h3>회원가입</h3>
 			<form method="post" action="addMember_Process.jsp"> 
 				<p><label>아이디</label>
-					<input name="user_Id" type="text" class="form-control" placeholder="아이디를 입력하세요" >5~13자 입력해주세요.
+					<input id="user_Id" name="user_Id" type="text" class="form-control" placeholder="아이디를 입력하세요" >
+					<input type="button" value="중복확인" class="dup" onclick="winopen()">
 				<p><label>비밀번호</label>
-					<input name="user_Password" type="text" class="form-control" placeholder="비밀번호를 입력하세요" >
+					<input name="user_Password" id="user_Password" type="text" class="form-control" placeholder="비밀번호를 입력하세요" >
 				<p><label>성명</label>
-					<input name="user_Name" type="text" class="form-control">
+					<input name="user_Name" id="user_Name" type="text" class="form-control">
 				<p><label>생년월일</label>
 					<input type="text" name="user_Birth1" maxlength="4" placeholder="년(4자)" size="6">
 					<select name="user_Birth2">
@@ -74,5 +75,16 @@
 				<input type="reset" class="btn btn-primary " value="취소" onclick="location.href='mainPage.jsp' ">
 			</form>
 		</div>
+		<script type="text/javascript">
+	<!-- 아이디중복체크 -->
+	function winopen(){
+		if(document.fr.id.value =="" || document.fr.id.value.length < 0){
+			alert("아이디를 먼저 입력해주세요")
+			document.fr.id.focus();
+		}else{
+			window.open("addMember_IdCheck.jsp?user_Id="+document.fr.id.value,"");
+	}
+}
+		</script>
 	</body>
 </html>

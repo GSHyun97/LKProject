@@ -58,3 +58,13 @@ public class UserDAO {
 		return -1; //DB오류를 의미
 	}
 }
+/*
+ * //아이디 중복체크 public int addIdCheck(String userID){ String SQL =
+ * "select id from fun_member where id=?"; try {
+ * pstmt=conn.prepareStatement(SQL); pstmt.setString(1, user.getUser_Id()); rs =
+ * pstmt.executeQuery(); if(rs.next()){ if; }else{ result = 1; }
+ * 
+ * System.out.println("아이디 중복체크결과 : "+result); } catch (Exception e) { // TODO
+ * Auto-generated catch block e.printStackTrace(); } finally { closeDB(); }
+ * return result; }
+ */
