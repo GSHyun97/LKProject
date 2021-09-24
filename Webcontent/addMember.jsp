@@ -84,7 +84,7 @@
 		}else{
 			window.open("addMember_IdCheck.jsp?user_Id="+document.fr.id.value,"");
 	}
-}12214651231561231513
+}
 		</script>
 	</body>
 </html>
