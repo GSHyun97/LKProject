@@ -19,8 +19,8 @@
 	padding-left:100px;
 }
 ul{
-        text-align: center;
-        list-style: none;
+   text-align: center;
+   list-style: none;
 
 }
 li{
@@ -67,8 +67,8 @@ li{
 </header>
 
 <!-- 태그 삽입 부분 -->
-<nav>
-	<ul class="a">
+<div class="menu">
+    <ul>
       <li><a href="#">태그1</a></li>
 	  <li><a href="#">태그2</a></li>
 	  <li><a href="#">태그3</a></li>
@@ -76,7 +76,7 @@ li{
 	  <li><a href="#">태그5</a></li>
 	  <li><a href="#">태그6</a></li>
     </ul>
-</nav>
+</div>
 <!-- 메인페이지 헤더 부분화면
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">

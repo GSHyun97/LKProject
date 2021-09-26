@@ -9,9 +9,43 @@ h5 {
 	font-family: 'jeju Gothic';
 	font-size: 18px;
 	
+	
+	
 }
+d-flex{
+	text-align:center;
+	width: 100%;
+}
+
 body {
-	
-	font-family: 'hanna';
-	
+  margin-top: 100px;
+  margin-bottom: 100px;
+  font-family: 'hanna';
 }
+.navbar {
+  margin-bottom: 0;
+}
+
+content{
+	width: 100%;
+	min-height: 380px; /* 최소높이 */
+	height: auto;
+	background-color: #0000ff;
+	float: center;
+}
+.footer{
+  height: 100px;
+  background: #333;
+  color: #fff;
+  font-size: 60px;
+  text-align: center;
+}
+.col-sm-4 col-sm-offset-2{
+	align-items: center;
+}
+
+
+
+    .menu { text-align: center; }
+    .menu ul { display:inline-table; }
+    .menu li { display:inline; }
