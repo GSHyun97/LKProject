@@ -2,6 +2,8 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.net.URLEncoder"%>
+<%@ page import="user.UserDAO" %>
+<%@ page import="user.PostDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,21 +19,31 @@
 <style>
 .form-inline{
 	padding-left:100px;
+	
 }
 ul{
-   text-align: center;
-   list-style: none;
+        text-align: center;
+        list-style: none;
 
 }
 li{
 	display:inline-block;
 	padding: 10px;
 }
+.col-lg-3{
+display: inline-block;
+}
 </style>
+
 </head>
 <body>
 
-<!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야해-->
+<%
+UserDAO userDAO = new UserDAO();
+PostDAO postDAO = new PostDAO();
+%>
+
+<!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야함-->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand flex-grow-1" href="#">로고</a>
@@ -65,10 +77,9 @@ li{
         </div>
     </nav>
 </header>
-
-<!-- 태그 삽입 부분. -->
-<div class="menu">
-    <ul>
+<!-- 태그 삽입 부분 -->
+<nav>
+	<ul class="a">
       <li><a href="#">태그1</a></li>
 	  <li><a href="#">태그2</a></li>
 	  <li><a href="#">태그3</a></li>
@@ -76,7 +87,8 @@ li{
 	  <li><a href="#">태그5</a></li>
 	  <li><a href="#">태그6</a></li>
     </ul>
-</div>
+</nav>
+
 <!-- 메인페이지 헤더 부분화면
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
@@ -135,56 +147,49 @@ li{
 	</div>
 </section>
 	-->
-		<!-- 2세션 
-	<div class="container jumbotron"> 
-		<div class="row"> <div class="col-sm-3 col-sm-offset-1">2-1세션</div> 
-		<div class="col-sm-3 col-sm-offset-1">2-2세션</div> 
-		<div class="col-sm-3 col-sm-offset-1">2-3세션</div> 
-		<div class="col-sm-3 col-sm-offset-1">2-4세션</div> 
-
-	</div> 
-	-->
 	
-
+	<section>
+		<%for(int i=1;i<=postDAO.dbCount("post");i++){
+		String originalAddress=postDAO.seeVideo(i);
+		String playerAddress=originalAddress.replace("watch?v=", "embed/");
+		String postTitle=postDAO.seeTitle(i);
+		String postHashtag=postDAO.seeHashtag(i);
+		String postView=postDAO.seeView(i);
+		String postLike=postDAO.seeLike(i);
+		String postReport=postDAO.seeReport(i);
+		%>
+	
 		<div class="container-fluid"> 
 			<div class="card-header bg-light">
-			<div class="row"> 
-			<div class="col-sm-3 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"> 
-			<p><div class='embed-container'>
-			<iframe src='https://www.youtube.com/embed/QILiHiTD3uc' frameborder='0' allowfullscreen>
-			</iframe>
-			</div></p>
-			<p>Title</p>
-			<p>#태그1 #태그2</p>
-			<div class="col-sm-12 col-sm-offset-1" style="background-color:#eee;">
 				<div class="row"> 
-					<div class="col-3 text-left" >
-					<a onclick="return confirm('담으시겠습니까?')" href="./likeAction.jsp?user_Id=">담기</a>
-					</div>
-					<div class="col-9 text-right">
-					<span style="color: green;">Like 20</span>
-					<span style="color: green;">View 20</span>
-						<a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id=">좋아요</a>
-						<a onclick="return confirm('신고 하시겠습니까?')" style="color: red;" href="./reportAction.jsp?user_Id=">신고</a>
-					</div>
+					<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 			
+						<p></p><div class='embed-container'>
+						<iframe src=<%=playerAddress %> frameborder="0">
+						</iframe>
+						</div>
+						<p><%=postTitle %></p>
+						<p><%=postHashtag %></p>
+						<div class="col-lg-12 col-lg-offset-1" style="background-color:#eee;">
+							<div class="row"> 
+								<div class="col-3 text-left" >
+								<a onclick="return confirm('담으시겠습니까?')" href="./likeAction.jsp?user_Id=">담기</a>
+								</div>
+								<div class="col-9 text-right">
+								<span style="color: green;"><%=postView %>View</span>
+								<span style="color: green;"><%=postLike %>Like</span>
+								
+									<a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id=">좋아요</a>
+									<a onclick="return confirm('신고 하시겠습니까?')" style="color: red;" href="./reportAction.jsp?user_Id=">신고</a>
+								</div>
+							</div> 
+						</div>
+					</div> 
+
 				</div> 
-			</div>
 			</div> 
-			<div class="col-sm-3 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"><p>2seesion</p></div> 
-			<div class="col-sm-3 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"><p>3seesion</p></div>
-			<div class="col-sm-3 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"><p>4seesion</p></div>  
-			</div> 
-			</div> 
-			<div class="card-header bg-light">
-			<div class="row"> 
-			<div class="col-lg-3 col-lg-offset-1" style="border:1px solid gray; background-color:#eee;"><p>5seesion</p></div> 
-			<div class="col-lg-3 col-lg-offset-1" style="border:1px solid gray; background-color:#eee;"><p>6seesion</p></div> 
-			<div class="col-lg-3 col-lg-offset-1" style="border:1px solid gray; background-color:#eee;"><p>7seesion</p></div> 
-			<div class="col-lg-3 col-lg-offset-1" style="border:1px solid gray; background-color:#eee;"><p>8seesion</p></div>
-			</div> 
-			</div> 
-			
 		</div>
+	 <%} %>
+	 </section>
 
 		
 
@@ -277,7 +282,6 @@ li{
     crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-	
 	
 	
 </body>
