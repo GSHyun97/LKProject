@@ -40,9 +40,6 @@ content{
 .col-sm-4 col-sm-offset-2{
 	align-items: center;
 }
-
-
-
     .menu { text-align: center; }
     .menu ul { display:inline-table; }
     .menu li { display:inline; }
