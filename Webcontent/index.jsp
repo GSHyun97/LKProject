@@ -66,7 +66,7 @@ li{
     </nav>
 </header>
 
-<!-- 태그 삽입 부분 -->
+<!-- 태그 삽입 부분. -->
 <div class="menu">
     <ul>
       <li><a href="#">태그1</a></li>
@@ -74,7 +74,7 @@ li{
 	  <li><a href="#">태그3</a></li>
 	  <li><a href="#">태그4</a></li>
 	  <li><a href="#">태그5</a></li>
-	  <li><a href="#">태그6</a></li>
+	  <li><a href="#">태그66</a></li>
     </ul>
 </div>
 <!-- 메인페이지 헤더 부분화면
