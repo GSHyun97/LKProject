@@ -145,11 +145,11 @@ li{
 	</div> 
 	-->
 	
-	<div class="container"> 
+
 		<div class="container-fluid"> 
 			<div class="card-header bg-light">
 			<div class="row"> 
-			<div class="col-sm-4 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"> 
+			<div class="col-sm-3 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"> 
 			<p><div class='embed-container'>
 			<iframe src='https://www.youtube.com/embed/QILiHiTD3uc' frameborder='0' allowfullscreen>
 			</iframe>
@@ -170,13 +170,22 @@ li{
 				</div> 
 			</div>
 			</div> 
-			<div class="col-sm-4 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"><p>3seesion</p></div> 
-			<div class="col-sm-4 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"><p>4seesion</p></div> 
+			<div class="col-sm-3 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"><p>2seesion</p></div> 
+			<div class="col-sm-3 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"><p>3seesion</p></div>
+			<div class="col-sm-3 col-sm-offset-1" style="border:1px solid gray; background-color:#eee;"><p>4seesion</p></div>  
+			</div> 
+			</div> 
+			<div class="card-header bg-light">
+			<div class="row"> 
+			<div class="col-lg-3 col-lg-offset-1" style="border:1px solid gray; background-color:#eee;"><p>5seesion</p></div> 
+			<div class="col-lg-3 col-lg-offset-1" style="border:1px solid gray; background-color:#eee;"><p>6seesion</p></div> 
+			<div class="col-lg-3 col-lg-offset-1" style="border:1px solid gray; background-color:#eee;"><p>7seesion</p></div> 
+			<div class="col-lg-3 col-lg-offset-1" style="border:1px solid gray; background-color:#eee;"><p>8seesion</p></div>
 			</div> 
 			</div> 
 			
 		</div>
-	</div>
+
 		
 
 
