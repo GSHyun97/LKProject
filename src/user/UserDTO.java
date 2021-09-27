@@ -1,7 +1,8 @@
 package user;
 
 
-public class dbgetset {
+public class UserDTO {
+	
 	private String user_Id;
 	private String user_Password;
 	private String user_Name;

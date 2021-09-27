@@ -2,7 +2,7 @@
 <%@ page import="user.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="user" class="user.dbgetset" scope="page" />
+<jsp:useBean id="user" class="user.UserDTO" scope="page" />
 <jsp:setProperty name="user" property="user_Id" />
 <jsp:setProperty name="user" property="user_Password" />
 <html>
