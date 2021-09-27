@@ -19,7 +19,7 @@
 					$('#checkMessage').html('사용할 수 있는 아이디입니다.');
 					$('#checkType').attr('class', 'modal-content panel-success');
 				}else{
-					$('#checkMessage').html('사용할 수 없는 아이디입니다.');
+					$('#checkMessage').html('이미 존재하는 아이디입니다.');
 					$('#checkType').attr('class', 'modal-content panel-warning');
 				}
 				$('#checkModal').modal("show");
