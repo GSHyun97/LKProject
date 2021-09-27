@@ -31,7 +31,7 @@ li{
 </head>
 <body>
 
-<!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야함-->
+<!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야해-->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand flex-grow-1" href="#">로고</a>
