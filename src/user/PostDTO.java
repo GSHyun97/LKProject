@@ -1,4 +1,4 @@
-package test002;
+package user;
 
 public class PostDTO {
 	

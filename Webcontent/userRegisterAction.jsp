@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="test002.PostDTO"%>
+<%@ page import="user.PostDTO"%>
 <%@ page import="test002.PostDAO"%>
 <%@ page import="java.io.PrintWriter"%>
 
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 	
 
 	String post_Title = null;
@@ -41,7 +41,7 @@
 	}
 	
 	test002.PostDAO postDAO = new test002.PostDAO();
-	int result = postDAO.write(new test002.PostDTO(0, post_Title, post_Link, post_Hashtag, 0, 0, 0, post_UploadDate));
+	int result = postDAO.write(new user.PostDTO(0, post_Title, post_Link, post_Hashtag, 0, 0, 0, post_UploadDate));
 	if (result == -1) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");

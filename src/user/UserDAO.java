@@ -43,14 +43,14 @@ public class UserDAO {
 	}
 	//회원가입 메소드
 	public int addMember(dbgetset user) {					
-		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?)";     
+		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";     
 		try {
 			pstmt=conn.prepareStatement(SQL);      							
 			pstmt.setString(1, user.getUser_Id());   
 			pstmt.setString(2, user.getUser_Password());
 			pstmt.setString(3, user.getUser_Name());
-			pstmt.setString(4, user.getUser_Birth());
-			pstmt.setString(5, user.getUser_Email());
+			pstmt.setString(4, user.getUser_Birth1()+user.getUser_Birth2()+user.getUser_Birth3());
+			pstmt.setString(5, user.getUser_Email1()+"@"+user.getUser_Email2());
 			return pstmt.executeUpdate();                   				
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -58,3 +58,13 @@ public class UserDAO {
 		return -1; //DB오류를 의미
 	}
 }
+/*
+ * //아이디 중복체크 public int addIdCheck(String userID){ String SQL =
+ * "select id from fun_member where id=?"; try {
+ * pstmt=conn.prepareStatement(SQL); pstmt.setString(1, user.getUser_Id()); rs =
+ * pstmt.executeQuery(); if(rs.next()){ if; }else{ result = 1; }
+ * 
+ * System.out.println("아이디 중복체크결과 : "+result); } catch (Exception e) { // TODO
+ * Auto-generated catch block e.printStackTrace(); } finally { closeDB(); }
+ * return result; }
+ */
