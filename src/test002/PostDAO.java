@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import user.PostDTO;
+
 public class PostDAO {
 	
 	private Connection conn; 											//DB에 접근하게 해주는 객체

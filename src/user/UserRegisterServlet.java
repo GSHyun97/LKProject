@@ -33,7 +33,7 @@ public class UserRegisterServlet extends HttpServlet{
 			response.sendRedirect("addMember.jsp");
 			return;
 		}
-		if(user_Password1.equals(user_Password2)) {
+		if(!(user_Password1.equals(user_Password2))) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "비밀번호가 다릅니다");
 			response.sendRedirect("addMember.jsp");

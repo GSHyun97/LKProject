@@ -33,8 +33,6 @@
 					class="nav-link dropdown-toggle" id="dropdown"
 					data-toggle="dropdown" href="#"> 회원관리 </a>
 					<div class="dropdown-menu" aria-labelledby="dropdown">
-
-
 					</div></li>
 			</ul>
 			<form action="./index.jsp" method="get"
