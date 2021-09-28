@@ -272,7 +272,7 @@ PostDAO postDAO = new PostDAO();
 	</div>
 <!-- 푸터 부분 -->
 	<footer id = footer class="bg-dark mt-4 p-5 text-center" style="color: #FFFFFF;">
-		Copyright &copy; 2021 2조 All Rights Reserves. <a href="adminpage.jsp">관리자</a></footer>
+		Copyright &copy; 2021 2조 All Rights Reserves. <a href="adminpage_Login.jsp">관리자</a></footer>
 
 	<script src="./js/jquery.min.js"></script>
 	<script src="./js/pooper.js"></script>
