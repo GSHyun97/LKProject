@@ -46,10 +46,10 @@ PostDAO postDAO = new PostDAO();
 <!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야함-->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand flex-grow-1" href="#">로고</a>
+        <a class="navbar-brand flex-grow-1" href="./index.jsp">로고</a>
         <div class="flex-grow-1 d-flex">
-            <form class="form-inline flex-nowrap bg-light mx-0 mx-lg-auto rounded p-2">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline flex-nowrap bg-light mx-0 mx-lg-auto rounded p-2" action = "./searchPage.jsp">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -149,14 +149,16 @@ PostDAO postDAO = new PostDAO();
 	-->
 	
 	<section>
-		<%for(int i=1;i<=postDAO.dbCount("post");i++){
-		String originalAddress=postDAO.seeVideo(i);
-		String playerAddress=originalAddress.replace("watch?v=", "embed/");
-		String postTitle=postDAO.seeTitle(i);
-		String postHashtag=postDAO.seeHashtag(i);
-		String postView=postDAO.seeView(i);
-		String postLike=postDAO.seeLike(i);
-		String postReport=postDAO.seeReport(i);
+		<%for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
+			int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
+			if( seeState==1){											//삭제가 안된 글만
+				String originalAddress=postDAO.seeVideo(i);
+				String playerAddress=originalAddress.replace("watch?v=", "embed/");
+				String postTitle=postDAO.seeTitle(i);
+				String postHashtag=postDAO.seeHashtag(i);
+				String postView=postDAO.seeView(i);
+				String postLike=postDAO.seeLike(i);
+				String postReport=postDAO.seeReport(i);
 		%>
 	
 		<div class="container-fluid"> 
@@ -177,7 +179,6 @@ PostDAO postDAO = new PostDAO();
 								<div class="col-9 text-right">
 								<span style="color: green;"><%=postView %>View</span>
 								<span style="color: green;"><%=postLike %>Like</span>
-								
 									<a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id=">좋아요</a>
 									<a onclick="return confirm('신고 하시겠습니까?')" style="color: red;" href="./reportAction.jsp?user_Id=">신고</a>
 								</div>
@@ -188,7 +189,7 @@ PostDAO postDAO = new PostDAO();
 				</div> 
 			</div> 
 		</div>
-	 <%} %>
+	 <%} } %>
 	 </section>
 
 		

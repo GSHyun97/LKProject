@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 
 public class PostDAO {
 	
@@ -26,7 +27,7 @@ public class PostDAO {
 	
 	
 	public String seeTitle(int num) {
-		String sql="SELECT * FROM post WHERE post_Number=?";
+		String sql="SELECT * FROM post WHERE post_Number=? AND post_seeState=1";
 		
 		try{
 			pstmt=conn.prepareStatement(sql);
@@ -86,6 +87,8 @@ public class PostDAO {
 		String sql="SELECT * FROM post WHERE post_Number=?";
 		
 		try{
+			
+			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 		rs=pstmt.executeQuery();
@@ -159,9 +162,82 @@ public class PostDAO {
         return -1;
 	}
 	
+	public int seeState(int num) {
+		String SQL = "SELECT post_seeState from post where post_Number=?";
+		
+		try {
+			
+			pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1, num);
+		rs=pstmt.executeQuery();
+		rs.next();
+		return rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
+	public int searchPostCount(String str) {
+		String SQL = "SELECT Count(*) from post where post_Title Like ? OR post_HashTag Like ?";
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, "%"+str+"%");
+			pstmt.setString(2, "%"+str+"%");
+			rs=pstmt.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
-	
+	public int deletePostCount(String str) {
+		String SQL = "SELECT Count(*) from post where post_seeState=0 AND( post_Title Like ? OR post_HashTag Like ?)";
+		try {
+			pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1, "%"+str+"%");
+			pstmt.setString(2, "%"+str+"%");
+			rs=pstmt.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public int searchPost(int num,String str) {
+		String SQL = "SELECT post_Number from post where post_Title Like ? OR post_HashTag Like ?";
+		int State=0;
+		
+		try {
+			
+			pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1, "%"+str+"%");
+			pstmt.setString(2, "%"+str+"%");
+			rs=pstmt.executeQuery();
+			/*for(int i=1;i<=searchPostCount(str);i++) {
+				rs.next();
+				if(num==rs.getInt(1)) {
+					State=1;
+					return State;
+				}
+				
+			}*/
+			while(rs.next()) {
+				if(num==rs.getInt(1)) {
+					State=1;
+					return State;
+				}
+			}
+			return State;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
 }
 
