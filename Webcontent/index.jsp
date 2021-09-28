@@ -17,6 +17,7 @@
 			</style>
 <script src="https://kit.fontawesome.com/402914fc57.js" crossorigin="anonymous"></script>
 <style>
+
 .form-inline{
 	padding-left:100px;
 	
@@ -30,9 +31,7 @@ li{
 	display:inline-block;
 	padding: 10px;
 }
-.col-lg-3{
-display: inline-block;
-}
+
 </style>
 
 </head>
@@ -67,7 +66,8 @@ PostDAO postDAO = new PostDAO();
 
 		<a class="dropdown-item" href="#">로그인</a>
 	    <a class="dropdown-item" href="#">회원가입</a>
-
+		
+		<a class="dropdown-item" href="#">글 올리기</a>
 		<a class="dropdown-item" href="#">내가 담은글</a>
 		<a class="dropdown-item" href="#">내가 쓴글</a>
 		<a class="dropdown-item" href="#">로그아웃</a>
@@ -147,53 +147,47 @@ PostDAO postDAO = new PostDAO();
 	</div>
 </section>
 	-->
-	
-	<section>
-		<%for(int i=1;i<=postDAO.dbCount("post");i++){
-		String originalAddress=postDAO.seeVideo(i);
-		String playerAddress=originalAddress.replace("watch?v=", "embed/");
-		String postTitle=postDAO.seeTitle(i);
-		String postHashtag=postDAO.seeHashtag(i);
-		String postView=postDAO.seeView(i);
-		String postLike=postDAO.seeLike(i);
-		String postReport=postDAO.seeReport(i);
-		%>
-	
-		<div class="container-fluid"> 
-			<div class="card-header bg-light">
-				<div class="row"> 
-					<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 			
-						<p></p><div class='embed-container'>
-						<iframe src=<%=playerAddress %> frameborder="0">
-						</iframe>
-						</div>
-						<p><%=postTitle %></p>
-						<p><%=postHashtag %></p>
-						<div class="col-lg-12 col-lg-offset-1" style="background-color:#eee;">
-							<div class="row"> 
-								<div class="col-3 text-left" >
-								<a onclick="return confirm('담으시겠습니까?')" href="./likeAction.jsp?user_Id=">담기</a>
-								</div>
-								<div class="col-9 text-right">
-								<span style="color: green;"><%=postView %>View</span>
-								<span style="color: green;"><%=postLike %>Like</span>
-								
-									<a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id=">좋아요</a>
-									<a onclick="return confirm('신고 하시겠습니까?')" style="color: red;" href="./reportAction.jsp?user_Id=">신고</a>
-								</div>
-							</div> 
-						</div>
-					</div> 
+<section>	
 
-				</div> 
+	<div class="container-fluid"> 
+		<div class="card-header bg-light">
+			<div class="row"> 
+				<%for(int i=1;i<=postDAO.dbCount("post");i++){
+				String originalAddress=postDAO.seeVideo(i);
+				String playerAddress=originalAddress.replace("watch?v=", "embed/");
+				String postTitle=postDAO.seeTitle(i);
+				String postHashtag=postDAO.seeHashtag(i);
+				String postView=postDAO.seeView(i);
+				String postLike=postDAO.seeLike(i);
+				String postReport=postDAO.seeReport(i);
+				%> 
+				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
+		        <p></p>
+		        <div class='embed-container'>
+		        <iframe src=<%=playerAddress%>>
+				</iframe>
+		        </div>
+		        <p><%=postTitle%></p>
+				<p><%=postHashtag%></p>
+		        	<div class="col-sm-12" style="background-color:#eee;">
+		        		<div class="row"> 
+		        		<div class="col-3 text-left" >
+		        		<a onclick="return confirm('담으시겠습니까?')" href="./likeAction.jsp?user_Id=">담기</a>
+		        		</div>
+		        			<div class="col-9 text-right">
+					        <span style="color: green;"><%=postView %>View</span>
+							<span style="color: green;"><%=postLike %>Like</span>
+					        <a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id=">좋아요</a>
+					        <a onclick="return confirm('신고 하시겠습니까?')" style="color: red;" href="./reportAction.jsp?user_Id=">신고</a>
+					        </div>
+		        		</div> 
+		        	</div>
+	            </div>
+	            <%}%> 
 			</div> 
-		</div>
-	 <%} %>
-	 </section>
-
-		
-
-
+		</div> 
+	</div>
+</section>		
 	
 <!-- 모달 안쪽 세션 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dailog"

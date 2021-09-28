@@ -1,4 +1,5 @@
-create table hashtag(
-	hashtag_Name VARCHAR(20),
-	hashtag_View int
+insert into post values(2,
+"ÁøÂ¥..±âÀıÇÒ »·..¡¶¶ûÁ¾ ÇÁ¸®ºä¡·",
+"https://www.youtube.com/watch?v=4LLNh9I0i_E",
+"#zz","09-28",0,0,0,1
 );
