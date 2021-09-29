@@ -24,8 +24,21 @@ public class PostDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	
+	public int seeNumber(String originalAddress) {
+		String sql="SELECT post_Number FROM post WHERE post_Link=?";
+		
+		try{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, originalAddress);
+			rs=pstmt.executeQuery();
+			rs.next();
+		return rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+		
+	}
 	public String seeTitle(int num) {
 		String sql="SELECT * FROM post WHERE post_Number=? AND post_seeState=1";
 		
@@ -87,13 +100,11 @@ public class PostDAO {
 		String sql="SELECT * FROM post WHERE post_Number=?";
 		
 		try{
-			
-			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
-		rs=pstmt.executeQuery();
-		rs.next();
-		return rs.getString(6);
+			rs=pstmt.executeQuery();
+			rs.next();
+			return rs.getString(6);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -239,6 +250,19 @@ public class PostDAO {
 		return -1;
 	}
 	
+	
+	public void ViewReWriteDAO() {
+		String SQL ="UPDATE post SET post_View=post_View+1 WHERE post_number=1";
+		try {
+			pstmt=conn.prepareStatement(SQL);
+			//pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			return ;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ;
+	}
 }
 
 /*

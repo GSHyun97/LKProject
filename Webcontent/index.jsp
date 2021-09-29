@@ -4,6 +4,7 @@
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
+<%@ page import="user.ReWriteDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,17 +41,24 @@ li{
 <%
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
+ReWriteDAO reWriteDAO=new ReWriteDAO();
 %>
-
+<script>
+	function openWin(num){
+		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
+	}
+</script>
 <!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야함-->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand flex-grow-1" href="#">로고</a>
         <div class="flex-grow-1 d-flex">
-            <form class="form-inline flex-nowrap bg-light mx-0 mx-lg-auto rounded p-2">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
-            </form>
+            <form action="./searchPage.jsp" method="get"
+				class="form-inline my-2 my-lg0">
+				<input type="text" class="form-control mr-sm-2" name="search"
+					placeholder="내용을 입력하세요." aria-label="search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+			</form>
         </div>
         <div class="dropdown">
         <button class="navbar-toggler" type="button" 
@@ -152,7 +160,9 @@ PostDAO postDAO = new PostDAO();
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
 			<div class="row"> 
-				<%for(int i=1;i<=postDAO.dbCount("post");i++){
+				<%for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
+			int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
+			if( seeState==1){											//삭제가 안된 글만
 				String originalAddress=postDAO.seeVideo(i);
 				String playerAddress=originalAddress.replace("watch?v=", "embed/");
 				String postTitle=postDAO.seeTitle(i);
@@ -160,14 +170,16 @@ PostDAO postDAO = new PostDAO();
 				String postView=postDAO.seeView(i);
 				String postLike=postDAO.seeLike(i);
 				String postReport=postDAO.seeReport(i);
-				%> 
+		%>
 				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
 		        <p></p>
 		        <div class='embed-container'>
 		        <iframe src=<%=playerAddress%>>
 				</iframe>
 		        </div>
-		        <p><%=postTitle%></p>
+		       
+		       
+		        <a onclick="openWin(<%=i %>);" href=<%=originalAddress %>  > <%=postTitle%> </a>
 				<p><%=postHashtag%></p>
 		        	<div class="col-sm-12" style="background-color:#eee;">
 		        		<div class="row"> 
@@ -183,7 +195,7 @@ PostDAO postDAO = new PostDAO();
 		        		</div> 
 		        	</div>
 	            </div>
-	            <%}%> 
+	            <%} }%> 
 			</div> 
 		</div> 
 	</div>
