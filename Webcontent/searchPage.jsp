@@ -58,9 +58,7 @@ PostDAO postDAO = new PostDAO();
 				String originalAddress=postDAO.seeVideo(i);
 				String playerAddress=originalAddress.replace("watch?v=", "embed/");
 				String postTitle=postDAO.seeTitle(i);
-				String postHashtag=postDAO.seeHashtag(i);
-				String postView=postDAO.seeView(i);
-				String postLike=postDAO.seeLike(i);
+				
 				String postReport=postDAO.seeReport(i);
 		%>
 	
@@ -73,15 +71,14 @@ PostDAO postDAO = new PostDAO();
 						</iframe>
 						</div>
 						<p><%=postTitle %></p>
-						<p><%=postHashtag %></p>
+						
 						<div class="col-lg-12 col-lg-offset-1" style="background-color:#eee;">
 							<div class="row"> 
 								<div class="col-3 text-left" >
 								<a onclick="return confirm('담으시겠습니까?')" href="./likeAction.jsp?user_Id=">담기</a>
 								</div>
 								<div class="col-9 text-right">
-								<span style="color: green;"><%=postView %>View</span>
-								<span style="color: green;"><%=postLike %>Like</span>
+								
 									<a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id=">좋아요</a>
 									<a onclick="return confirm('신고 하시겠습니까?')" style="color: red;" href="./reportAction.jsp?user_Id=">신고</a>
 								</div>

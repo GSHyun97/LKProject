@@ -10,6 +10,7 @@ public class PostDTO {
 	private int post_Like;
 	private int post_Report;
 	private String post_UploadDate;
+	private String post_seeState;
 	
 	
 	public int getPost_count() {
@@ -60,13 +61,19 @@ public class PostDTO {
 	public void setPost_UploadDate(String post_UploadDate) {
 		this.post_UploadDate = post_UploadDate;
 	}
+	public String getPost_seeState() {
+		return post_seeState;
+	}
+	public void setPost_seeState(String post_seeState) {
+		this.post_seeState = post_seeState;
+	}
 	
 	public PostDTO() {
 		
 	}
 	
 	public PostDTO(int post_count, String post_Title, String post_Link, String post_Hashtag, int post_View,
-			int post_Like, int post_Report, String post_UploadDate) {
+			int post_Like, int post_Report, String post_UploadDate, String post_seeState) {
 		super();
 		this.post_count = post_count;
 		this.post_Title = post_Title;
@@ -76,6 +83,7 @@ public class PostDTO {
 		this.post_Like = post_Like;
 		this.post_Report = post_Report;
 		this.post_UploadDate = post_UploadDate;
+		this.post_seeState = post_seeState;
 	}
 
 }

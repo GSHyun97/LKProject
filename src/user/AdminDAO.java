@@ -41,4 +41,16 @@ public class AdminDAO {
 		}
 		return -2;
 	}
+	public int delete(int post_Number) {
+		String SQL = "UPDATE post SET post_seeState = 0 WHERE post_Number = ?";
+		try { 
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, post_Number);
+			pstmt.executeUpdate();
+			return 1;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }
