@@ -27,7 +27,6 @@ public class ReWriteDAO {
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, num);
-			System.out.println(num+"¿Ã1¡ı∞°µ ");
 			pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

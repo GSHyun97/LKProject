@@ -47,6 +47,9 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
 	}
+	function clickHashtag(hashtag){
+		window.open("searchPage.jsp?search="+hashtag,"_self");
+	}
 </script>
 <!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야함-->
 <header>
@@ -179,8 +182,16 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 		        </div>
 		       
 		       
-		        <a onclick="openWin(<%=i %>);" href=<%=originalAddress %>  > <%=postTitle%> </a>
-				<p><%=postHashtag%></p>
+		        <a onclick="openWin(<%=i %>);" href=<%=originalAddress %>  > <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
+		        
+				<p>                                                   <!-- 09.29 현강섭,해쉬태그 클릭시 검색 -->
+				<%String[] array=postHashtag.split("#"); %>
+					<% int j=1 ;%>
+					<%for(j=1;j<array.length;j++){%>
+					<a href="searchPage.jsp?search=<%=array[j]%>" >#<%=array[j]%></a>
+					<%} %>
+				</p>
+				
 		        	<div class="col-sm-12" style="background-color:#eee;">
 		        		<div class="row"> 
 		        		<div class="col-3 text-left" >

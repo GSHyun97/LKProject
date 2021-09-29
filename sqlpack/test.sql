@@ -1,5 +1,5 @@
-insert into post values(2,
-"진짜..기절할 뻔..《랑종 프리뷰》",
-"https://www.youtube.com/watch?v=4LLNh9I0i_E",
-"#zz","09-28",0,0,0,1
+insert into post values(6,
+"김말이튀김은 사드세요..... 제d발",
+"https://www.youtube.com/watch?v=JWl6rLlf5Aw",
+"#zz#ee#ss","09-28",0,0,0,1
 );

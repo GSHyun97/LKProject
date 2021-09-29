@@ -82,6 +82,8 @@ public class PostDAO {
 		}
 		return null;
 	}
+	
+	
 	public String seeUploadDate(int num) {
 		String sql="SELECT * FROM post WHERE post_Number=?";
 		
