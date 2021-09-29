@@ -40,6 +40,16 @@ content{
 .col-sm-4 col-sm-offset-2{
 	align-items: center;
 }
-    .menu { text-align: center; }
-    .menu ul { display:inline-table; }
-    .menu li { display:inline; }
+.menu { text-align: center; }
+.menu ul { display:inline-table; }
+.menu li { display:inline; }
+
+.navbar-brand{
+	font-size: 2rem;
+}
+.hot{
+	text-align: center;
+	margin: 20px;
+}
+    
+    

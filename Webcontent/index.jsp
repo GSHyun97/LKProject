@@ -18,26 +18,17 @@
 			</style>
 <script src="https://kit.fontawesome.com/402914fc57.js" crossorigin="anonymous"></script>
 <style>
-
-.form-inline{
-	padding-left:100px;
-	
-}
 ul{
         text-align: center;
         list-style: none;
-
 }
 li{
 	display:inline-block;
 	padding: 10px;
 }
-
 </style>
-
 </head>
 <body>
-
 <%
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
@@ -51,7 +42,7 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 <!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야함-->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand flex-grow-1" href="#">로고</a>
+        <a class="navbar-brand flex-grow-1" href="#">LOGO</a>
         <div class="flex-grow-1 d-flex">
             <form action="./searchPage.jsp" method="get"
 				class="form-inline my-2 my-lg0">
@@ -86,6 +77,9 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
     </nav>
 </header>
 <!-- 태그 삽입 부분 -->
+<nav class="hot">
+	<span>Hot Trend</span>
+</nav>
 <nav>
 	<ul class="a">
       <li><a href="#">태그1</a></li>
@@ -207,7 +201,24 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 			</div> 
 		</div> 
 	</div>
-</section>		
+</section>	
+
+<!-- 페이지 버튼 -->
+<section>
+	<div class="pageMove" style="margin:30px;">
+		<nav>
+			<ul class="page">
+		      <li><a href="#" style="color:#;">이전</a></li>
+		      <li><a href="#">1</a></li>
+			  <li><a href="#">2</a></li>
+			  <li><a href="#">3</a></li>
+			  <li><a href="#">4</a></li>
+			  <li><a href="#">5</a></li>
+			  <li><a href="#">다음 페이지</a></li>
+	    	</ul>
+		</nav>
+	</div>
+</section>	
 	
 <!-- 모달 안쪽 세션 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dailog"
