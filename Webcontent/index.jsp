@@ -47,9 +47,6 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
 	}
-	function clickHashtag(hashtag){
-		window.open("searchPage.jsp?search="+hashtag,"_self");
-	}
 </script>
 <!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야함-->
 <header>

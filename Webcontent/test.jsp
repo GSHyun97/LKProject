@@ -27,6 +27,7 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 <script>
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
+		
 	}
 	
 </script>
@@ -54,7 +55,7 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 		        </div>
 		       
 		       
-		        <a onclick="openWin(<%=i %>);" href=<%=originalAddress %>  > <%=postTitle%> </a>
+		        <a onclick="openWin(<%=i %>,<%=postHashtag %>);" href=<%=originalAddress %>  > <%=postTitle%> </a>
 				<p>
 				<%String[] array=postHashtag.split("#"); %>
 					<% int j=1 ;%>

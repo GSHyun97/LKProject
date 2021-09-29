@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+
 public class ReWriteDAO {
 	private Connection conn; 											//DB에 접근하게 해주는 객체
 	private PreparedStatement pstmt;  									//SQL문장 삽입할거임
@@ -22,7 +24,7 @@ public class ReWriteDAO {
 		}
 	}
 	
-	public void ViewReWriteDAO(int num) {
+	public void ViewReWrite(int num) {
 		String SQL ="UPDATE post SET post_View=post_View+1 WHERE post_number=?";
 		try {
 			pstmt = conn.prepareStatement(SQL);
@@ -31,6 +33,21 @@ public class ReWriteDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Exception");
+		}
+	}
+	
+	public void hashtagViewReWrite(int num) {
+		String[] array=(new PostDAO().seeHashtag(num)).split("#");
+		String SQL="UPDATE hashtag SET hashtag_View=hashtag_View+1 WHERE hashtag_Name=?";
+		try {
+			for(int i=1;i<array.length;i++) {
+				pstmt=conn.prepareStatement(SQL);
+				pstmt.setString(1, array[i]);
+				pstmt.executeUpdate();
+				System.out.println("해쉬태그"+array[i]+"증가");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
