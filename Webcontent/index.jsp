@@ -5,6 +5,7 @@
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
 <%@ page import="user.ReWriteDAO" %>
+<%@ page import="user.HashDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,13 @@ li{
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
+HashDAO hashDAO=new HashDAO();
+%>
+
+<%
+
+String[] hashrank=hashDAO.HashRanking();
+
 %>
 <script>
 	function openWin(num){
@@ -82,12 +90,12 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 </nav>
 <nav>
 	<ul class="a">
-      <li><a href="#">태그1</a></li>
-	  <li><a href="#">태그2</a></li>
-	  <li><a href="#">태그3</a></li>
-	  <li><a href="#">태그4</a></li>
-	  <li><a href="#">태그5</a></li>
-	  <li><a href="#">태그6</a></li>
+      <li><a href="#">#<%=hashrank[0] %></a></li>
+	  <li><a href="#">#<%=hashrank[1] %></a></li>
+	  <li><a href="#">#<%=hashrank[2] %></a></li>
+	  <li><a href="#">#<%=hashrank[3] %></a></li>
+	  <li><a href="#">#<%=hashrank[4] %></a></li>
+	  <li><a href="#">#<%=hashrank[5] %></a></li>
     </ul>
 </nav>
 

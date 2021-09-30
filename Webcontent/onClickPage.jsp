@@ -5,6 +5,7 @@
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
 <%@ page import="user.ReWriteDAO" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,7 @@
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
+
 int num=Integer.parseInt(request.getParameter("num"));
 %>
 <%reWriteDAO.ViewReWrite(num);%>                        <!-- 온클릭페이지 열리면 조회수 오르는 메소드 실행 -->

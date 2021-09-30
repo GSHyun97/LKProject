@@ -44,7 +44,7 @@ public class ReWriteDAO {
 				pstmt=conn.prepareStatement(SQL);
 				pstmt.setString(1, array[i]);
 				pstmt.executeUpdate();
-				System.out.println("해쉬태그"+array[i]+"증가");
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
