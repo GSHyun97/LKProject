@@ -66,11 +66,10 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 		<a class="dropdown-item" href="#">로그인</a>
 	    <a class="dropdown-item" href="#">회원가입</a>
 		
-		<a class="dropdown-item" href="#">글 올리기</a>
+		<a class="dropdown-item" data-toggle="modal" href="#registerModal">글 올리기</a>
 		<a class="dropdown-item" href="#">내가 담은글</a>
 		<a class="dropdown-item" href="#">내가 쓴글</a>
 		<a class="dropdown-item" href="#">로그아웃</a>
-
             </div>
          </div>
         </div>
