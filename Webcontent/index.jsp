@@ -31,6 +31,7 @@ li{
 </head>
 <body>
 <%
+
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
