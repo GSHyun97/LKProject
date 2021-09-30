@@ -16,7 +16,7 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("location.href = 'adminpage.jsp'");
-			script.println("</script>");	//ggsadasdasd
+			script.println("</script>");	//ggsadasdasdsfaf
 		}
 	%>
 </body>
