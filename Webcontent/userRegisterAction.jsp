@@ -41,7 +41,7 @@ request.setCharacterEncoding("UTF-8");
 	}
 	
 	user.PostDAO postDAO = new user.PostDAO();
-	int result = postDAO.write(new user.PostDTO(0, post_Title, post_Link, post_Hashtag, 0, 0, 0, post_UploadDate));
+	int result = postDAO.write(new user.PostDTO(0, post_Title, post_Link, post_Hashtag, 0, 0, 0));
 	if (result == -1) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");

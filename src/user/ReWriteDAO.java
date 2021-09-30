@@ -50,5 +50,16 @@ public class ReWriteDAO {
 			e.printStackTrace();
 		}
 	}
+	public void ReportReWrite(int num) {
+		String SQL ="UPDATE post SET post_Report= post_Report+1 WHERE post_Number=?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Exception");
+		}
+	}
 	
 }

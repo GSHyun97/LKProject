@@ -173,7 +173,7 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 		        </div>
 		       
 		       
-		        <a onclick="openWin(<%=i %>);" href=<%=originalAddress %>  > <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
+		        <a onclick="openWin(<%=i %>);" href=<%=originalAddress%>  > <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
 		        
 				<p>                                                   <!-- 09.29 현강섭,해쉬태그 클릭시 검색 -->
 				<%String[] array=postHashtag.split("#"); %>
@@ -192,7 +192,7 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 					        <span style="color: green;"><%=postView %>View</span>
 							<span style="color: green;"><%=postLike %>Like</span>
 					        <a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id=">좋아요</a>
-					        <a onclick="return confirm('신고 하시겠습니까?')" style="color: red;" href="./reportAction.jsp?user_Id=">신고</a>
+					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
 					        </div>
 		        		</div> 
 		        	</div>

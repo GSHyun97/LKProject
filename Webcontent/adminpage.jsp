@@ -47,7 +47,7 @@ PostDAO postDAO = new PostDAO();
 		        	<p><%=postTitle%></p>
 		        			<div class="col-9 text-right">
 					        <a onclick="return confirm('삭제 하시겠습니까?')"href="./deleteAction.jsp?post_Number=<%= i%>">삭제</a>
-					        <a>신고된 횟수</a>
+					        <a >신고된 횟수 <%=postReport%></a>
 					        </div>
 		        		</div> 
 		        	</div>
