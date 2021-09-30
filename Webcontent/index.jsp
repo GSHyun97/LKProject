@@ -5,6 +5,7 @@
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
 <%@ page import="user.ReWriteDAO" %>
+<%@ page import="user.HashDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,63 +31,37 @@ li{
 </head>
 <body>
 <%
+
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
+HashDAO hashDAO=new HashDAO();
+%>
+
+<%
+
+String[] hashrank=hashDAO.HashRanking();
+
 %>
 <script>
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
 	}
 </script>
-<!-- 회원가입, 로그인 jsp에도 넣어야함! , 2행 printwriter 추가해야함-->
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand flex-grow-1" href="#">LOGO</a>
-        <div class="flex-grow-1 d-flex">
-            <form action="./searchPage.jsp" method="get"
-				class="form-inline my-2 my-lg0">
-				<input type="text" class="form-control mr-sm-2" name="search"
-					placeholder="내용을 입력하세요." aria-label="search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-			</form>
-        </div>
-        <div class="dropdown">
-        <button class="navbar-toggler" type="button" 
-        data-toggle="collapse" 
-        data-target="#navbarNavAltMarkup" 
-        aria-controls="navbarNavAltMarkup" 
-        aria-label="Toggle navigation" 
-        aria-expanded="false" >
-            <span class="navbar-toggler-icon" style="font-size:0.5rem;"></span>            
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-
-		<a class="dropdown-item" href="#">로그인</a>
-	    <a class="dropdown-item" href="#">회원가입</a>
-		
-		<a class="dropdown-item" data-toggle="modal" href="#registerModal">글 올리기</a>
-		<a class="dropdown-item" href="#">내가 담은글</a>
-		<a class="dropdown-item" href="#">내가 쓴글</a>
-		<a class="dropdown-item" href="#">로그아웃</a>
-            </div>
-         </div>
-        </div>
-    </nav>
-</header>
+<!-- 헤더 부분-->
+<%@ include file="header.jsp" %>
 <!-- 태그 삽입 부분 -->
 <nav class="hot">
 	<span>Hot Trend</span>
 </nav>
 <nav>
 	<ul class="a">
-      <li><a href="#">태그1</a></li>
-	  <li><a href="#">태그2</a></li>
-	  <li><a href="#">태그3</a></li>
-	  <li><a href="#">태그4</a></li>
-	  <li><a href="#">태그5</a></li>
-	  <li><a href="#">태그6</a></li>
+      <li><a href="#">#<%=hashrank[0] %></a></li>
+	  <li><a href="#">#<%=hashrank[1] %></a></li>
+	  <li><a href="#">#<%=hashrank[2] %></a></li>
+	  <li><a href="#">#<%=hashrank[3] %></a></li>
+	  <li><a href="#">#<%=hashrank[4] %></a></li>
+	  <li><a href="#">#<%=hashrank[5] %></a></li>
     </ul>
 </nav>
 
@@ -295,9 +270,14 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 		</div>
 	</div>
 <!-- 푸터 부분 -->
+<<<<<<< HEAD
 	<footer id = footer class="bg-dark mt-4 p-5 text-center" style="color: #FFFFFF;">
 		Copyright &copy; 2021 2조 All Rights Reserves. <a href="adminpage_Login.jsp">관리자</a></footer>
 
+=======
+	<%@ include file="footer.jsp" %>
+<!-- js 스크립 부분 -->
+>>>>>>> branch 'master' of https://github.com/GSHyun97/LKProject.git
 	<script src="./js/jquery.min.js"></script>
 	<script src="./js/pooper.js"></script>
 	<script src="./js/bootstrap.min.js"></script>

@@ -20,7 +20,7 @@ int num=Integer.parseInt(request.getParameter("num"));
 %>
 <%reWriteDAO.ReportReWrite(num);%>            
 <script>
-	window.close();
+	window.close();//닫힘
 </script>
 </body>
 </html>

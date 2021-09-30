@@ -35,7 +35,11 @@ public class PostDAO {
 		return rs.getInt(1);
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+		}finally {
+            try {if(conn != null) {conn.close();}} catch (Exception e) {e.printStackTrace();}
+            try {if(pstmt != null){pstmt.close();}}catch (Exception e) {e.printStackTrace();}
+            try {if(rs != null)   {rs.close();}}   catch (Exception e) {e.printStackTrace();}
+        }
 		return -1;
 		
 	}
@@ -69,10 +73,10 @@ public class PostDAO {
 		return null;
 	}
 	public String seeHashtag(int num) {
-		String sql="SELECT * FROM post WHERE post_Number=?";
+		String SQL="SELECT * FROM post WHERE post_Number=?";
 		
 		try{
-			pstmt=conn.prepareStatement(sql);
+			pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, num);
 		rs=pstmt.executeQuery();
 		rs.next();
@@ -170,7 +174,7 @@ public class PostDAO {
             return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        } 
+        }
         //db¿À·ù½Ã -1
         return -1;
 	}
@@ -253,18 +257,8 @@ public class PostDAO {
 	}
 	
 	
-	public void ViewReWriteDAO() {
-		String SQL ="UPDATE post SET post_View=post_View+1 WHERE post_number=1";
-		try {
-			pstmt=conn.prepareStatement(SQL);
-			//pstmt.setInt(1, num);
-			pstmt.executeUpdate();
-			return ;
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return ;
-	}
+	
+	
 }
 
 /*

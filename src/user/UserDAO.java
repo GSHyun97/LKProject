@@ -82,13 +82,6 @@ public class UserDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			try {
-				if(rs !=null) rs.close();
-				if(pstmt !=null) pstmt.close();
-		}catch(Exception e){
-			e.printStackTrace();
-			}
 		}
 		return -1;
 	}
