@@ -8,7 +8,7 @@
 UserDAO userDAO = new UserDAO();
 String name = request.getParameter("user_Name");
 String email = request.getParameter("user_Email");
-String id = userDAO.findId(name, email);
+String id = userDAO.findId(name, email);//dsadsadasd
 %>
 <body>
 	<nav class="navbar navbar-default">
