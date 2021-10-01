@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand flex-grow-1" href="#"><span>HOT KEY</span></a>
+        <a class="navbar-brand flex-grow-1" href="index.jsp"><span>HOT KEYWORD</span></a>
         <div class="flex-grow-1 d-flex">
             <form action="./searchPage.jsp" method="get"
 				class="form-inline my-2 my-lg0">

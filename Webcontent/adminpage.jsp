@@ -4,19 +4,13 @@
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
-<<<<<<< HEAD
 <%@ page import="user.AdminDAO" %>
-=======
 <%@ page import="user.ReWriteDAO" %>
->>>>>>> refs/remotes/origin/master
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-
-=======
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, inital-scale=1, shrink-to-fit=no">
 <title>adminPage</title>
@@ -42,18 +36,16 @@ body{
 	 padding-top:70px;
 }
 </style>
->>>>>>> refs/remotes/origin/master
 </head>
 <body>
-<<<<<<< HEAD
+
 <% 
 AdminDAO adminDAO = new AdminDAO();
 PostDAO postDAO = new PostDAO();
 UserDAO userDAO = new UserDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
 %>
-<table style="width: 80%">
-=======
+
 	<!-- ADMIN 삽입 부분 -->
 	<body id="body-pd">
         <header class="header" id="header">
@@ -71,22 +63,8 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
                 </div>
             </nav>
         </div> 
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
-	<tr style="background-color: #ccbbcc; text-align: center;" >
-
-		<td><a href="../index.jsp">Main</a></td>
-
-		<td><a href="#">회원관리</a></td>
-
-		<td><a href="#">조회 수 관리</a></td>
-		<a>총 조회수 <%=adminDAO.seeTotalView()%></a>
-		<td><a href="#">주문관리</a></td>
-		<td><a href="#">로그아웃</a></td>
-	</tr>
-</table>
-=======
+	
 <script>
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
@@ -153,7 +131,6 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 	</div>
 </section>
 	-->
->>>>>>> refs/remotes/origin/master
 <section>	
 
 	<div class="container-fluid"> 
