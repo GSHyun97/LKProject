@@ -85,4 +85,25 @@ public class UserDAO {
 		}
 		return -1;
 	}
+	public String findId(String user_Name, String user_Email) {
+		System.out.println("add角青");
+		String SQL = "SELECT user_Id FROM user WHERE user_Name=? AND user_Email = ?";
+		System.out.println("sql积己");
+		try {
+			pstmt=conn.prepareStatement(SQL);
+			System.out.println("1角青");
+			pstmt.setString(1, user_Name);
+			System.out.println("2角青");
+			pstmt.setString(2, user_Email);
+			System.out.println("3角青");
+			rs = pstmt.executeQuery();
+			System.out.println("rs角青");
+			rs.next();
+				System.out.println("if角青");
+				return rs.getString(1);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

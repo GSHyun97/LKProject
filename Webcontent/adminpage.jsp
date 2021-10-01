@@ -2,13 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
+<%@ page import="user.AdminDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
+
 </head>
 <body>
+<% AdminDAO adminDAO = new AdminDAO();
+PostDAO postDAO = new PostDAO();%>
 <table style="width: 80%">
 
 	<tr style="background-color: #ccbbcc; text-align: center;" >
@@ -18,16 +22,11 @@
 		<td><a href="#">회원관리</a></td>
 
 		<td><a href="#">조회 수 관리</a></td>
-
+		<a>총 조회수 <%=adminDAO.seeTotalView()%></a>
 		<td><a href="#">주문관리</a></td>
-		
 		<td><a href="#">로그아웃</a></td>
 	</tr>
 </table>
-<%
-UserDAO userDAO = new UserDAO();
-PostDAO postDAO = new PostDAO();
-%>
 <section>	
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">

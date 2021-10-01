@@ -53,7 +53,7 @@ public class AdminDAO {
 		}
 		return -1;
 	}
-	public void seeReport(int post_Number) {
+	public void addReport(int post_Number) {
 		String SQL ="UPDATE post SET post_View=post_View+1 WHERE post_Number=?";
 		try {
 			pstmt = conn.prepareStatement(SQL);
@@ -63,5 +63,28 @@ public class AdminDAO {
 			e.printStackTrace();
 			System.out.println("Exception");
 		}
+	}
+	public void addTotalView() {
+		String SQL ="UPDATE admin SET admin_TotalView=admin_TotalView+1";//where
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Exception");
+		}
+	}
+	public String seeTotalView() {
+		String sql="SELECT admin_TotalView FROM admin";
+		
+		try{
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			rs.next();
+			return rs.getString(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
