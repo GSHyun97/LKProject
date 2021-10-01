@@ -46,8 +46,12 @@ body{
 </head>
 <body>
 <<<<<<< HEAD
-<% AdminDAO adminDAO = new AdminDAO();
-PostDAO postDAO = new PostDAO();%>
+<% 
+AdminDAO adminDAO = new AdminDAO();
+PostDAO postDAO = new PostDAO();
+UserDAO userDAO = new UserDAO();
+ReWriteDAO reWriteDAO=new ReWriteDAO();
+%>
 <table style="width: 80%">
 =======
 	<!-- ADMIN 삽입 부분 -->
@@ -83,11 +87,6 @@ PostDAO postDAO = new PostDAO();%>
 	</tr>
 </table>
 =======
-<%
-UserDAO userDAO = new UserDAO();
-PostDAO postDAO = new PostDAO();
-ReWriteDAO reWriteDAO=new ReWriteDAO();
-%>
 <script>
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");

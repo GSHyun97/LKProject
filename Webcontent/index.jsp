@@ -56,12 +56,9 @@ String[] hashrank=hashDAO.HashRanking();
 </nav>
 <nav>
 	<ul class="a">
-      <li><a href="#">#<%=hashrank[0] %></a></li>
-	  <li><a href="#">#<%=hashrank[1] %></a></li>
-	  <li><a href="#">#<%=hashrank[2] %></a></li>
-	  <li><a href="#">#<%=hashrank[3] %></a></li>
-	  <li><a href="#">#<%=hashrank[4] %></a></li>
-	  <li><a href="#">#<%=hashrank[5] %></a></li>
+	<%for(int i=0;i<6;i++){ %>
+      <li><a href="searchPage.jsp?search=<%=hashrank[i]%>">#<%=hashrank[i] %></a></li>
+	  <%} %>
     </ul>
 </nav>
 
