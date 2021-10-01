@@ -62,4 +62,15 @@ public class ReWriteDAO {
 		}
 	}
 	
+	
+	public void LikeReWrite(int num) {
+		String SQL ="UPDATE post SET post_Like=post_Like+1 WHERE post_number=?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

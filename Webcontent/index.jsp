@@ -47,6 +47,9 @@ String[] hashrank=hashDAO.HashRanking();
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
 	}
+	function LikeopenWin(num){
+		window.open("onClickLikePage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
+	}
 </script>
 <!-- 헤더 부분-->
 <%@ include file="header.jsp" %>
@@ -162,7 +165,7 @@ String[] hashrank=hashDAO.HashRanking();
 		        			<div class="col-9 text-right">
 					        <span style="color: green;"><%=postView %>View</span>
 							<span style="color: green;"><%=postLike %>Like</span>
-					        <a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id=">좋아요</a>
+					        <a onclick="LikeopenWin(<%=i %>)" href="#">좋아요</a>
 					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
 					        </div>
 		        		</div> 
