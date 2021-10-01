@@ -17,6 +17,7 @@
 				<p><input class="btn btn-primary form-control" type="submit" value="로그인">
 			</form>
 					<a href="addMember.jsp">회원가입</a>
+					<a href="IdFind.jsp">아이디 찾기</a>
 	</div>
 </body>
 </html>

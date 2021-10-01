@@ -92,8 +92,25 @@ public class UserDAO {
 			pstmt.setString(1, user_Name);
 			pstmt.setString(2, user_Email);
 			rs = pstmt.executeQuery();
-			rs.next();
+			rs.next();{
 				return rs.getString(1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public String findPassword(String user_Name, String user_Id, String user_Email) {
+		String SQL = "SELECT user_Password FROM user WHERE user_Name=? AND user_Id = ? AND user_Email = ?";
+		try {
+			pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1, user_Name);
+			pstmt.setString(2, user_Id);
+			pstmt.setString(3, user_Email);
+			rs = pstmt.executeQuery();
+			rs.next();{
+				return rs.getString(1);
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
