@@ -6,11 +6,11 @@
 <body>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="index.jsp">CF Master</a>
+			<a class="navbar-brand" href="index.jsp">HOT KEYWORD</a>
 		</div>
 	</nav>
 	<div class="container" align="center">
-			<h3><a href="./index.jsp">CF Master</a></h3>
+			<h3><a href="./index.jsp">HOT KEYWORD</a></h3>
 			<form method="post" action="loginProcess.jsp"> 
 				<p>아이디<input type="text" class="form-control" name='user_Id'>
 				<p>비밀번호<input type="password" class="form-control" name='user_Password'>

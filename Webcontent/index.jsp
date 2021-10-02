@@ -135,7 +135,7 @@ String[] hashrank=hashDAO.HashRanking();
 				String postView=postDAO.seeView(i);
 				String postLike=postDAO.seeLike(i);
 				String postReport=postDAO.seeReport(i);
-		%>
+				%>
 				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
 		        <p></p>
 		        <div class='embed-container'>
