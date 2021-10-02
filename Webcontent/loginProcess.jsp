@@ -8,10 +8,22 @@
 <html>
 <head>
 <body>
-	<%		
+	<%	
+	String user_Id=null;
+	if(session.getAttribute("user_Id") != null){
+		user_Id = (String) session.getAttribute("user_Id");
+	}
+	if(user_Id !=null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('이미 로그인 되어있습니다.')");
+		script.println("location.href = 'index.jsp'");
+		script.println("</script>");
+	}
 		UserDAO userDAO = new UserDAO();
 		int result = userDAO.login(user.getUser_Id(), user.getUser_Password());
 		if(result == 1){
+			session.setAttribute("user_Id", user.getUser_Id());
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("location.href = 'index.jsp'");

@@ -45,7 +45,7 @@
 					<input id="user_Id" name="user_Id" type="text" placeholder="아이디를 입력하세요" maxlength="15">
 					<button class="btn btn-primary" onclick="registerCheckFunction();" type="button">중복확인</button>
 				<p><label>비밀번호</label>
-					<input name="user_Password1" id="user_Password1" type="password" onkeyup="passwordCheckFunction();" placeholder="비밀번호를 입력하세요" >
+					<input name="user_Password1" id="user_Password1" type="password" onkeyup="passwordCheckFunction();" placeholder="비밀번호를 입력하세요" minlength="6" maxlength= >
 				<p><label>비밀번호확인</label>
 					<input name="user_Password2" id="user_Password2" type="password" placeholder="비밀번호를 다시 입력하세요" >
 				<p><label>성명</label>

@@ -31,13 +31,11 @@ li{
 </head>
 <body>
 <%
-
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
 HashDAO hashDAO=new HashDAO();
 %>
-
 <%
 
 String[] hashrank=hashDAO.HashRanking();
@@ -124,7 +122,6 @@ String[] hashrank=hashDAO.HashRanking();
 </section>
 	-->
 <section>	
-
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
 			<div class="row"> 

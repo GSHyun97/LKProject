@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="java.io.PrintWriter"%>
+<%
+	String user_Id = null;
+	if(session.getAttribute("user_Id") != null){
+		user_Id=(String) session.getAttribute("user_Id");
+	}
+%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand flex-grow-1" href="index.jsp"><span>HOT KEYWORD</span></a>
         <div class="flex-grow-1 d-flex">
@@ -21,15 +27,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-
-		<a class="dropdown-item" href="#">로그인</a>
+		<%
+		if(user_Id ==null){
+		%>
+		}
+		<a class="dropdown-item" href="lo">로그인</a>
 	    <a class="dropdown-item" href="#">회원가입</a>
-		
+		<%
+		}else{
+		%>
 		<a class="dropdown-item" data-toggle="modal" href="#registerModal">글 올리기</a>
 		<a class="dropdown-item" href="#">내가 담은글</a>
 		<a class="dropdown-item" href="#">내가 쓴글</a>
 		<a class="dropdown-item" href="#">로그아웃</a>
             </div>
+            <%	
+		}
+		%>
          </div>
         </div>
 </nav>

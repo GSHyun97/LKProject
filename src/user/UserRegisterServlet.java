@@ -43,7 +43,7 @@ public class UserRegisterServlet extends HttpServlet{
 		if(result == 1) {
 			request.getSession().setAttribute("messageType", "성공 메시지");
 			request.getSession().setAttribute("messageContent", "회원가입 완료");
-			response.sendRedirect("mainPage.jsp");
+			response.sendRedirect("index.jsp");
 			return;
 		}else {
 			request.getSession().setAttribute("messageType", "오류 메시지");
