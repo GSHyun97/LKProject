@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
+<%@ page import="user.getUserNumberDAO" %>
 <%
+	getUserNumberDAO getusernumberDAO = new getUserNumberDAO();
 	String user_Id = null;
+	int user_Number=0;
+	int headerSeeState=0;
 	if(session.getAttribute("user_Id") != null){
 		user_Id=(String) session.getAttribute("user_Id");
+		user_Number=getusernumberDAO.getUserNumber(user_Id);
 	}
+	if(user_Number>0) headerSeeState=1;
+	//if(관리자페이지면) headerSeeState=2;
 %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand flex-grow-1" href="index.jsp"><span>HOT KEYWORD</span></a>
@@ -28,12 +35,12 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
 		<%
-		if(user_Id ==null){
+		if(headerSeeState==0){
 		%>
 		<a class="dropdown-item" href="login.jsp">로그인</a>
 	    <a class="dropdown-item" href="addMember.jsp">회원가입</a>
 		<%
-		}else{
+		}else if (headerSeeState==1){
 		%>
 		<a class="dropdown-item" data-toggle="modal" href="#registerModal">글 올리기</a>
 		<a class="dropdown-item" href="#">내가 담은글</a>

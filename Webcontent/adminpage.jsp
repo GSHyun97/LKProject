@@ -6,6 +6,7 @@
 <%@ page import="user.PostDAO" %>
 <%@ page import="user.AdminDAO" %>
 <%@ page import="user.ReWriteDAO" %>
+<%@ page import="user.HashDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,8 +45,11 @@ AdminDAO adminDAO = new AdminDAO();
 PostDAO postDAO = new PostDAO();
 UserDAO userDAO = new UserDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
+HashDAO hashDAO=new HashDAO();
 %>
-
+<%
+String[] hashrank=hashDAO.HashRanking(10);
+%>
 	<!-- ADMIN 삽입 부분 -->
 	<body id="body-pd">
         <header class="header" id="header">
@@ -131,12 +135,21 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 	</div>
 </section>
 	-->
+	총조회수:<%=adminDAO.seeTotalView() %>      <!--  //총조회수 -->
+	<ul class="a">
+	<%for(int i=0;i<10;i++){ %>
+      <li>#<%=hashrank[i] %></li>                <!-- 해시태그순위 -->
+	  <%} %>
+    </ul>
+    
 <section>	
 
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
 			<div class="row"> 
 				<%for(int i=1;i<=postDAO.dbCount("post");i++){
+					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
+					if( seeState==1){
 				String originalAddress=postDAO.seeVideo(i);
 				String playerAddress=originalAddress.replace("watch?v=", "embed/");
 				String postTitle=postDAO.seeTitle(i);
@@ -158,7 +171,7 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 		        		</div> 
 					</div>
 	            </div>
-	            <%}%> 
+	            <%} }%> 
 			</div> 
 		</div>
 	</div>

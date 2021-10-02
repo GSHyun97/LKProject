@@ -25,6 +25,7 @@ int num=Integer.parseInt(request.getParameter("num"));
 <%reWriteDAO.ViewReWrite(num);%>                        <!-- 온클릭페이지 열리면 조회수 오르는 메소드 실행 -->
 <%reWriteDAO.hashtagViewReWrite(num);%>					<!-- 온클릭페이지 열리면 해쉬태그조회수 오르는 메소드 실행  -->
 <%adminDAO.addTotalView();%>
+opener.location.reload(); 
 <script>
 	window.close();
 </script>
