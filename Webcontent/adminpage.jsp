@@ -74,8 +74,32 @@ String[] hashrank=hashDAO.HashRanking(10);
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
 	}
 </script>
-<!-- 헤더부분 -->
-<%@ include file="header.jsp" %>
+<!-- 헤더 부분-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand flex-grow-1" href="index.jsp"><span>HOT KEYWORD</span></a>
+        <div class="flex-grow-1 d-flex">
+            <form action="./searchPage.jsp" method="get"
+				class="form-inline my-2 my-lg0">
+				<input type="text" class="form-control mr-sm-2" name="search"
+					placeholder="내용을 입력하세요." aria-label="search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+			</form>
+        </div>
+        <div class="dropdown">
+        <button class="navbar-toggler" type="button" 
+        data-toggle="collapse" 
+        data-target="#navbarNavAltMarkup" 
+        aria-controls="navbarNavAltMarkup" 
+        aria-label="Toggle navigation" 
+        aria-expanded="false" >
+            <span class="navbar-toggler-icon" style="font-size:0.5rem;"></span>            
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+         </div>
+        </div>
+</nav>
+<!-- 헤더부분 끝 -->
 
 <!-- 메인페이지 헤더 부분화면
 <nav class="navbar navbar-light bg-light">
