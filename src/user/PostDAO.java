@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 
 public class PostDAO {
 	
@@ -289,7 +290,65 @@ public class PostDAO {
 	      return false;
 		
 	}
-	
+	public int getNext() {
+		String SQL = "SELECT post_Number FROM post ORDER BY post_Number DESC";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) + 1;
+			}
+			return 1; // 첫 번째 게시물인 경우
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1; // 데이터베이스 오류
+	}
+
+	public ArrayList<PostDTO> getList(int pageNumber) {
+		String SQL = "SELECT * from post " + "WHERE post_Number < ? " + "AND post_seeState = 1 "
+				+ "ORDER BY post_Number DESC LIMIT 8";
+
+		ArrayList<PostDTO> list = new ArrayList<PostDTO>();
+		int num = getNext() - (pageNumber - 1) * 8;
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				PostDTO postdto = new PostDTO();
+				postdto.setPost_Number(rs.getInt(1));
+				postdto.setPost_Title(rs.getString(2));
+				postdto.setPost_Link(rs.getString(3));
+				postdto.setPost_Hashtag(rs.getString(4));
+				postdto.setPost_UploadDate(rs.getString(5));
+				postdto.setPost_View(rs.getInt(6)); 
+				postdto.setPost_Like(rs.getInt(7)); //
+				postdto.setPost_Report(rs.getInt(8));
+				list.add(postdto);
+			}
+
+			System.out.println(list.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public boolean nextPage(int pageNumber) {
+		String SQL = "SELECT * from post WHERE post_Number < ? AND post_seeState = 1";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, getNext() - (pageNumber - 1) * 8);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
 
 /*

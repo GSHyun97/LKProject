@@ -4,6 +4,7 @@
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
+<%@ page import="user.PostDTO" %>
 <%@ page import="user.ReWriteDAO" %>
 <%@ page import="user.HashDAO" %>
 <%@ page import="user.getUserNumberDAO" %>
@@ -38,6 +39,12 @@ PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
 HashDAO hashDAO=new HashDAO();
 getUserNumberDAO getusernumberDAO = new getUserNumberDAO();
+%>
+<%
+	int pageNumber = 1;
+	if(request.getParameter("pageNumber") !=null){
+		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+	}
 %>
 
 <%
@@ -269,7 +276,7 @@ if(user_Number>0) headerSeeState=1;
 	</div>
 </section>
 <!-- 페이지 버튼 -->
-<section>
+<!-- <section>
 	<div class="pageMove" style="margin:30px;">
 		<nav>
 			<ul class="page">
@@ -283,7 +290,37 @@ if(user_Number>0) headerSeeState=1;
 	    	</ul>
 		</nav>
 	</div>
-</section>	
+</section>	 -->
+<%
+	ArrayList<PostDTO> list = postDAO.getList(pageNumber);
+    for(int i =0; i < list.size(); i++){
+%>
+	<tr>
+		<td><%= list.get(i).getPost_Number() %></td>
+		<td><%= list.get(i).getPost_Title() %></td>
+		<td><%= list.get(i).getPost_Link() %></td>
+		<td><%= list.get(i).getPost_Hashtag() %></td>
+		<td><%= list.get(i).getPost_View() %></td>
+		<td><%= list.get(i).getPost_Like() %></td>
+		<td><%= list.get(i).getPost_Report() %></td>
+		<td><%= list.get(i).getPost_UploadDate() %></td>
+		<td><%= list.get(i).getPost_seeState() %></td>
+	</tr>
+<%
+    }
+%>
+</table>
+<%
+	if(pageNumber !=1){
+%>
+	<a href="index.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arraw-left">이전</a>
+<%
+	}if(postDAO.nextPage(pageNumber + 1)){
+%>
+	<a href="index.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-success btn-arraw-left">다음</a>
+<%
+	}
+%>
 	
 <!-- 모달 안쪽 세션 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dailog"
