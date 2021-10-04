@@ -30,7 +30,7 @@
                 </div>
                 <div class="input-box">
                     <span class="details">비밀번호</span>
-                    <input type="text" name='user_Password' placeholder="비밀번호를 입력해주세요" required>
+                    <input type="password" name='user_Password' placeholder="비밀번호를 입력해주세요" required>
                 </div>
                 <div class="buttons">
                     <div class="button">
