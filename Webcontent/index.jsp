@@ -50,8 +50,11 @@ int loginState=1;
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
 	}
-	function LikeopenWin(num){
-		window.open("onClickLikePage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
+	function LikeopenWin(num,userNum){
+		window.open("onClickLikePage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
+	}
+	function UnLikeopenWin(num,userNum){
+		window.open("onClickUnLikePage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
 	}
 	function refresh(){
 		location.reload();
@@ -71,7 +74,6 @@ if(session.getAttribute("user_Id") != null){
 	user_Number=getusernumberDAO.getUserNumber(user_Id);
 }
 if(user_Number>0) headerSeeState=1;
-//if(관리자페이지면) headerSeeState=2;
 %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand flex-grow-1" href="index.jsp"><span>HOT KEYWORD</span></a>
@@ -229,10 +231,14 @@ if(user_Number>0) headerSeeState=1;
 							<span style="color: green;"><%=postLike %>Like</span>
 							
 							<%
-							if(loginState==0) {%>                                  <!-- 10.02현강섭 좋아요 -->
+							if(user_Number==0) {%>                                  <!-- 10.02현강섭 좋아요 -->
 								<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">좋아요</a>
 							<%}else{ %>
-					       		 <a onclick="LikeopenWin(<%=i %>)  " href="#">좋아요</a>
+								<%if(reWriteDAO.LikeUserInquiry(i,user_Number)) {%>      <!-- 좋아요 되어있으면 -->
+								<a onclick="UnLikeopenWin(<%=i %>,<%=user_Number %>)  " href="#">좋아요취소</a>
+								<%}else{ %>
+					       		 <a onclick="LikeopenWin(<%=i %>,<%=user_Number %>)  " href="#">좋아요</a>
+					       		<%} %>
 					        <%} %>
 					        
 					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>

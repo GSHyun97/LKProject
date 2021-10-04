@@ -21,16 +21,16 @@
     <div class="Home" OnClick="location.href ='index.jsp'">HOT KEYWORD</div>
     <div class="container">
         <div class="title">Login</div>
-        <form method="post" action="findIdAction.jsp">   
+        <form method="post" action="loginProcess.jsp">    
                 <div class="input-box">
                     <!-- 
                     <span class="details">아이디 <button class="btn2" onclick="registerCheckFunction();" type="button">중복확인</button></span> -->
                     <span class="details">아이디</span>
-                    <input type="text" placeholder="아이디를 입력해주세요" required autofocus> 
+                    <input type="text" name='user_Id' placeholder="아이디를 입력해주세요" required autofocus> 
                 </div>
                 <div class="input-box">
                     <span class="details">비밀번호</span>
-                    <input type="text" placeholder="비밀번호를 입력해주세요" required>
+                    <input type="text" name='user_Password' placeholder="비밀번호를 입력해주세요" required>
                 </div>
                 <div class="buttons">
                     <div class="button">
