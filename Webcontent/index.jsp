@@ -39,12 +39,15 @@ PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
 HashDAO hashDAO=new HashDAO();
 getUserNumberDAO getusernumberDAO = new getUserNumberDAO();
+
 %>
+
 <%
 	int pageNumber = 1;
 	if(request.getParameter("pageNumber") !=null){
 		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
+	ArrayList<PostDTO> list = postDAO.getList(pageNumber);
 %>
 
 <%
@@ -202,20 +205,24 @@ if(user_Number>0) headerSeeState=1;
 	</div>
 </section>
 	-->
+	
+	
+	
+	
 <section>	
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
 			<div class="row" id="post"> 
-				<%for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
-			int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
+				<%for(int i =0; i < list.size(); i++){                    //모든 postDB탐색
+			int seeState=1;//postDAO.seeState(i);                             //삭제유무 판별할 변수
 			if( seeState==1){											//삭제가 안된 글만
-				String originalAddress=postDAO.seeVideo(i);
+				String originalAddress=list.get(i).getPost_Link();
 				String playerAddress=originalAddress.replace("watch?v=", "embed/");
-				String postTitle=postDAO.seeTitle(i);
-				String postHashtag=postDAO.seeHashtag(i);
-				String postView=postDAO.seeView(i);
-				String postLike=postDAO.seeLike(i);
-				String postReport=postDAO.seeReport(i);
+				String postTitle=list.get(i).getPost_Title();
+				String postHashtag=list.get(i).getPost_Hashtag();
+				String postView= Integer.toString(list.get(i).getPost_View());
+				String postLike=Integer.toString(list.get(i).getPost_Like());
+				String postReport= Integer.toString(list.get(i).getPost_Report());
 				%>
 				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
 		        <p></p>
@@ -291,25 +298,7 @@ if(user_Number>0) headerSeeState=1;
 		</nav>
 	</div>
 </section>	 -->
-<%
-	ArrayList<PostDTO> list = postDAO.getList(pageNumber);
-    for(int i =0; i < list.size(); i++){
-%>
-	<tr>
-		<td><%= list.get(i).getPost_Number() %></td>
-		<td><%= list.get(i).getPost_Title() %></td>
-		<td><%= list.get(i).getPost_Link() %></td>
-		<td><%= list.get(i).getPost_Hashtag() %></td>
-		<td><%= list.get(i).getPost_View() %></td>
-		<td><%= list.get(i).getPost_Like() %></td>
-		<td><%= list.get(i).getPost_Report() %></td>
-		<td><%= list.get(i).getPost_UploadDate() %></td>
-		<td><%= list.get(i).getPost_seeState() %></td>
-	</tr>
-<%
-    }
-%>
-</table>
+
 <%
 	if(pageNumber !=1){
 %>
@@ -397,6 +386,27 @@ if(user_Number>0) headerSeeState=1;
 			</div>
 		</div>
 	</div> 
+	<table>
+<%
+    
+    for(int i =0; i < list.size(); i++){
+%>
+    <tr>
+        <td><%= list.get(i).getPost_Number() %></td>
+        <td><%= list.get(i).getPost_Title() %></td>
+        <td><%= list.get(i).getPost_Link() %></td>
+        <td><%= list.get(i).getPost_Hashtag() %></td>
+        <td><%= list.get(i).getPost_View() %></td>
+        <td><%= list.get(i).getPost_Like() %></td>
+        <td><%= list.get(i).getPost_Report() %></td>
+        <td><%= list.get(i).getPost_UploadDate() %></td>
+        <td><%= list.get(i).getPost_seeState() %></td>
+    </tr>
+<%
+    }
+%>
+</table>
+	
 	
 	<%@ include file="footer.jsp" %>
 <!-- js 스크립 부분 --> 
