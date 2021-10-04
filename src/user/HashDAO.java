@@ -42,4 +42,24 @@ public class HashDAO {
 		return hashRank;
 		
 	}
+	public String[] HashRankingView(int num) {
+		String SQL="select hashtag_View from hashtag order by hashtag_View desc limit ?";
+		String[] hashRank=new String[num];
+	 
+		try{
+			pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1, num);    
+			rs=pstmt.executeQuery();
+			for(int i=0;i<num;i++) {
+				rs.next();
+				hashRank[i]=rs.getString(1);
+			}
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return hashRank;
+		
+	}
 }

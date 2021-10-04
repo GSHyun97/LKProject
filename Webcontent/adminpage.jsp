@@ -49,6 +49,7 @@ HashDAO hashDAO=new HashDAO();
 %>
 <%
 String[] hashrank=hashDAO.HashRanking(10);
+String[] hashrankView=hashDAO.HashRankingView(10);
 %>
 	<!-- ADMIN 삽입 부분 -->
 	<body id="body-pd">
@@ -162,7 +163,7 @@ String[] hashrank=hashDAO.HashRanking(10);
 	총조회수:<%=adminDAO.seeTotalView() %>      <!--  //총조회수 -->  
 	<ul class="a">
 	<%for(int i=0;i<10;i++){ %>
-      <li>#<%=hashrank[i] %></li>                <!-- 해시태그순위 -->
+      <li>#<%=hashrank[i] %>: <%=hashrankView[i] %></li>                <!-- 해시태그순위 -->
 	  <%} %>
     </ul>
     
