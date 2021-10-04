@@ -312,7 +312,7 @@ public class PostDAO {
 		ArrayList<PostDTO> list = new ArrayList<PostDTO>();
 		int num = getNext() - (pageNumber - 1) * 8;
 		try {
-			pstmt = conn.prepareStatement(SQL);
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -328,7 +328,7 @@ public class PostDAO {
 				list.add(postdto);
 			}
 
-			System.out.println(list.size());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
