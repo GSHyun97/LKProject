@@ -68,7 +68,7 @@ String[] hashrankView=hashDAO.HashRankingView(10);
                 <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> 
                     <span class="nav_logo-name">ADMIN</span></a>
                     <div class="nav_list"> 
-                    <a href="adminPage.jsp" class="nav_link"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">홈</span> </a> 
+                    <a href="adminpage.jsp" class="nav_link"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">홈</span> </a> 
                     <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">회원 관리</span> </a> 
                     <a href="hashtag.jsp" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">조회 수 관리</span> </a>
                 	</div>
