@@ -36,6 +36,13 @@ li{
 body{
 	 padding-top:70px;
 }
+
+.jjj{
+	margin: 25px;
+}
+.kkk{
+	margin: 25px;
+}
 </style>
 </head>
 <body>
@@ -51,7 +58,7 @@ HashDAO hashDAO=new HashDAO();
 String[] hashrank=hashDAO.HashRanking(10);
 String[] hashrankView=hashDAO.HashRankingView(10);
 %>
-	<!-- ADMIN 삽입 부분 0 -->
+	<!-- ADMIN 삽입 부분 -->
 	<body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> 관리자 권한 페이지</div>
@@ -60,10 +67,10 @@ String[] hashrankView=hashDAO.HashRankingView(10);
             <nav class="nav">
                 <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> 
                     <span class="nav_logo-name">ADMIN</span></a>
-                    <div class="nav_list"> <a href="adminpage.jsp" class="nav_link active"> 
-                    <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">홈</span> </a> 
+                    <div class="nav_list"> 
+                    <a href="adminPage.jsp" class="nav_link"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">홈</span> </a> 
                     <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">회원 관리</span> </a> 
-                    <a href="hashtag.jsp" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">조회 수 관리</span> </a>
+                    <a href="hashtag.jsp" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">조회 수 관리</span> </a>
                 	</div>
                 </div>
             </nav>
@@ -98,60 +105,17 @@ String[] hashrankView=hashDAO.HashRankingView(10);
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
          </div>
-         </div>
+        </div>
         </div>
 </nav>
 
-<section>	
-	<div class="container-fluid"> 
-		<div class="card-header bg-light">
-			<div class="row"> 
-				<%for(int i=1;i<=postDAO.dbCount("post");i++){
-					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
-					if( seeState==1){
-				String originalAddress=postDAO.seeVideo(i);
-				String playerAddress=originalAddress.replace("watch?v=", "embed/");
-				String postTitle=postDAO.seeTitle(i);
-				String postReport=postDAO.seeReport(i);
-				%>
-				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
-		        <p></p>
-		        <div class='embed-container'>
-		        <iframe src=<%=playerAddress%>>
-				</iframe>
-		        </div>
-		        <div class="col-sm-12" style="background-color:#eee;">
-		        		<div class="row"> 
-		        	<p><%=postTitle%></p>
-		        			<div class="col-12 text-right">
-					        <a onclick="return confirm('삭제 하시겠습니까?')"href="./deleteAction.jsp?post_Number=<%= i%>">삭제</a>
-					        <a >신고된 횟수 <%=postReport%></a>
-					        </div>
-		        		</div> 
-					</div>
-	            </div>
-	            <%} }%> 
-			</div> 
-		</div>
-	</div>
-</section>	
-
-<!-- 페이지 버튼 -->
-<section>
-	<div class="pageMove" style="margin:30px;">
-		<nav>
-			<ul class="page">
-		      <li><a href="#" style="color:#;">이전</a></li>
-		      <li><a href="#">1</a></li>
-			  <li><a href="#">2</a></li>
-			  <li><a href="#">3</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">5</a></li>
-			  <li><a href="#">다음 페이지</a></li>
-	    	</ul>
-		</nav>
-	</div>
-</section>	
+	<h2 class="jjj">총 조회수 : <%=adminDAO.seeTotalView() %></h2>      <!--  //총조회수 -->  
+	<h5 class="kkk">태그 검색 수</h5>
+	<ul class="bb">
+	<%for(int i=0;i<10;i++){ %>
+      <li>#<%=hashrank[i] %>: <%=hashrankView[i] %>회</li>                <!-- 해시태그순위 -->
+	  <%} %>
+    </ul>		
 	
 <!-- 모달 안쪽 세션 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dailog"

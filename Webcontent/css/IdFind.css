@@ -59,6 +59,7 @@ form .user-details .input-box{
 
     background-color: #fff;
     position: relative;
+    padding: 30px;
 }
 .user-details .input-box .details{
     display: block ;
