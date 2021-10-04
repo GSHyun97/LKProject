@@ -30,23 +30,33 @@ li{
 </style>
 </head>
 <body>
+
 <%
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
 HashDAO hashDAO=new HashDAO();
 %>
+
 <%
 
-String[] hashrank=hashDAO.HashRanking();
+String[] hashrank=hashDAO.HashRanking(6);
+int loginState=1;
 
-%>
+%><!-- dlqwpdlqwpd -->
 <script>
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
 	}
 	function LikeopenWin(num){
 		window.open("onClickLikePage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
+	}
+	function refresh(){
+		location.reload();
+	}
+	function adrressmove(adrress){
+		location.href="adrress";
+		return true;
 	}
 </script>
 <!-- 헤더 부분-->
@@ -124,7 +134,7 @@ String[] hashrank=hashDAO.HashRanking();
 <section>	
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
-			<div class="row"> 
+			<div class="row" id="post"> 
 				<%for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
 			int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
 			if( seeState==1){											//삭제가 안된 글만
@@ -144,7 +154,7 @@ String[] hashrank=hashDAO.HashRanking();
 		        </div>
 		       
 		       
-		        <a onclick="openWin(<%=i %>);" href=<%=originalAddress%>  > <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
+		        <a onclick="openWin(<%=i %>); refresh();"href=<%=originalAddress%> target="_blank"> <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
 		        
 				<p>                                                   <!-- 09.29 현강섭,해쉬태그 클릭시 검색 -->
 				<%String[] array=postHashtag.split("#"); %>
@@ -162,7 +172,14 @@ String[] hashrank=hashDAO.HashRanking();
 		        			<div class="col-9 text-right">
 					        <span style="color: green;"><%=postView %>View</span>
 							<span style="color: green;"><%=postLike %>Like</span>
-					        <a onclick="LikeopenWin(<%=i %>)" href="#">좋아요</a>
+							
+							<%
+							if(loginState==0) {%>                                  <!-- 10.02현강섭 좋아요 -->
+								<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">좋아요</a>
+							<%}else{ %>
+					       		 <a onclick="LikeopenWin(<%=i %>)  " href="#">좋아요</a>
+					        <%} %>
+					        
 					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
 					        </div>
 		        		</div> 
@@ -172,8 +189,7 @@ String[] hashrank=hashDAO.HashRanking();
 			</div> 
 		</div> 
 	</div>
-</section>	
-
+</section>
 <!-- 페이지 버튼 -->
 <section>
 	<div class="pageMove" style="margin:30px;">
@@ -265,9 +281,10 @@ String[] hashrank=hashDAO.HashRanking();
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> 
+	
 	<%@ include file="footer.jsp" %>
-<!-- js 스크립 부분 -->
+<!-- js 스크립 부분 --> 
 	<script src="./js/jquery.min.js"></script>
 	<script src="./js/pooper.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
