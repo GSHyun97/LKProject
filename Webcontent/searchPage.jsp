@@ -5,6 +5,7 @@
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
 <%@ page import="user.ReWriteDAO" %>
+<%@ page import="user.HashDAO" %>
 <%@ page import="user.getUserNumberDAO" %>
 <!DOCTYPE html>
 <html>
@@ -36,15 +37,36 @@ li{
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
+HashDAO hashDAO=new HashDAO();
 getUserNumberDAO getusernumberDAO = new getUserNumberDAO();
-
 %>
 <script>
+
+function BookmarkopenWin(num,userNum){
+	window.open("onClickBookmarkPage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
+}
+function UnBookmarkopenWin(num,userNum){
+	window.open("onClickUnBookmarkPage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
+}
+	
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
 	}
+	function LikeopenWin(num,userNum){
+		window.open("onClickLikePage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
+	}
+	function UnLikeopenWin(num,userNum){
+		window.open("onClickUnLikePage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
+	}
+	function refresh(){
+		location.reload();
+	}
+	function adrressmove(adrress){
+		location.href="adrress";
+		return true;
+	}
 </script>
-<!-- 헤더 부분-->
+
 <!-- 헤더 부분-->
 <%
 String user_Id = null;
@@ -87,8 +109,8 @@ if(user_Number>0) headerSeeState=1;
 		}else if (headerSeeState==1){
 		%>
 		<a class="dropdown-item" data-toggle="modal" href="#registerModal">글 올리기</a>
-		<a class="dropdown-item" href="#">내가 담은글</a>
-		<a class="dropdown-item" href="#">내가 쓴글</a>
+		<a class="dropdown-item" href="bookmarkPage.jsp">내가 담은글</a>
+		<a class="dropdown-item" href="myWritePage.jsp">내가 쓴글</a>
 		<a class="dropdown-item" href="logoutAction.jsp">로그아웃</a>
             </div>
             <%	
@@ -120,28 +142,26 @@ if(user_Number>0) headerSeeState=1;
 <section>	
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
-			<div class="row"> 
-			<%
-			for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
-				int seeState=postDAO.seeState(i);                           //삭제유무 판별할 변수
-				int searchState=postDAO.searchPost(i,search);
-			if( seeState==1 && searchState==1){								//삭제가 안된 글만
-				String originalAddress=postDAO.seeVideo(i);
-				String playerAddress=originalAddress.replace("watch?v=", "embed/");
-				String postTitle=postDAO.seeTitle(i);
-				String postHashtag=postDAO.seeHashtag(i);
-				String postView=postDAO.seeView(i);
-				String postLike=postDAO.seeLike(i);
-				String postReport=postDAO.seeReport(i);
-			%>
-				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
-		        <p></p>
+			<div class="row" id="post"> 
+				<%for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
+					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
+					int searchState=postDAO.searchPost(i,search);
+					if( seeState==1 && searchState==1){	
+						String originalAddress=postDAO.seeVideo(i);
+						String playerAddress=originalAddress.replace("watch?v=", "embed/");
+						String postTitle=postDAO.seeTitle(i);
+						String postHashtag=postDAO.seeHashtag(i);
+						String postView=postDAO.seeView(i);
+						String postLike=postDAO.seeLike(i);
+						String postReport=postDAO.seeReport(i);
+				%>
+				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;">
 		        <div class='embed-container'>
-		        <iframe src=<%=playerAddress%>>
-				</iframe>
+		        	<iframe src=<%=playerAddress%>></iframe>
 		        </div>
-		        
-		        <a onclick="openWin(<%=i %>);" href=<%=originalAddress%>  > <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
+		       
+		       
+		        <a onclick="openWin(<%=i %>); refresh();"href=<%=originalAddress%> target="_blank"> <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
 		        
 				<p>                                                   <!-- 09.29 현강섭,해쉬태그 클릭시 검색 -->
 				<%String[] array=postHashtag.split("#"); %>
@@ -150,17 +170,38 @@ if(user_Number>0) headerSeeState=1;
 					<a href="searchPage.jsp?search=<%=array[j]%>" >#<%=array[j]%></a>
 					<%} %>
 				</p>
-		        
+				
 		        	<div class="col-sm-12" style="background-color:#eee;">
 		        		<div class="row"> 
 		        		<div class="col-3 text-left" >
-		        		<a onclick="return confirm('담으시겠습니까?')" href="./likeAction.jsp?user_Id=">담기</a>
+		        		
+		        		
+		        		<%if(user_Number==0) {%>  
+		        		<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">담기</a>
+		        		<%}else{ %>
+		        			<%if(reWriteDAO.BookmarkUserInquiry(i,user_Number)) {%>      <!-- 담기 되어있으면 -->
+		        				<a onclick="UnBookmarkopenWin(<%=i %>,<%=user_Number %>); refresh();  " href="#">담기 취소</a>
+		        			<%}else{ %>
+		        				<a onclick="BookmarkopenWin(<%=i %>,<%=user_Number %>); refresh();  " href="#">담기</a>
+		        			<%} %>
+		        		<%} %>
 		        		</div>
 		        			<div class="col-9 text-right">
 					        <span style="color: green;"><%=postView %>View</span>
 							<span style="color: green;"><%=postLike %>Like</span>
-					        <a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id=">좋아요</a>
-					        <a onclick="return confirm('신고 하시겠습니까?')" style="color: red;" href="./reportAction.jsp?user_Id=">신고</a>
+							
+							<%
+							if(user_Number==0) {%>                                  <!-- 10.02현강섭 좋아요 -->
+								<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">좋아요</a>
+							<%}else{ %>
+								<%if(reWriteDAO.LikeUserInquiry(i,user_Number)) {%>      <!-- 좋아요 되어있으면 -->
+								<a onclick="UnLikeopenWin(<%=i %>,<%=user_Number %>); refresh();  " href="#">좋아요취소</a>
+								<%}else{ %>
+					       		 <a onclick="LikeopenWin(<%=i %>,<%=user_Number %>); refresh(); " href="#">좋아요</a>
+					       		<%} %>
+					        <%} %>
+					        
+					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
 					        </div>
 		        		</div> 
 		        	</div>
@@ -169,8 +210,7 @@ if(user_Number>0) headerSeeState=1;
 			</div> 
 		</div> 
 	</div>
-</section>	
-
+</section>
 <!-- 페이지 버튼 -->
 <section>
 	<div class="pageMove" style="margin:30px;">

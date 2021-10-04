@@ -111,9 +111,7 @@ public class ReWriteDAO {
       }catch(Exception e) {
          e.printStackTrace();
       }
-      
    }
-   
    public boolean LikeUserInquiry(int num,int userNum) {
       String SQL ="SELECT * FROM postLikeUser WHERE post_Number = ? AND post_LikeUser = ?";
       try {
@@ -130,4 +128,49 @@ public class ReWriteDAO {
       }
       return false;
    }
+   //------------------------------------좋아요 끝---------------------------------
+   
+   //------------------------------------북마크 시작-------------------------------
+   public void BookmarkUserReWrite(int num,int userNum) {
+	      String SQL ="INSERT INTO postBookmarkUser VALUES(?,?)";
+	      
+	      try {
+	         pstmt = conn.prepareStatement(SQL);
+	         pstmt.setInt(1, num);
+	         pstmt.setInt(2, userNum);
+	         pstmt.executeUpdate();
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	   }
+   public void BookmarkUserDelete(int num,int userNum) {
+	      String SQL ="DELETE FROM postBookmarkUser WHERE post_Number = ? AND post_BookmarkUser = ?";
+	      
+	      try {
+	         pstmt = conn.prepareStatement(SQL);
+	         pstmt.setInt(1, num);
+	         pstmt.setInt(2, userNum);
+	         pstmt.executeUpdate();
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	   }
+   public boolean BookmarkUserInquiry(int num,int userNum) {
+	      String SQL ="SELECT * FROM postBookmarkUser WHERE post_Number = ? AND post_BookmarkUser = ?";
+	      try {
+	         pstmt = conn.prepareStatement(SQL);
+	         pstmt.setInt(1, num);
+	         pstmt.setInt(2, userNum);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) {
+	            return true;
+	         }
+	         return false;
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      return false;
+	   }
+   
+   
 }

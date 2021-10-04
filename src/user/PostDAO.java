@@ -256,8 +256,39 @@ public class PostDAO {
 		return -1;
 	}
 	
-	
-	
+	public boolean Bookmarkpost(int num,int userNum) {
+	      String SQL ="SELECT * FROM postBookmarkUser WHERE post_Number = ? AND post_BookmarkUser = ?";
+	      try {
+	         pstmt = conn.prepareStatement(SQL);
+	         pstmt.setInt(1, num);
+	         pstmt.setInt(2, userNum);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) {
+	            return true;
+	         }
+	         return false;
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      return false;
+	   }
+	public boolean MyWritepost(int num, int userNum) {
+		String SQL ="SELECT * FROM post WHERE post_Number = ? AND post_WriteUser = ?";
+	      try {
+	         pstmt = conn.prepareStatement(SQL);
+	         pstmt.setInt(1, num);
+	         pstmt.setInt(2, userNum);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) {
+	            return true;
+	         }
+	         return false;
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      return false;
+		
+	}
 	
 }
 

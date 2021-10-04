@@ -15,6 +15,7 @@
 <title>웹 사이트</title>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/custom.css">
+<link rel="stylesheet" href="./css/searchPage.css">
 			<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } 
 			.embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 			</style>
@@ -28,10 +29,10 @@ li{
 	display:inline-block;
 	padding: 10px;
 }
+
 </style>
 </head>
 <body>
-
 <%
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
@@ -39,14 +40,8 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 HashDAO hashDAO=new HashDAO();
 getUserNumberDAO getusernumberDAO = new getUserNumberDAO();
 %>
-
-<%
-
-String[] hashrank=hashDAO.HashRanking(6);
-int loginState=1;
-
-%>
 <script>
+
 function BookmarkopenWin(num,userNum){
 	window.open("onClickBookmarkPage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
 }
@@ -71,6 +66,7 @@ function UnBookmarkopenWin(num,userNum){
 		return true;
 	}
 </script>
+
 <!-- 헤더 부분-->
 <%
 String user_Id = null;
@@ -81,6 +77,7 @@ if(session.getAttribute("user_Id") != null){
 	user_Number=getusernumberDAO.getUserNumber(user_Id);
 }
 if(user_Number>0) headerSeeState=1;
+//if(관리자페이지면) headerSeeState=2;
 %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand flex-grow-1" href="index.jsp"><span>HOT KEYWORD</span></a>
@@ -124,97 +121,36 @@ if(user_Number>0) headerSeeState=1;
 </nav>
 <!-- 헤더부분 끝 -->
 
-
-<!-- 태그 삽입 부분 -->
-<nav class="hot">
-	<span>Hot Trend</span>
-</nav>
-<nav>
-	<ul class="a">
-	<%for(int i=0;i<6;i++){ %>
-      <li><a href="searchPage.jsp?search=<%=hashrank[i]%>">#<%=hashrank[i] %></a></li>
-	  <%} %>
-    </ul>
-</nav>
-
-<!-- 메인페이지 헤더 부분화면
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">로고</a>  
-    <div class="dropdown">
-	  <button class="navbar-toggler" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-	    <a class="dropdown-item" href="#">로그인</a>
-	    <a class="dropdown-item" href="#">회원가입</a>
-	    <a class="dropdown-item" href="#">비인칸</a>
-	  </div>
-	</div>
-   </div>
-</nav> -->
-<!-- 메인페이지 바디 검색 부분화면 
-<nav>
-	<div class="container" style="text-align: center; margin: 0auto;" > 
-	<div style="display: inline-block; padding-left:0;"> 
-	 	<form action="./index.jsp" method="get"
-		class="form-inline my-2 my-lg0">
-		<input type="text" class="form-control mr-sm-2" name="search"
-		placeholder="내용을 입력하세요." aria-label="search">
-		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-		</form>
-	</div> 
-	</div> -->
-	
-<!-- 중앙 바디 부분 
-</nav>
-	<section class="container">
-	<div class="container" style="text-align: center; margin: 0auto;" > 
-  	<div style="border: 1px solid; display: inline-block;"> 
-		<form method="get" action="./index.jsp" class="form-inline mt-3">
-			<select name="LectureDivide" class="form-control mx-1 mt-2">
-				<option value="전체">전체</option>
-				<option value="전공" >예1</option>
-				<option value="교양" >예2</option>
-
-			</select> 
-			<select name="searchType" class="form-control mx-1 mt-2">
-				<option value="최신순">최신순</option>
-				<option value="최신순">조회순</option>
-				<option value="최신순">좋아요순</option>
-			</select>
-			
-			<input type="text" name="search" class="form-control mx-1 mt-2"
-				placeholder="ex)#삼성#스마트폰">
-			<button type="submit" class="btn btn-primary mx-1 mt-2">검색</button>
-			<a class="btn btn-primary mx-1 mt-2" data-toggle="modal"
-				href="#registerModal">등록하기</a> <a class="btn btn-danger mx-1 mt-2"
-				data-toggle="modal" href="#reportModal">신고</a>
-		</form>
-	</div> 
-	</div>
-</section>
-	-->
+<!-- 통합검색 글자부분 -->
+	<div class="curation">
+        <div class="content-header sub-visual">
+            <div class="cont-wrap ">
+                <div class="cont ">
+                    <h1>내가 담은 글</h1>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
 <section>	
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
 			<div class="row" id="post"> 
 				<%for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
-			int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
-			if( seeState==1){											//삭제가 안된 글만
-				String originalAddress=postDAO.seeVideo(i);
-				String playerAddress=originalAddress.replace("watch?v=", "embed/");
-				String postTitle=postDAO.seeTitle(i);
-				String postHashtag=postDAO.seeHashtag(i);
-				String postView=postDAO.seeView(i);
-				String postLike=postDAO.seeLike(i);
-				String postReport=postDAO.seeReport(i);
+					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
+					boolean bookmarkState=postDAO.Bookmarkpost(i,user_Number);
+					if( seeState==1 && bookmarkState){											//삭제가 안된 글만
+						String originalAddress=postDAO.seeVideo(i);
+						String playerAddress=originalAddress.replace("watch?v=", "embed/");
+						String postTitle=postDAO.seeTitle(i);
+						String postHashtag=postDAO.seeHashtag(i);
+						String postView=postDAO.seeView(i);
+						String postLike=postDAO.seeLike(i);
+						String postReport=postDAO.seeReport(i);
 				%>
-				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
-		        <p></p>
+				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;">
 		        <div class='embed-container'>
-		        <iframe src=<%=playerAddress%>>
-				</iframe>
+		        	<iframe src=<%=playerAddress%>></iframe>
 		        </div>
 		       
 		       
@@ -359,10 +295,10 @@ if(user_Number>0) headerSeeState=1;
 				</div>
 			</div>
 		</div>
-	</div> 
-	
+	</div>
+<!-- 푸터 부분 -->
 	<%@ include file="footer.jsp" %>
-<!-- js 스크립 부분 --> 
+<!-- js 스크립 부분 -->
 	<script src="./js/jquery.min.js"></script>
 	<script src="./js/pooper.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
