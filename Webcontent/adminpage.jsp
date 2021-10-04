@@ -135,7 +135,7 @@ String[] hashrank=hashDAO.HashRanking(10);
 	</div>
 </section>
 	-->
-	총조회수:<%=adminDAO.seeTotalView() %>      <!--  //총조회수 -->
+	총조회수:<%=adminDAO.seeTotalView() %>      <!--  //총조회수 -->  
 	<ul class="a">
 	<%for(int i=0;i<10;i++){ %>
       <li>#<%=hashrank[i] %></li>                <!-- 해시태그순위 -->

@@ -25,7 +25,7 @@ public class HashDAO {
 	public String[] HashRanking(int num) {
 		String SQL="select hashtag_Name from hashtag order by hashtag_View desc limit ?";
 		String[] hashRank=new String[num];
-	
+	 
 		try{
 			pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, num);    
