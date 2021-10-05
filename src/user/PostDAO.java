@@ -305,50 +305,40 @@ public class PostDAO {
 		return -1; // 데이터베이스 오류
 	}
 
-	public ArrayList<PostDTO> getList(int pageNumber) {
-		String SQL = "SELECT * from post " + "WHERE post_Number < ? " + "AND post_seeState = 1 "
-				+ "ORDER BY post_Number DESC LIMIT 8";
-
-		ArrayList<PostDTO> list = new ArrayList<PostDTO>();
-		int num = getNext() - (pageNumber - 1) * 8;
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, num);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				PostDTO postdto = new PostDTO();
-				postdto.setPost_Number(rs.getInt(1));
-				postdto.setPost_Title(rs.getString(2));
-				postdto.setPost_Link(rs.getString(3));
-				postdto.setPost_Hashtag(rs.getString(4));
-				postdto.setPost_UploadDate(rs.getString(5));
-				postdto.setPost_View(rs.getInt(6)); 
-				postdto.setPost_Like(rs.getInt(7)); //
-				postdto.setPost_Report(rs.getInt(8));
-				list.add(postdto);
-			}
-
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-	public boolean nextPage(int pageNumber) {
-		String SQL = "SELECT * from post WHERE post_Number < ? AND post_seeState = 1";
+	
+	
+	public int[][] postnum(int mpn) {
+		String SQL ="SELECT post_Number FROM post WHERE post_seeState=1 ORDER BY post_Number";
+		int[][] post=new int[mpn][8];
 		try {
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext() - (pageNumber - 1) * 8);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				return true;
+			for(int i=0;i<mpn;i++) {
+				for(int j=0;j<8;j++) {
+					if(rs.next()) {
+						post[i][j]=rs.getInt(1);
+					}
+					else {
+						post[i][j]=1;
+					}
+				}
 			}
+			return post;
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("오류");
 		}
-		return false;
+		return post;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 /*

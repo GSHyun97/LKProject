@@ -47,7 +47,7 @@ getUserNumberDAO getusernumberDAO = new getUserNumberDAO();
 	if(request.getParameter("pageNumber") !=null){
 		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
-	ArrayList<PostDTO> list = postDAO.getList(pageNumber);
+	
 %>
 
 <%
@@ -205,24 +205,34 @@ if(user_Number>0) headerSeeState=1;
 	</div>
 </section>
 	-->
-	
-	
-	
-	
+	<%
+		int postCount=postDAO.dbCount("post");
+		int mpn=(postCount%8==0)? postCount/8:postCount/8+1;
+	%>
 <section>	
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
 			<div class="row" id="post"> 
-				<%for(int i =0; i < list.size(); i++){                    //모든 postDB탐색
-			int seeState=1;//postDAO.seeState(i);                             //삭제유무 판별할 변수
-			if( seeState==1){											//삭제가 안된 글만
-				String originalAddress=list.get(i).getPost_Link();
+				
+				<%
+					int[][] post=postDAO.postnum(mpn);
+				/*for(int i=0;i<mpn;i++) {
+					for(int j=0;j<8;j++) {
+						System.out.println("["+i+"]"+"["+j+"]:"+post[i][j]);
+					}
+				}*/
+				%>
+				
+				<%for(int i=0; i<8;i++){                    //모든 postDB탐색
+					int seei=post[pageNumber-1][i];
+			if( postDAO.seeState(seei)==1){											//삭제가 안된 글만
+				String originalAddress=postDAO.seeVideo(seei);
 				String playerAddress=originalAddress.replace("watch?v=", "embed/");
-				String postTitle=list.get(i).getPost_Title();
-				String postHashtag=list.get(i).getPost_Hashtag();
-				String postView= Integer.toString(list.get(i).getPost_View());
-				String postLike=Integer.toString(list.get(i).getPost_Like());
-				String postReport= Integer.toString(list.get(i).getPost_Report());
+				String postTitle=postDAO.seeTitle(seei);
+				String postHashtag=postDAO.seeHashtag(seei);
+				String postView=postDAO.seeView(seei);
+				String postLike=postDAO.seeLike(seei);
+				String postReport=postDAO.seeReport(seei);
 				%>
 				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
 		        <p></p>
@@ -250,10 +260,10 @@ if(user_Number>0) headerSeeState=1;
 		        		<%if(user_Number==0) {%>  
 		        		<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">담기</a>
 		        		<%}else{ %>
-		        			<%if(reWriteDAO.BookmarkUserInquiry(i,user_Number)) {%>      <!-- 담기 되어있으면 -->
-		        				<a onclick="UnBookmarkopenWin(<%=i %>,<%=user_Number %>); refresh();  " href="#">담기 취소</a>
+		        			<%if(reWriteDAO.BookmarkUserInquiry(seei,user_Number)) {%>      <!-- 담기 되어있으면 -->
+		        				<a onclick="UnBookmarkopenWin(<%=seei %>,<%=user_Number %>); refresh();  " href="#">담기 취소</a>
 		        			<%}else{ %>
-		        				<a onclick="BookmarkopenWin(<%=i %>,<%=user_Number %>); refresh();  " href="#">담기</a>
+		        				<a onclick="BookmarkopenWin(<%=seei %>,<%=user_Number %>); refresh();  " href="#">담기</a>
 		        			<%} %>
 		        		<%} %>
 		        		</div>
@@ -265,51 +275,46 @@ if(user_Number>0) headerSeeState=1;
 							if(user_Number==0) {%>                                  <!-- 10.02현강섭 좋아요 -->
 								<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">좋아요</a>
 							<%}else{ %>
-								<%if(reWriteDAO.LikeUserInquiry(i,user_Number)) {%>      <!-- 좋아요 되어있으면 -->
-								<a onclick="UnLikeopenWin(<%=i %>,<%=user_Number %>); refresh();  " href="#">좋아요취소</a>
+								<%if(reWriteDAO.LikeUserInquiry(seei,user_Number)) {%>      <!-- 좋아요 되어있으면 -->
+								<a onclick="UnLikeopenWin(<%=seei %>,<%=user_Number %>); refresh();  " href="#">좋아요취소</a>
 								<%}else{ %>
-					       		 <a onclick="LikeopenWin(<%=i %>,<%=user_Number %>); refresh(); " href="#">좋아요</a>
+					       		 <a onclick="LikeopenWin(<%=seei %>,<%=user_Number %>); refresh(); " href="#">좋아요</a>
 					       		<%} %>
 					        <%} %>
 					        
-					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
+					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=seei%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
 					        </div>
 		        		</div> 
 		        	</div>
 	            </div>
-	            <%} }%> 
+	            <% 
+	            
+					} //if끝
+			
+				}//for끝
+				%> 
 			</div> 
 		</div> 
 	</div>
 </section>
-<!-- 페이지 버튼 -->
-<!-- <section>
+
+<section>
 	<div class="pageMove" style="margin:30px;">
 		<nav>
 			<ul class="page">
-		      <li><a href="#" style="color:#;">이전</a></li>
-		      <li><a href="#">1</a></li>
-			  <li><a href="#">2</a></li>
-			  <li><a href="#">3</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">5</a></li>
-			  <li><a href="#">다음 페이지</a></li>
+		      <li>
+		      <%if(pageNumber!=1){ %><a href="index.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arraw-left">이전</a><%} %>
+		      <%for(int i=1;i<=mpn;i++){ %><li><a href="index.jsp?pageNumber=<%=i%>"><%=i %></a></li> <%} %>				<!-- 페이지번호나오는 for문 -->
+			  <%if(pageNumber!=mpn){ %> <a href="index.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-success btn-arraw-left">다음</a><%} %>
+			  </li>
 	    	</ul>
 		</nav>
 	</div>
-</section>	 -->
+</section>	 
 
-<%
-	if(pageNumber !=1){
-%>
-	<a href="index.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arraw-left">이전</a>
-<%
-	}if(postDAO.nextPage(pageNumber + 1)){
-%>
-	<a href="index.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-success btn-arraw-left">다음</a>
-<%
-	}
-%>
+
+	
+
 	
 <!-- 모달 안쪽 세션 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dailog"
@@ -386,27 +391,6 @@ if(user_Number>0) headerSeeState=1;
 			</div>
 		</div>
 	</div> 
-	<table>
-<%
-    
-    for(int i =0; i < list.size(); i++){
-%>
-    <tr>
-        <td><%= list.get(i).getPost_Number() %></td>
-        <td><%= list.get(i).getPost_Title() %></td>
-        <td><%= list.get(i).getPost_Link() %></td>
-        <td><%= list.get(i).getPost_Hashtag() %></td>
-        <td><%= list.get(i).getPost_View() %></td>
-        <td><%= list.get(i).getPost_Like() %></td>
-        <td><%= list.get(i).getPost_Report() %></td>
-        <td><%= list.get(i).getPost_UploadDate() %></td>
-        <td><%= list.get(i).getPost_seeState() %></td>
-    </tr>
-<%
-    }
-%>
-</table>
-	
 	
 	<%@ include file="footer.jsp" %>
 <!-- js 스크립 부분 --> 
