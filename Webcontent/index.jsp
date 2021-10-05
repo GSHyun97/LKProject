@@ -302,10 +302,9 @@ if(user_Number>0) headerSeeState=1;
 	<div class="pageMove" style="margin:30px;">
 		<nav>
 			<ul class="page">
-		      <li>
-		      <%if(pageNumber!=1){ %><a href="index.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arraw-left">이전</a><%} %>
+		      <li> <%if(pageNumber!=1){ %><a href="index.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arraw-left">이전</a><%} %></li>
 		      <%for(int i=1;i<=mpn;i++){ %><li><a href="index.jsp?pageNumber=<%=i%>"><%=i %></a></li> <%} %>				<!-- 페이지번호나오는 for문 -->
-			  <%if(pageNumber!=mpn){ %> <a href="index.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-success btn-arraw-left">다음</a><%} %>
+			  <%if(pageNumber!=mpn){ %> <li><a href="index.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-success btn-arraw-left">다음</a><%} %>
 			  </li>
 	    	</ul>
 		</nav>
