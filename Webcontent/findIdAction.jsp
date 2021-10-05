@@ -38,7 +38,7 @@ String id = userDAO.findId(name, email);
                     </div>
                 <div class="button">
                         <!-- <input type="reset" value="회원가입" onclick="location.href='#'"> -->
-                        <button class="btn btn-blue btn-block" type="submit" value="비밀번호 찾으러 가기" onclick="location.href='passwordFind.jsp'">비밀번호 찾으러 가기</button> 
+                        <button class="btn btn-blue btn-block" type="submit" value="비밀번호 찾으러 가기" onclick="location.href='passwordFind.jsp'">비밀번호 찾기</button> 
                     </div>
                 </div> 
     </div>
