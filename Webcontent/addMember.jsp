@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, intial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/addMember.css">
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <title>회원 가입</title>
@@ -38,21 +39,30 @@
 </script>
 </head>
 <body>
-	<div class="container">
-			<h3>회원가입</h3>
-			<form method="post" action="./userRegister"> 
-				<p><label>아이디</label>
-					<input id="user_Id" name="user_Id" type="text" placeholder="아이디를 입력하세요" maxlength="15">
-					<button class="btn btn-primary" onclick="registerCheckFunction();" type="button">중복확인</button>
-				<p><label>비밀번호</label>
-					<input name="user_Password1" id="user_Password1" type="password" onkeyup="passwordCheckFunction();" placeholder="비밀번호를 입력하세요" minlength="6" maxlength= >
-				<p><label>비밀번호확인</label>
-					<input name="user_Password2" id="user_Password2" type="password" placeholder="비밀번호를 다시 입력하세요" >
-				<p><label>성명</label>
-					<input name="user_Name" id="user_Name" type="text" class="form-control">
+    <div class="container">
+        <div class="title">Registration</div>
+        <form method="post" action="./userRegister"> 
+            <div class="abc">
+                <div class="input-box">
+                <p><span class="detail"><label>아이디 </label><button class="btn2" onclick="registerCheckFunction();" type="button">중복확인</button></span>
+                <input id="user_Id" name="user_Id" type="text" class="form-control" placeholder="아이디를 입력하세요" maxlength="15"> 
+                </div>
+                <div class="input-box">
+            <p><label>비밀번호</label>
+                <input name="user_Password1" id="user_Password1" type="password" class="form-control" onkeyup="passwordCheckFunction();" placeholder="비밀번호를 입력하세요" minlength="6" maxlength= >
+                </div>
+                <div class="input-box">
+            <p><label>비밀번호 확인</label>
+                <input name="user_Password2" id="user_Password2" type="password" class="form-control" placeholder="비밀번호를 다시 입력하세요" >
+            </div>
+            <div class="input-box">
+                <p><label>이름</label>
+					<input name="user_Name" id="user_Name" type="text" class="form-control" placeholder="이름을 입력하세요">
+                </div>
+                    <div class="input-box">
 				<p><label>생년월일</label>
-					<input type="text" name="user_Birth1" maxlength="4" placeholder="년(4자)" size="6">
-					<select name="user_Birth2">
+					<input type="text" name="user_Birth1" maxlength="4" class="form-control" placeholder="년(4자)" size="6">
+					<select name="user_Birth2" class="form-control">
 						<option value="">월</option>
 						<option value="01">1</option>
 						<option value="02">2</option>
@@ -67,7 +77,7 @@
 						<option value="11">11</option>
 						<option value="12">12</option>
 					</select>
-					<select name="user_Birth3">
+					<select name="user_Birth3" class="form-control">
 						<option value="">일</option>
 						<option value="01">1</option>
 						<option value="02">2</option>
@@ -100,16 +110,20 @@
 						<option value="29">29</option>
 						<option value="30">30</option>
 						<option value="31">31</option>
-					</select>
+					</select></div>
+                    <div class="input-box">
 				<p><label>이메일</label>
-					<input type="text" name="user_Email1" maxlength="50">@ 
-					<select name="user_Email2">
+					<input type="text" name="user_Email1" class="form-control" maxlength="50"placeholder="이메일을 입력하세요"> @ 
+					<select name="user_Email2" class="form-control">
 						<option>naver.com</option>
 						<option>gmail.com</option>
-					</select>
+						<option>daum.net</option>
+						<option>nate.com</option>
+					</select>  </div>
+					</div>
 				<p><input type="submit" class="btn btn-primary " value="회원가입">
-				<h5 style="color:red" id="passwordCheckMessage"></h5>
-				<input type="reset" class="btn btn-primary " value="취소" onclick="location.href='mainPage.jsp' ">
+				
+				<input type="reset" class="btn btn-primary " value="취소" onclick="location.href='login.jsp' ">
 			</form>
 		</div>
 		<!-- 이 부분은 유효성 검사 칸 만들어본건데 작동은 잘 되는데 css건드릴때 다시 볼 필요가 있음 -->
