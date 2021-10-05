@@ -29,11 +29,11 @@
                     <!-- 
                     <span class="details">아이디 <button class="btn2" onclick="registerCheckFunction();" type="button">중복확인</button></span> -->
                     <span class="details">이름</span>
-                    <input type="text" name='user_Name' placeholder="이름을 입력해주세요" autofocus> 
+                    <input type="text" name='user_Name' placeholder="이름을 입력해주세요" required autofocus> 
                 </div>
                 <div class="input-box">
                     <span class="details">이메일</span>
-                    <input type="text" name='user_Email' placeholder="이메일을 입력해주세요">
+                    <input type="text" name='user_Email' placeholder="이메일을 입력해주세요" required>
                 </div>
         
                 <div class="buttons">
@@ -44,8 +44,12 @@
                 </form>
                 <div class="button">
                         <!-- <input type="reset" value="회원가입" onclick="location.href='#'"> -->
-                        <button class="btn btn-blue btn-block" type="submit" value="비밀번호 찾으러 가기" onclick="location.href='passwordFind.jsp'">비밀번호 찾으러 가기</button> 
-                    </div>
+                        <button class="btn btn-blue btn-block" type="submit" value="로그인" onclick="location.href='login.jsp'">로그인 하기</button> 
+                </div>
+                <div class="button">
+                        <!-- <input type="reset" value="회원가입" onclick="location.href='#'"> -->
+                        <button class="btn btn-blue btn-block" type="submit" value="비밀번호 찾기" onclick="location.href='passwordFind.jsp'">비밀번호 찾기</button> 
+                </div>
                 </div> 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>

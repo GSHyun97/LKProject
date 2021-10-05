@@ -27,15 +27,15 @@
 
             <div class="input-box">
                 <span class="details">이름</span>
-                <input type="text" name='user_Name' placeholder="아이디을 입력해주세요" autofocus>
+                <input type="text" name='user_Name' placeholder="아이디을 입력해주세요" required autofocus>
             </div>
             <div class="input-box">
                     <span class="details">아이디</span>
-                    <input type="text" name='user_Id' placeholder="이름을 입력해주세요" > 
+                    <input type="text" name='user_Id' placeholder="이름을 입력해주세요" required> 
             </div>
             <div class="input-box">
                     <span class="details">이메일</span>
-                    <input type="text" name='user_Email' placeholder="이메일을 입력해주세요">
+                    <input type="text" name='user_Email' placeholder="이메일을 입력해주세요" required>
             </div>
             <div class="buttons">
                 <div class="button">
@@ -44,8 +44,12 @@
                 </div>
             </form>
             <div class="button">
+                        <!-- <input type="reset" value="회원가입" onclick="location.href='#'"> -->
+                        <button class="btn btn-blue btn-block" type="submit" value="로그인" onclick="location.href='login.jsp'">로그인 하기</button> 
+                </div>
+            <div class="button">
                     <!-- <input type="reset" value="회원가입" onclick="location.href='#'"> -->
-                    <button class="btn btn-blue btn-block" type="submit" value="아이디 찾으러 가기" onclick="location.href='IdFind.jsp'">아이디 찾으러 가기</button> 
+                    <button class="btn btn-blue btn-block" type="submit" value="아이디 찾으러 가기" onclick="location.href='IdFind.jsp'">아이디 찾기</button> 
                 </div>
             </div> 
     </div>
