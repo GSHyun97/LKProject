@@ -242,7 +242,7 @@ if(user_Number>0) headerSeeState=1;
 		        </div>
 		       
 		       
-		        <a onclick="openWin(<%=i %>); refresh();"href=<%=originalAddress%> target="_blank"> <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
+		        <a onclick="openWin(<%=seei %>); refresh();"href=<%=originalAddress%> target="_blank"> <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
 		        
 				<p>                                                   <!-- 09.29 현강섭,해쉬태그 클릭시 검색 -->
 				<%String[] array=postHashtag.split("#"); %>
