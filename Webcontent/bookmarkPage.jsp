@@ -156,7 +156,7 @@ if(user_Number>0) headerSeeState=1;
 						String postLike=postDAO.seeLike(i);
 						String postReport=postDAO.seeReport(i);
 				%>
-				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;">
+				<div class="col-lg-3" style="border:1px solid gray; background-color:transparent;"> 
 		        <div class='embed-container'>
 		        	<iframe src=<%=playerAddress%>></iframe>
 		        </div>
@@ -177,7 +177,7 @@ if(user_Number>0) headerSeeState=1;
 					<%} %>
 				</p>
 				
-		        	<div class="col-sm-12" style="background-color:#eee;">
+		        	<div class="col-sm-12" style="background-color:transparent;">
 		        		<div class="row"> 
 		        		<div class="col-3 text-left" >
 		        		
