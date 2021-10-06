@@ -19,7 +19,7 @@
 			<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } 
 			.embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 			</style>
-<script src="https://kit.fontawesome.com/402914fc57.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/402914fc57.js"></script>
 <style>
 ul{
         text-align: center;
@@ -32,6 +32,8 @@ li{
 </style>
 </head>
 <body>
+
+
 
 <%
 UserDAO userDAO = new UserDAO();
@@ -137,7 +139,7 @@ if(user_Number>0) headerSeeState=1;
 
 <!-- 태그 삽입 부분 -->
 <nav class="hot">
-	<span>Hot Trend</span>
+	<h4>Hot Trend</h4>
 </nav>
 <nav>
 	<ul class="a">
@@ -163,19 +165,6 @@ if(user_Number>0) headerSeeState=1;
 	</div>
    </div>
 </nav> -->
-<!-- 메인페이지 바디 검색 부분화면 
-<nav>
-	<div class="container" style="text-align: center; margin: 0auto;" > 
-	<div style="display: inline-block; padding-left:0;"> 
-	 	<form action="./index.jsp" method="get"
-		class="form-inline my-2 my-lg0">
-		<input type="text" class="form-control mr-sm-2" name="search"
-		placeholder="내용을 입력하세요." aria-label="search">
-		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-		</form>
-	</div> 
-	</div> -->
-	
 <!-- 중앙 바디 부분 
 </nav>
 	<section class="container">
@@ -211,8 +200,8 @@ if(user_Number>0) headerSeeState=1;
 	%>
 <section>	
 	<div class="container-fluid"> 
-		<div class="card-header bg-light">
-			<div class="row" id="post"> 
+		<div class="card-header">
+			<div class="row" id="post" > 
 				
 				<%
 					int[][] post=postDAO.postnum(mpn);
@@ -397,11 +386,9 @@ if(user_Number>0) headerSeeState=1;
 	<script src="./js/pooper.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	
-	
+
 </body>
 </html>

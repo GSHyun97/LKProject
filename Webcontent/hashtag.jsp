@@ -43,6 +43,12 @@ body{
 .kkk{
 	margin: 25px;
 }
+.rank{
+	text-align: center;
+	padding-top: 20px;
+	font-weight:bold;
+	
+}
 </style>
 </head>
 <body>
@@ -108,14 +114,39 @@ String[] hashrankView=hashDAO.HashRankingView(10);
         </div>
         </div>
 </nav>
-
 	<h2 class="jjj">총 조회수 : <%=adminDAO.seeTotalView() %></h2>      <!--  //총조회수 -->  
-	<h5 class="kkk">태그 검색 수</h5>
-	<ul class="bb">
-	<%for(int i=0;i<10;i++){ %>
+	<h4 class="kkk">태그 검색 수</h4>
+	
+	<div class="col-sm-12" style="background-color:#eee;">
+		<div class="row"> 
+			<div class="col-12 text-right">
+			<h5 class="rank">1 ~ 6위 (표시중)</h5>
+			<ul class="bb">	
+			
+	<%for(int i=0;i<6;i++){ %>
       <li>#<%=hashrank[i] %>: <%=hashrankView[i] %>회</li>                <!-- 해시태그순위 -->
 	  <%} %>
-    </ul>		
+	  
+    </ul>			        
+			</div>
+		</div> 
+	</div>
+	
+	<div class="col-sm-12" style="background-color: white;">
+		<div class="row"> 
+			<div class="col-12 text-right">
+
+	<h5 class="rank">7 ~ 10위</h5>
+	<ul class="bb">
+	<%for(int i=6;i<10;i++){ %>
+      <li>#<%=hashrank[i] %>: <%=hashrankView[i] %>회</li>                <!-- 해시태그순위 -->
+	  <%} %>
+    </ul>			        
+			</div>
+		</div> 
+	</div>
+	
+			
 	
 <!-- 모달 안쪽 세션 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dailog"
@@ -193,7 +224,7 @@ String[] hashrankView=hashDAO.HashRankingView(10);
 		</div>
 	</div>
 <!-- 푸터 부분 -->
-	<%@ include file="footer.jsp" %>
+	<%@ include file="footer.jsp"%>
 <!-- js 스크립 부분 -->
 	<script src="./js/jquery.min.js"></script>
 	<script src="./js/pooper.js"></script>

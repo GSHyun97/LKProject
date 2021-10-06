@@ -6,6 +6,7 @@
     --background-color1: #6ECAFF;
     --background-color2: #fbcac9;
     --background-color3: #8ca6ce;
+    --background-color4: #dfd3df;
 }
 .navar-brand, h1, h2, h3, h4{
 	font-family: 'jeju Gothic';
@@ -24,7 +25,8 @@ d-flex{
 }
 
 body {
-  font-family: 'hanna';
+	background: linear-gradient(135deg, var(--background-color1), var(--background-color4));  
+  
 }
 .navbar {
   margin-bottom: 0;
@@ -62,12 +64,16 @@ content{
 	cursor: pointer;
 
 }
-.navbar-brand span {
+.navbar-brand span{
     background: linear-gradient(to right, var(--background-color2), var(--background-color3));
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
   }
+ 
+.a{
+	text-align: center;
+}
 
 
 
