@@ -25,8 +25,8 @@ d-flex{
 }
 
 body {
-	background: linear-gradient(135deg, var(--background-color1), var(--background-color4));  
-  
+  font-family: 'hanna';
+  background: linear-gradient(135deg, var(--background-color1), var(--background-color4));
 }
 .navbar {
   margin-bottom: 0;
@@ -41,7 +41,6 @@ content{
 }
 .footer{
   height: 100px;
-  background: #333;
   color: rgb(0, 0, 0);
   font-size: 60px;
   text-align: center;
@@ -64,16 +63,24 @@ content{
 	cursor: pointer;
 
 }
-.navbar-brand span{
+.navbar-brand span {
     background: linear-gradient(to right, var(--background-color2), var(--background-color3));
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-  }
- 
-.a{
-	text-align: center;
 }
+.bodytitle{
+	color: black;
+	font-weight: bold;
+}
+.hashblank{
+	color: auqa;;
+	border-right: 1px solid rgba(0,0,0,0.2);
+    border-left: 1px solid rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
 
 
 
