@@ -40,6 +40,14 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 HashDAO hashDAO=new HashDAO();
 getUserNumberDAO getusernumberDAO = new getUserNumberDAO();
 %>
+
+<%
+	int pageNumber = 1;
+	if(request.getParameter("pageNumber") !=null){
+		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+	}
+	
+%>
 <script>
 
 function BookmarkopenWin(num,userNum){
@@ -136,7 +144,7 @@ if(user_Number>0) headerSeeState=1;
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
 			<div class="row" id="post"> 
-				<%for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
+				<%for(int i=1;i<=postDAO.dbCount();i++){                    //모든 postDB탐색
 					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
 					boolean bookmarkState=postDAO.Bookmarkpost(i,user_Number);
 					if( seeState==1 && bookmarkState){											//삭제가 안된 글만
@@ -209,17 +217,13 @@ if(user_Number>0) headerSeeState=1;
 	<div class="pageMove" style="margin:30px;">
 		<nav>
 			<ul class="page">
-		      <li><a href="#" style="color:#;">이전</a></li>
-		      <li><a href="#">1</a></li>
-			  <li><a href="#">2</a></li>
-			  <li><a href="#">3</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">5</a></li>
-			  <li><a href="#">다음 페이지</a></li>
+		       <li ><a href="#"style="color: brown;">1</a></li>
+			  <li><a href="#" class="btn btn-success btn-arraw-left" >다음</a>
+			  </li>
 	    	</ul>
 		</nav>
 	</div>
-</section>	
+</section>
 	
 <!-- 모달 안쪽 세션 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dailog"

@@ -162,10 +162,7 @@ public class PostDAO {
 		return -1;
 	}
 	
-	
 	//---------------------------------dbCount끝------------------------
-	
-	
 	public int write(String post_Title, String post_Link, String post_Hashtag, int post_User) {
         String SQL = "INSERT INTO POST VALUES (post_Number, ?, ?, ?, CURRENT_TIMESTAMP , 0 , 0 ,0, 1, ?)";
         try {
@@ -202,10 +199,10 @@ public class PostDAO {
         }
 	}
 	public int seeState(int num) {
+		if(num==0)return 0;
 		String SQL = "SELECT post_seeState from post where post_Number=?";
 		
 		try {
-			
 			pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, num);
 		rs=pstmt.executeQuery();
@@ -327,7 +324,7 @@ public class PostDAO {
 	}
 
 	
-	
+	//------------------------------배열에 게시글 담기시작-----------------------
 	public int[][]postnum(int mpn) {
 		String SQL ="SELECT post_Number FROM post WHERE post_seeState=1 ORDER BY post_Number DESC";
 		int[][] post=new int[mpn][8];
@@ -340,7 +337,7 @@ public class PostDAO {
 						post[i][j]=rs.getInt(1);
 					}
 					else {
-						post[i][j]=1;
+						post[i][j]=0;
 					}
 				}
 			}
@@ -353,6 +350,34 @@ public class PostDAO {
 	}
 	
 	
+	public int[][]searchpostnum(int mpn,String str) {
+		String SQL ="SELECT post_Number FROM post WHERE post_seeState=1 AND (post_Title Like ? OR post_HashTag Like ?)ORDER BY post_Number DESC";
+		int[][] post=new int[mpn][8];	
+		
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, "%"+str+"%");
+			pstmt.setString(2, "%"+str+"%");
+			rs = pstmt.executeQuery();
+			for(int i=0;i<mpn;i++) {
+				for(int j=0;j<8;j++) {
+					if(rs.next()) {
+						post[i][j]=rs.getInt(1);
+					}
+					else {
+						post[i][j]=0;
+					}
+				}
+			}
+			return post;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("오류");
+		}
+		return post;
+	}
+	//------------------------------배열에 게시글 담기 끝-----------------------
 	
 	
 	

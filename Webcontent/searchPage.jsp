@@ -154,18 +154,23 @@ if(user_Number>0) headerSeeState=1;
 <section>	
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
-			<div class="row" id="post"> 
-				<%for(int i=1;i<=postDAO.dbCount();i++){                    //모든 postDB탐색
-					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
-					int searchState=postDAO.searchPost(i,search);
-					if( seeState==1 && searchState==1){	
-						String originalAddress=postDAO.seeVideo(i);
-						String playerAddress=originalAddress.replace("watch?v=", "embed/");
-						String postTitle=postDAO.seeTitle(i);
-						String postHashtag=postDAO.seeHashtag(i);
-						String postView=postDAO.seeView(i);
-						String postLike=postDAO.seeLike(i);
-						String postReport=postDAO.seeReport(i);
+			<div class="row" id="post">
+				<%
+					int[][] post=postDAO.searchpostnum(mpn,search);
+				%>
+			
+			 
+				<%for(int i=0; i<8;i++){                    
+					int seei=post[pageNumber-1][i];
+				if(seei>0){	
+			if( postDAO.seeState(seei)==1){											//삭제가 안된 글만
+				String originalAddress=postDAO.seeVideo(seei);
+				String playerAddress=originalAddress.replace("watch?v=", "embed/");
+				String postTitle=postDAO.seeTitle(seei);
+				String postHashtag=postDAO.seeHashtag(seei);
+				String postView=postDAO.seeView(seei);
+				String postLike=postDAO.seeLike(seei);
+				String postReport=postDAO.seeReport(seei);
 				%>
 				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;">
 		        <div class='embed-container'>
@@ -218,7 +223,8 @@ if(user_Number>0) headerSeeState=1;
 		        		</div> 
 		        	</div>
 	            </div>
-	            <%} }%> 
+	            <%} }
+	            }%> 
 			</div> 
 		</div> 
 	</div>
@@ -228,16 +234,16 @@ if(user_Number>0) headerSeeState=1;
 	<div class="pageMove" style="margin:30px;">
 		<nav>
 			<ul class="page">
-		      <li> <%if(pageNumber!=1){ %><a href="searchPage.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arraw-left">이전</a><%} %></li>
+		      <li> <%if(pageNumber!=1){ %><a href="searchPage.jsp?pageNumber=<%=pageNumber - 1%>&search=<%=search %>" class="btn btn-success btn-arraw-left">이전</a><%} %></li>
 		      <%for(int i=1;i<=mpn;i++){
 		    	  if(i==pageNumber){ %>
-		      		<li ><a href="searchPage.jsp?pageNumber=<%=i%>"style="color: brown;"><%=i %></a></li>
+		      		<li ><a href="searchPage.jsp?pageNumber=<%=i%>&search=<%=search %>"style="color: brown;"><%=i %></a></li>
 		         <%}
 		    	  else{%>
-		    		  <li ><a href="searchPage.jsp?pageNumber=<%=i%>"><%=i %></a></li>
+		    		  <li ><a href="searchPage.jsp?pageNumber=<%=i%>&search=<%=search %>"><%=i %></a></li>
 		    	  <%}
 		    	}%>				<!-- 페이지번호나오는 for문 -->
-			  <%if(pageNumber!=mpn){ %> <li><a href="searchPage.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-success btn-arraw-left" >다음</a><%} %>
+			  <%if(pageNumber!=mpn){ %> <li><a href="searchPage.jsp?pageNumber=<%=pageNumber + 1%>&search=<%=search %>" class="btn btn-success btn-arraw-left" >다음</a><%} %>
 			  </li>
 	    	</ul>
 		</nav>
