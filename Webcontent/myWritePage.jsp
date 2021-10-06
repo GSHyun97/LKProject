@@ -136,8 +136,8 @@ if(user_Number>0) headerSeeState=1;
     </div> 
     
 <section>	
-	<div class="container-fluid"> 
-		<div class="card-header bg-light">
+	<div class="container-fluid" style="background-color:transparent;"> 
+		<div class="card-header" style="background-color:transparent;">
 			<div class="row" id="post"> 
 				<%for(int i=1;i<=postDAO.dbCount();i++){                    //모든 postDB탐색
 					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수

@@ -152,8 +152,8 @@ if(user_Number>0) headerSeeState=1;
 		int mpn=(postCount%8==0)? postCount/8:postCount/8+1;
 	%>
 <section>	
-	<div class="container-fluid"> 
-		<div class="card-header">
+	<div class="container-fluid" style="background-color:transparent;"> 
+		<div class="card-header" style="background-color:transparent;">
 			<div class="row" id="post"> 
 				
 				<%
