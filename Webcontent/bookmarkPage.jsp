@@ -168,7 +168,12 @@ if(user_Number>0) headerSeeState=1;
 				<%String[] array=postHashtag.split("#"); %>
 					<% int j=1 ;%>
 					<%for(j=1;j<array.length;j++){%>
-					<a href="searchPage.jsp?search=<%=array[j]%>" >#<%=array[j]%></a>
+					<span class="hashblock"
+					style="border-right: 2px solid rgba(0,0,0,0.2);
+				    border-left: 2px solid rgba(0,0,0,0.2);
+				    border-top: 2px solid rgba(0,0,0,0.2);
+				    border-bottom: 2px solid rgba(0,0,0,0.2); padding: 3px; border-radius: 15px;">
+					<a href="searchPage.jsp?search=<%=array[j]%>" >#<%=array[j]%></a></span>
 					<%} %>
 				</p>
 				
@@ -202,7 +207,7 @@ if(user_Number>0) headerSeeState=1;
 					       		<%} %>
 					        <%} %>
 					        
-					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
+					        <a style="color:red;"onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
 					        </div>
 		        		</div> 
 		        	</div>

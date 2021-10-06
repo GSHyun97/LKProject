@@ -152,8 +152,8 @@ if(user_Number>0) headerSeeState=1;
 		int mpn=(postCount%8==0)? postCount/8:postCount/8+1;
 	%>
 <section>	
-	<div class="container-fluid" style="background-color:transparent;"> 
-		<div class="card-header" style="background-color:transparent;">
+	<div class="container-fluid"> 
+		<div class="card-header">
 			<div class="row" id="post"> 
 				
 				<%
@@ -185,7 +185,7 @@ if(user_Number>0) headerSeeState=1;
 				<%String[] array=postHashtag.split("#"); %>
 					<% int j=1 ;%>
 					<%for(j=1;j<array.length;j++){%>
-					<span
+					<span class="hashblock"
 					style="border-right: 2px solid rgba(0,0,0,0.2);
 				    border-left: 2px solid rgba(0,0,0,0.2);
 				    border-top: 2px solid rgba(0,0,0,0.2);

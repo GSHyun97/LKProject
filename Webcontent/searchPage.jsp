@@ -152,8 +152,8 @@ if(user_Number>0) headerSeeState=1;
     	int mpn=(postCount%8==0)? postCount/8:postCount/8+1;
     %>
 <section>	
-	<div class="container-fluid"> 
-		<div class="card-header bg-light">
+	<div class="container-fluid" style="background-color:transparent;"> 
+		<div class="card-header" style="background-color:transparent;">
 			<div class="row" id="post">
 				<%
 					int[][] post=postDAO.searchpostnum(mpn,search);
@@ -172,7 +172,7 @@ if(user_Number>0) headerSeeState=1;
 				String postLike=postDAO.seeLike(seei);
 				String postReport=postDAO.seeReport(seei);
 				%>
-				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;">
+				<div class="col-lg-3">
 		        <div class='embed-container'>
 		        	<iframe src=<%=playerAddress%>></iframe>
 		        </div>
@@ -184,11 +184,16 @@ if(user_Number>0) headerSeeState=1;
 				<%String[] array=postHashtag.split("#"); %>
 					<% int j=1 ;%>
 					<%for(j=1;j<array.length;j++){%>
-					<a href="searchPage.jsp?search=<%=array[j]%>" >#<%=array[j]%></a>
+					<span class="hashblock"
+					style="border-right: 2px solid rgba(0,0,0,0.2);
+				    border-left: 2px solid rgba(0,0,0,0.2);
+				    border-top: 2px solid rgba(0,0,0,0.2);
+				    border-bottom: 2px solid rgba(0,0,0,0.2); padding: 3px; border-radius: 15px;">
+					<a href="searchPage.jsp?search=<%=array[j]%>" >#<%=array[j]%></a></span>
 					<%} %>
 				</p>
 				
-		        	<div class="col-sm-12" style="background-color:#eee;">
+		        	<div class="col-sm-12">
 		        		<div class="row"> 
 		        		<div class="col-3 text-left" >
 		        		
@@ -218,7 +223,7 @@ if(user_Number>0) headerSeeState=1;
 					       		<%} %>
 					        <%} %>
 					        
-					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
+					        <a style="color:red;"onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=i%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
 					        </div>
 		        		</div> 
 		        	</div>
