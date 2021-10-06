@@ -30,30 +30,105 @@
 	function passwordCheckFunction(){
 		var user_Password1 = $('#user_Password1').val();
 		var user_Password2 = $('#user_Password2').val();
-		if(userPassword1 != userPassword2){
+		if(user_Password1 != user_Password2){
 			$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
 		}else{
 			$('#passwordCheckMessage').html('');
 		}
 	}
+	function check () {
+		var frm = document.frm;
+		if( !frm.user_Id.value){
+			alert("아이디를 입력하세요!");
+			
+			frm.user_Id.focus();
+			
+			return false;
+		}
+		if( !frm.user_Password1.value){
+			alert("비밀번호를 입력하세요!");
+			
+			frm.user_Password1.focus();
+			
+			return false;
+		}
+		if( !frm.user_Password2.value){
+			alert("비밀번호 확인을 입력하세요!");
+			
+			frm.user_Password2.focus();
+			
+			return false;
+		}
+		if( frm.user_Password1.value !== frm.user_Password2.value){
+			alert("비밀번호를 확인하세요!");
+			
+			frm.user_Password1.focus();
+			
+			return false;
+		}
+		if( !frm.user_Name.value){
+			alert("이름을 입력하세요!");
+			
+			frm.user_Name.focus();
+			
+			return false;
+		}
+		if( !frm.user_Birth1.value){
+			alert("생일을 입력하세요!");
+			
+			frm.user_Birth1.focus();
+			
+			return false;
+		}
+		if( !frm.user_Birth2.value){
+			alert("생일을 입력하세요!");
+			
+			frm.user_Birth2.focus();
+			
+			return false;
+		}
+		if( !frm.user_Birth3.value){
+			alert("생일을 입력하세요!");
+			
+			frm.user_Birth3.focus();
+			
+			return false;
+		}
+		if( !frm.user_Email1.value){
+			alert("이메일 입력하세요!");
+			
+			frm.user_Email1.focus();
+			
+			return false;
+		}
+		if( !frm.user_Email2.value){
+			alert("이메일 입력하세요!");
+			
+			frm.user_Email2.focus();
+			
+			return false;
+		}
+	}
+
+
 </script>
 </head>
 <body>
     <div class="container">
         <div class="title">Registration</div>
-        <form method="post" action="./userRegister"> 
+        <form method="post" name="frm" action="./userRegister" onsubmit="return check()">  <!-- submit을 눌렀을 떄 함수 작동 -->
             <div class="abc">
                 <div class="input-box">
-                <p><span class="detail"><label>아이디 </label><button class="btn2" onclick="registerCheckFunction();" type="button">중복확인</button></span>
+                <span class="detail"><label>아이디 </label><button class="btn2" onclick="registerCheckFunction();" type="button">중복확인</button></span>
                 <input id="user_Id" name="user_Id" type="text" class="form-control" placeholder="아이디를 입력하세요" maxlength="15"> 
                 </div>
                 <div class="input-box">
             <p><label>비밀번호</label>
-                <input name="user_Password1" id="user_Password1" type="password" class="form-control" onkeyup="passwordCheckFunction();" placeholder="비밀번호를 입력하세요" minlength="6" maxlength= >
+                <input name="user_Password1" id="user_Password1" type="password" class="form-control" onkeyup="passwordCheckFunction();" placeholder="비밀번호를 입력하세요" maxlength='15'>
                 </div>
                 <div class="input-box">
             <p><label>비밀번호 확인</label>
-                <input name="user_Password2" id="user_Password2" type="password" class="form-control" placeholder="비밀번호를 다시 입력하세요" >
+                <input name="user_Password2" id="user_Password2" type="password" class="form-control" placeholder="비밀번호를 다시 입력하세요" maxlength='15'>
             </div>
             <div class="input-box">
                 <p><label>이름</label>
@@ -61,7 +136,7 @@
                 </div>
                     <div class="input-box">
 				<p><label>생년월일</label>
-					<input type="text" name="user_Birth1" maxlength="4" class="form-control" placeholder="년(4자)" size="6">
+					<input type="text" class="form-control" name="user_Birth1" maxlength="4" placeholder="년(4자)" size="6">
 					<select name="user_Birth2" class="form-control">
 						<option value="">월</option>
 						<option value="01">1</option>
@@ -113,19 +188,22 @@
 					</select></div>
                     <div class="input-box">
 				<p><label>이메일</label>
-					<input type="text" name="user_Email1" class="form-control" maxlength="50"placeholder="이메일을 입력하세요"> @ 
-					<select name="user_Email2" class="form-control">
-						<option>naver.com</option>
-						<option>gmail.com</option>
-						<option>daum.net</option>
-						<option>nate.com</option>
+					<input type="text" class="form-control" name="user_Email1" maxlength="50"placeholder="이메일을 입력하세요"> @ 
+					<select name="user_Email2" class="form-control" onchange="change_email();">
+						<option value="">선택하세요</option>
+						<option value="naver.com">naver.com</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="nate.com">nate.com</option>
 					</select>  </div>
-					</div>
-				<p><input type="submit" class="btn btn-primary " value="회원가입">
-				
-				<input type="reset" class="btn btn-primary " value="취소" onclick="location.href='login.jsp' ">
-			</form>
-		</div>
+            
+            
+            <input type="submit" class="btn btn-primary " value="회원가입" >
+            <input type="reset" class="btn btn-primary " value="취소" onclick="location.href='login.jsp' ">
+         
+        </div>
+        </form>
+    </div>
 		<!-- 이 부분은 유효성 검사 칸 만들어본건데 작동은 잘 되는데 css건드릴때 다시 볼 필요가 있음 -->
 	 	<%
 			String messageContent = null;
@@ -143,10 +221,7 @@
 				<div class= "modal-dialog vertical-align-center">
 					<div class="modal-content" <% if(messageType.equals("오류메시지")) out.println("panel-warning"); else out.println("panel-success"); %>>
 						<div class="modal-header pannel-heading">
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span>
-								<span class="sr-only">Close</span>
-							</button>
+							
 							<h4 class="modal-title">
 								<%= messageType %>
 							</h4>
@@ -193,3 +268,5 @@
 		</div>
 	</body>
 </html> 
+
+222
