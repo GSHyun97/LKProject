@@ -12,7 +12,7 @@ public class PostDTO {
    private int post_Report;
    private String post_UploadDate;
    private String post_seeState;
-   
+   private int post_User;
    
    public int getPost_count() {
       return post_count;
@@ -92,5 +92,11 @@ public class PostDTO {
    public void setPost_Number(int post_Number) {
       this.post_Number = post_Number;
    }
+public int getPost_User() {
+	return post_User;
+}
+public void setPost_User(int post_User) {
+	this.post_User = post_User;
+}
 
 }
