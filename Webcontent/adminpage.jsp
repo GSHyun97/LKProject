@@ -153,7 +153,7 @@ String[] hashrankView=hashDAO.HashRankingView(10);
 	</div>
 </section>	
 	
-<!-- 모달 안쪽 세션 -->
+<!-- 모달 안쪽 세션  -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dailog"
 		aria-labelledby="modal" aria-hidden="true">
 		<div class="modal-dialog">
