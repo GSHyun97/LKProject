@@ -40,6 +40,14 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 HashDAO hashDAO=new HashDAO();
 getUserNumberDAO getusernumberDAO = new getUserNumberDAO();
 %>
+
+<%
+	int pageNumber = 1;
+	if(request.getParameter("pageNumber") !=null){
+		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+	}
+	
+%>
 <script>
 
 function BookmarkopenWin(num,userNum){
@@ -139,7 +147,10 @@ if(user_Number>0) headerSeeState=1;
             </div>
         </div>
     </div> 
-    
+    <%
+    	int postCount=postDAO.searchPostCount(search)- postDAO.deletePostCount(search);
+    	int mpn=(postCount%8==0)? postCount/8:postCount/8+1;
+    %>
 <section>	
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
@@ -217,13 +228,17 @@ if(user_Number>0) headerSeeState=1;
 	<div class="pageMove" style="margin:30px;">
 		<nav>
 			<ul class="page">
-		      <li><a href="#" style="color:#;">이전</a></li>
-		      <li><a href="#">1</a></li>
-			  <li><a href="#">2</a></li>
-			  <li><a href="#">3</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">5</a></li>
-			  <li><a href="#">다음 페이지</a></li>
+		      <li> <%if(pageNumber!=1){ %><a href="searchPage.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arraw-left">이전</a><%} %></li>
+		      <%for(int i=1;i<=mpn;i++){
+		    	  if(i==pageNumber){ %>
+		      		<li ><a href="searchPage.jsp?pageNumber=<%=i%>"style="color: brown;"><%=i %></a></li>
+		         <%}
+		    	  else{%>
+		    		  <li ><a href="searchPage.jsp?pageNumber=<%=i%>"><%=i %></a></li>
+		    	  <%}
+		    	}%>				<!-- 페이지번호나오는 for문 -->
+			  <%if(pageNumber!=mpn){ %> <li><a href="searchPage.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-success btn-arraw-left" >다음</a><%} %>
+			  </li>
 	    	</ul>
 		</nav>
 	</div>

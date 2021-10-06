@@ -162,19 +162,7 @@ public class PostDAO {
 		return -1;
 	}
 	
-	public int searchdbCount(String str) {
-		String sql="SELECT COUNT(*) FROM post WHERE post_Name=?";
-		try {
-			pstmt=conn.prepareStatement(sql);
-			//pstmt.setString(1, str);
-			rs=pstmt.executeQuery();
-			rs.next();
-			return rs.getInt(1);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
+	
 	//---------------------------------dbCount³¡------------------------
 	
 	
