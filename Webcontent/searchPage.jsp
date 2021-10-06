@@ -4,7 +4,7 @@
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
-<%@ page import="user.ReWriteDAO" %>
+<%@ page import="user.ReWriteDAO"%>
 <%@ page import="user.HashDAO" %>
 <%@ page import="user.getUserNumberDAO" %>
 <!DOCTYPE html>
