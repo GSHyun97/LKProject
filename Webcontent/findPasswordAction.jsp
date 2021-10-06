@@ -45,10 +45,7 @@ for(int i=password.length()-1; i>=0; i--){
                         <button class="btn btn-blue btn-block" type="submit" value="로그인" onclick="location.href='login.jsp'">로그인 하러 가기</button> 
                     </div>
                     </div>
-                <div class="button">
-                        <!-- <input type="reset" value="회원가입" onclick="location.href='#'"> -->
-                        <button class="btn btn-blue btn-block" type="submit" value="아이디 찾으러 가기" onclick="location.href='IdFind.jsp'">아이디 찾기</button> 
-                    </div>
+                
                 </div> 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>

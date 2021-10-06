@@ -86,7 +86,7 @@ String[] hashrankView=hashDAO.HashRankingView(10);
 			<div class="row"> 
 				<%for(int i=1;i<=postDAO.dbCount();i++){
 					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
-					if( seeState==1){
+					if( seeState==1 && Integer.parseInt(postDAO.seeReport(i))>0){
 				String originalAddress=postDAO.seeVideo(i);
 				String playerAddress=originalAddress.replace("watch?v=", "embed/");
 				String postTitle=postDAO.seeTitle(i);
@@ -119,12 +119,9 @@ String[] hashrankView=hashDAO.HashRankingView(10);
 	<div class="pageMove" style="margin:30px;">
 		<nav>
 			<ul class="page">
-		      <li><a href="#" style="color:#;">이전</a></li>
+		      
 		      <li><a href="#">1</a></li>
-			  <li><a href="#">2</a></li>
-			  <li><a href="#">3</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">5</a></li>
+			  
 			  <li><a href="#">다음 페이지</a></li>
 	    	</ul>
 		</nav>

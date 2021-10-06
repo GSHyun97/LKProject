@@ -45,14 +45,14 @@ public class PostDAO {
 		
 	}
 	public String seeTitle(int num) {
-		String sql="SELECT * FROM post WHERE post_Number=? AND post_seeState=1";
+		String sql="SELECT post_Title FROM post WHERE post_Number=? AND post_seeState=1";
 		
 		try{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 		rs=pstmt.executeQuery();
 		rs.next();
-		return rs.getString(2);
+		return rs.getString(1);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -60,28 +60,28 @@ public class PostDAO {
 	
 	}
 	public String seeVideo(int num) {
-		String sql="SELECT * FROM post WHERE post_Number=?";
+		String sql="SELECT post_Link FROM post WHERE post_Number=?";
 		
 		try{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 		rs=pstmt.executeQuery();
 		rs.next();
-		return rs.getString(3);
+		return rs.getString(1);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	public String seeHashtag(int num) {
-		String SQL="SELECT * FROM post WHERE post_Number=?";
+		String SQL="SELECT post_Hashtag FROM post WHERE post_Number=?";
 		
 		try{
 			pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, num);
 		rs=pstmt.executeQuery();
 		rs.next();
-		return rs.getString(4);
+		return rs.getString(1);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -90,42 +90,42 @@ public class PostDAO {
 	
 	
 	public String seeUploadDate(int num) {
-		String sql="SELECT * FROM post WHERE post_Number=?";
+		String sql="SELECT post_UploadDate FROM post WHERE post_Number=?";
 		
 		try{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 		rs=pstmt.executeQuery();
 		rs.next();
-		return rs.getString(5);
+		return rs.getString(1);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	public String seeView(int num) {
-		String sql="SELECT * FROM post WHERE post_Number=?";
+		String sql="SELECT post_View FROM post WHERE post_Number=?";
 		
 		try{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs=pstmt.executeQuery();
 			rs.next();
-			return rs.getString(6);
+			return rs.getString(1);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	public String seeLike(int num) {
-		String sql="SELECT * FROM post WHERE post_Number=?";
+		String sql="SELECT post_Like FROM post WHERE post_Number=?";
 		
 		try{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 		rs=pstmt.executeQuery();
 		rs.next();
-		return rs.getString(7);
+		return rs.getString(1);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -133,14 +133,14 @@ public class PostDAO {
 	}
 	
 	public String seeReport(int num) {
-		String sql="SELECT * FROM post WHERE post_Number=?";
+		String sql="SELECT post_Report FROM post WHERE post_Number=?";
 		
 		try{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 		rs=pstmt.executeQuery();
 		rs.next();
-		return rs.getString(8);
+		return rs.getString(1);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -182,6 +182,7 @@ public class PostDAO {
 	public void HashSearch(String post_Hashtag) {   
 		
 		String[] array=post_Hashtag.split("#");
+		
 		for(int i=1;i<array.length;i++) {
 			HashWrite(array[i]);
 		}

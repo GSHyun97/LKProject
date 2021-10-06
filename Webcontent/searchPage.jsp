@@ -178,7 +178,7 @@ if(user_Number>0) headerSeeState=1;
 		        </div>
 		       
 		       
-		        <a onclick="openWin(<%=i %>); refresh();"href=<%=originalAddress%> target="_blank"> <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
+		        <a onclick="openWin(<%=seei %>); refresh();"href=<%=originalAddress%> target="_blank"> <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
 		        
 				<p>                                                   <!-- 09.29 현강섭,해쉬태그 클릭시 검색 -->
 				<%String[] array=postHashtag.split("#"); %>
@@ -201,10 +201,10 @@ if(user_Number>0) headerSeeState=1;
 		        		<%if(user_Number==0) {%>  
 		        		<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">담기</a>
 		        		<%}else{ %>
-		        			<%if(reWriteDAO.BookmarkUserInquiry(i,user_Number)) {%>      <!-- 담기 되어있으면 -->
-		        				<a onclick="UnBookmarkopenWin(<%=i %>,<%=user_Number %>); refresh();  " href="#">담기 취소</a>
+		        			<%if(reWriteDAO.BookmarkUserInquiry(seei,user_Number)) {%>      <!-- 담기 되어있으면 -->
+		        				<a onclick="UnBookmarkopenWin(<%=seei %>,<%=user_Number %>); refresh();  " href="#">담기 취소</a>
 		        			<%}else{ %>
-		        				<a onclick="BookmarkopenWin(<%=i %>,<%=user_Number %>); refresh();  " href="#">담기</a>
+		        				<a onclick="BookmarkopenWin(<%=seei %>,<%=user_Number %>); refresh();  " href="#">담기</a>
 		        			<%} %>
 		        		<%} %>
 		        		</div>
@@ -216,10 +216,10 @@ if(user_Number>0) headerSeeState=1;
 							if(user_Number==0) {%>                                  <!-- 10.02현강섭 좋아요 -->
 								<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">좋아요</a>
 							<%}else{ %>
-								<%if(reWriteDAO.LikeUserInquiry(i,user_Number)) {%>      <!-- 좋아요 되어있으면 -->
-								<a onclick="UnLikeopenWin(<%=i %>,<%=user_Number %>); refresh();  " href="#">좋아요취소</a>
+								<%if(reWriteDAO.LikeUserInquiry(seei,user_Number)) {%>      <!-- 좋아요 되어있으면 -->
+								<a onclick="UnLikeopenWin(<%=seei %>,<%=user_Number %>); refresh();  " href="#">좋아요취소</a>
 								<%}else{ %>
-					       		 <a onclick="LikeopenWin(<%=i %>,<%=user_Number %>); refresh(); " href="#">좋아요</a>
+					       		 <a onclick="LikeopenWin(<%=seei %>,<%=user_Number %>); refresh(); " href="#">좋아요</a>
 					       		<%} %>
 					        <%} %>
 					        

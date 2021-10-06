@@ -258,10 +258,7 @@ if(user_Number>0) headerSeeState=1;
 	    	</ul>
 		</nav>
 	</div>
-</section>	 
-
-
-	
+</section>
 
 	
 <!-- 모달 안쪽 세션 -->
@@ -277,7 +274,7 @@ if(user_Number>0) headerSeeState=1;
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="./userRegisterAction.jsp" method="post">
+					<form action="./userRegisterAction.jsp?post_User=<%=user_Number%>" method="post">
 						
 						<div class="form-group">
 							<label>제목</label> <input type="text" name="post_Title"
@@ -288,7 +285,6 @@ if(user_Number>0) headerSeeState=1;
 							<div class="form-row">
 							<div class="form-group col-sm-12">
 								<label>해쉬태그 넣기</label> 
-		
 								<input type="text" name="post_Hashtag"
 									class="form-control" placeholder="ex)#삼성#스마트폰"maxlength="20">
 							</div>
