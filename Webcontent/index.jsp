@@ -4,7 +4,10 @@
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.PostDAO" %>
+<%@ page import="user.PostDTO" %>
 <%@ page import="user.ReWriteDAO" %>
+<%@ page import="user.HashDAO" %>
+<%@ page import="user.getUserNumberDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,34 +32,122 @@ li{
 </style>
 </head>
 <body>
+
 <%
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
 ReWriteDAO reWriteDAO=new ReWriteDAO();
+HashDAO hashDAO=new HashDAO();
+getUserNumberDAO getusernumberDAO = new getUserNumberDAO();
+
+%>
+
+<%
+	int pageNumber = 1;
+	if(request.getParameter("pageNumber") !=null){
+		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+	}
+	
+%>
+
+<%
+
+String[] hashrank=hashDAO.HashRanking(6);
+int loginState=1;
+
 %>
 <script>
+function BookmarkopenWin(num,userNum){
+	window.open("onClickBookmarkPage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
+}
+function UnBookmarkopenWin(num,userNum){
+	window.open("onClickUnBookmarkPage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
+}
+	
 	function openWin(num){
 		window.open("onClickPage.jsp?num="+num,"", "width=1px,height=1px,left=20000px");
 	}
+	function LikeopenWin(num,userNum){
+		window.open("onClickLikePage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
+	}
+	function UnLikeopenWin(num,userNum){
+		window.open("onClickUnLikePage.jsp?num="+num+"&userNum="+userNum,"", "width=1px,height=1px,left=20000px");
+	}
+	function refresh(){
+		location.reload();
+	}
+	function adrressmove(adrress){
+		location.href="adrress";
+		return true;
+	}
 </script>
 <!-- 헤더 부분-->
-<%@ include file="header.jsp" %>
+<%
+String user_Id = null;
+int user_Number=0;
+int headerSeeState=0;
+if(session.getAttribute("user_Id") != null){
+	user_Id=(String) session.getAttribute("user_Id");
+	user_Number=getusernumberDAO.getUserNumber(user_Id);
+}
+if(user_Number>0) headerSeeState=1;
+%>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand flex-grow-1" href="index.jsp"><span>HOT KEYWORD</span></a>
+        <div class="flex-grow-1 d-flex">
+            <form action="./searchPage.jsp" method="get"
+				class="form-inline my-2 my-lg0">
+				<input type="text" class="form-control mr-sm-2" name="search"
+					placeholder="내용을 입력하세요." aria-label="search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+			</form>
+        </div>
+        <div class="dropdown">
+        <button class="navbar-toggler" type="button" 
+        data-toggle="collapse" 
+        data-target="#navbarNavAltMarkup" 
+        aria-controls="navbarNavAltMarkup" 
+        aria-label="Toggle navigation" 
+        aria-expanded="false" >
+            <span class="navbar-toggler-icon" style="font-size:0.5rem;"></span>            
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+		<%
+		if(headerSeeState==0){
+		%>
+		<a class="dropdown-item" href="login.jsp">로그인</a>
+	    <a class="dropdown-item" href="addMember.jsp">회원가입</a>
+		<%
+		}else if (headerSeeState==1){
+		%>
+		<a class="dropdown-item" data-toggle="modal" href="#registerModal">글 올리기</a>
+		<a class="dropdown-item" href="bookmarkPage.jsp">내가 담은글</a>
+		<a class="dropdown-item" href="myWritePage.jsp">내가 쓴글</a>
+		<a class="dropdown-item" href="logoutAction.jsp">로그아웃</a>
+            </div>
+            <%	
+		}
+		%>
+         </div>
+        </div>
+</nav>
+<!-- 헤더부분 끝 -->
+
+
 <!-- 태그 삽입 부분 -->
 <nav class="hot">
-	<h4>Hot Trend</h4>
+	<span>Hot Trend</span>
 </nav>
 <nav>
 	<ul class="a">
-      <li><a href="#">태그1</a></li>
-	  <li><a href="#">태그2</a></li>
-	  <li><a href="#">태그3</a></li>
-	  <li><a href="#">태그4</a></li>
-	  <li><a href="#">태그5</a></li>
-	  <li><a href="#">태그6</a></li>
+	<%for(int i=0;i<6;i++){ %>
+      <li><a href="searchPage.jsp?search=<%=hashrank[i]%>">#<%=hashrank[i] %></a></li>
+	  <%} %>
     </ul>
 </nav>
 
-<!-- 메인페이지 헤더 부분화면
+<!--  메인페이지 헤더 부분화면
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">로고</a>  
@@ -114,23 +205,36 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 	</div>
 </section>
 	-->
+	<%
+		int postCount=postDAO.dbCount("post");
+		int mpn=(postCount%8==0)? postCount/8:postCount/8+1;
+	%>
 <section>	
-
 	<div class="container-fluid"> 
-		<div class="card-header">
-			<div class="row"> 
-				<%for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
-			int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
-			if( seeState==1){											//삭제가 안된 글만
-				String originalAddress=postDAO.seeVideo(i);
+		<div class="card-header bg-light">
+			<div class="row" id="post"> 
+				
+				<%
+					int[][] post=postDAO.postnum(mpn);
+				/*for(int i=0;i<mpn;i++) {
+					for(int j=0;j<8;j++) {
+						System.out.println("["+i+"]"+"["+j+"]:"+post[i][j]);
+					}
+				}*/
+				%>
+				
+				<%for(int i=0; i<8;i++){                    
+					int seei=post[pageNumber-1][i];
+			if( postDAO.seeState(seei)==1){											//삭제가 안된 글만
+				String originalAddress=postDAO.seeVideo(seei);
 				String playerAddress=originalAddress.replace("watch?v=", "embed/");
-				String postTitle=postDAO.seeTitle(i);
-				String postHashtag=postDAO.seeHashtag(i);
-				String postView=postDAO.seeView(i);
-				String postLike=postDAO.seeLike(i);
-				String postReport=postDAO.seeReport(i);
-		%>
-				<div class="col-lg-3" style="border:1px solid gray; background-color:#	eee;"> 
+				String postTitle=postDAO.seeTitle(seei);
+				String postHashtag=postDAO.seeHashtag(seei);
+				String postView=postDAO.seeView(seei);
+				String postLike=postDAO.seeLike(seei);
+				String postReport=postDAO.seeReport(seei);
+				%>
+				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
 		        <p></p>
 		        <div class='embed-container'>
 		        <iframe src=<%=playerAddress%>>
@@ -138,52 +242,85 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 		        </div>
 		       
 		       
-		        <a class="bodytitle"onclick="openWin(<%=i %>);" href=<%=originalAddress %>  > <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
+		        <a onclick="openWin(<%=seei %>); refresh();"href=<%=originalAddress%> target="_blank"> <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
 		        
 				<p>                                                   <!-- 09.29 현강섭,해쉬태그 클릭시 검색 -->
 				<%String[] array=postHashtag.split("#"); %>
 					<% int j=1 ;%>
 					<%for(j=1;j<array.length;j++){%>
-					<span><a class="hashblank"href="searchPage.jsp?search=<%=array[j]%>">#<%=array[j] %></a></span>
+					<a href="searchPage.jsp?search=<%=array[j]%>" >#<%=array[j]%></a>
 					<%} %>
 				</p>
 				
-		        	<div class="col-sm-12">
+		        	<div class="col-sm-12" style="background-color:#eee;">
 		        		<div class="row"> 
 		        		<div class="col-3 text-left" >
-		        		<a onclick="return confirm('담으시겠습니까?')" href="./likeAction.jsp?user_Id=">담기</a>
+		        		
+		        		
+		        		<%if(user_Number==0) {%>  
+		        		<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">담기</a>
+		        		<%}else{ %>
+		        			<%if(reWriteDAO.BookmarkUserInquiry(seei,user_Number)) {%>      <!-- 담기 되어있으면 -->
+		        				<a onclick="UnBookmarkopenWin(<%=seei %>,<%=user_Number %>); refresh();  " href="#">담기 취소</a>
+		        			<%}else{ %>
+		        				<a onclick="BookmarkopenWin(<%=seei %>,<%=user_Number %>); refresh();  " href="#">담기</a>
+		        			<%} %>
+		        		<%} %>
 		        		</div>
 		        			<div class="col-9 text-right">
-					        <span style="color: green;">View  <%=postView %></span>
-							<span style="color: green;">Like  <%=postLike %></span>
-					        <a onclick="return confirm('좋아요를 누르시겠습니까?')" href="./likeAction.jsp?user_Id="> 좋아요</a>
-					        <a onclick="return confirm('신고 하시겠습니까?')" style="color: red;" href="./reportAction.jsp?user_Id="> 신고</a>
+					        <span style="color: green;"><%=postView %>View</span>
+							<span style="color: green;"><%=postLike %>Like</span>
+							
+							<%
+							if(user_Number==0) {%>                                  <!-- 10.02현강섭 좋아요 -->
+								<a onclick="if(!confirm('로그인 상태에서 가능합니다 로그인 페이지로 이동하시겠습니까?')){return false;}" href="./login.jsp">좋아요</a>
+							<%}else{ %>
+								<%if(reWriteDAO.LikeUserInquiry(seei,user_Number)) {%>      <!-- 좋아요 되어있으면 -->
+								<a onclick="UnLikeopenWin(<%=seei %>,<%=user_Number %>); refresh();  " href="#">좋아요취소</a>
+								<%}else{ %>
+					       		 <a onclick="LikeopenWin(<%=seei %>,<%=user_Number %>); refresh(); " href="#">좋아요</a>
+					       		<%} %>
+					        <%} %>
+					        
+					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=seei%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
 					        </div>
 		        		</div> 
 		        	</div>
 	            </div>
-	            <%} }%> 
+	            <% 
+	            
+					} //if끝
+			
+				}//for끝
+				%> 
 			</div> 
 		</div> 
 	</div>
-</section>	
+</section>
 
-<!-- 페이지 버튼 -->
 <section>
 	<div class="pageMove" style="margin:30px;">
 		<nav>
 			<ul class="page">
-		      <li><a href="#" style="color:#;">이전</a></li>
-		      <li><a href="#">1</a></li>
-			  <li><a href="#">2</a></li>
-			  <li><a href="#">3</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">5</a></li>
-			  <li><a href="#">다음 페이지</a></li>
+		      <li> <%if(pageNumber!=1){ %><a href="index.jsp?pageNumber=<%=pageNumber - 1%>" class="btn btn-success btn-arraw-left">이전</a><%} %></li>
+		      <%for(int i=1;i<=mpn;i++){
+		    	  if(i==pageNumber){ %>
+		      		<li ><a href="index.jsp?pageNumber=<%=i%>"style="color: brown;"><%=i %></a></li>
+		         <%}
+		    	  else{%>
+		    		  <li ><a href="index.jsp?pageNumber=<%=i%>"><%=i %></a></li>
+		    	  <%}
+		    	}%>				<!-- 페이지번호나오는 for문 -->
+			  <%if(pageNumber!=mpn){ %> <li><a href="index.jsp?pageNumber=<%=pageNumber + 1%>" class="btn btn-success btn-arraw-left" >다음</a><%} %>
+			  </li>
 	    	</ul>
 		</nav>
 	</div>
-</section>	
+</section>	 
+
+
+	
+
 	
 <!-- 모달 안쪽 세션 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dailog"
@@ -199,24 +336,21 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 				</div>
 				<div class="modal-body">
 					<form action="./userRegisterAction.jsp" method="post">
-						<div class="form-row">
+						
+						<div class="form-group">
+							<label>제목</label> <input type="text" name="post_Title"
+								class="form-control" maxlength="40">
+							<label>링크</label> <input type="text" name="post_Link"
+								class="form-control" maxlength="80">		
+						</div>	
+							<div class="form-row">
 							<div class="form-group col-sm-12">
 								<label>해쉬태그 넣기</label> 
 		
 								<input type="text" name="post_Hashtag"
 									class="form-control" placeholder="ex)#삼성#스마트폰"maxlength="20">
 							</div>
-						</div>
-						<div class="form-group">
-							<label>제목</label> <input type="text" name="post_Title"
-								class="form-control" maxlength="40">
-							<label>링크</label> <input type="text" name="post_Link"
-								class="form-control" maxlength="80">		
-							<label>업로드 날짜</label> <input type="text" name="post_UploadDate"
-								class="form-control" maxlength="80">								
-														
-
-						</div>			
+						</div>	
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">취소</button>
@@ -259,10 +393,10 @@ ReWriteDAO reWriteDAO=new ReWriteDAO();
 				</div>
 			</div>
 		</div>
-	</div>
-<!-- 푸터 부분 -->
+	</div> 
+	
 	<%@ include file="footer.jsp" %>
-<!-- js 스크립 부분 -->
+<!-- js 스크립 부분 --> 
 	<script src="./js/jquery.min.js"></script>
 	<script src="./js/pooper.js"></script>
 	<script src="./js/bootstrap.min.js"></script>

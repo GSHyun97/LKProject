@@ -7,11 +7,11 @@
 <%
 request.setCharacterEncoding("UTF-8");
 	
-
+	
 	String post_Title = null;
 	String post_Link = null;	
 	String post_Hashtag = null;
-	String post_UploadDate = null;
+	int post_User = 0;
 	
 	if (request.getParameter("post_Title") != null) {
 		post_Title = request.getParameter("post_Title");
@@ -22,14 +22,13 @@ request.setCharacterEncoding("UTF-8");
 	if (request.getParameter("post_Hashtag") != null) {
 		post_Hashtag = request.getParameter("post_Hashtag");
 	}
-	if (request.getParameter("post_UploadDate") != null) {
-		post_UploadDate = request.getParameter("post_UploadDate");
+	if (request.getParameter("post_User") != null) {
+		post_User = Integer.parseInt(request.getParameter("post_User"));
 	}
-	
-	if (post_Title == null || post_Link == null || post_Hashtag == null ||
-	post_UploadDate == null || 
+
+	if (post_Title == null || post_Link == null || post_Hashtag == null || 
 	post_Title.equals("") || post_Link.equals("") 
-	|| post_Hashtag.equals("") || post_UploadDate.equals("") ) {
+	|| post_Hashtag.equals("")){
 	
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
@@ -39,9 +38,8 @@ request.setCharacterEncoding("UTF-8");
 		script.close();
 		return;
 	}
-	
 	user.PostDAO postDAO = new user.PostDAO();
-	int result = postDAO.write(new user.PostDTO(0, post_Title, post_Link, post_Hashtag, 0, 0, 0));
+	int result = postDAO.write(post_Title, post_Link, post_Hashtag, post_User);
 	if (result == -1) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");

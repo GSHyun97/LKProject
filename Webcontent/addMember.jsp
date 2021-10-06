@@ -197,7 +197,6 @@
 						<option value="nate.com">nate.com</option>
 					</select>  </div>
             
-            
             <input type="submit" class="btn btn-primary " value="회원가입" >
             <input type="reset" class="btn btn-primary " value="취소" onclick="location.href='login.jsp' ">
          

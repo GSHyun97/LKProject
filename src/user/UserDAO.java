@@ -45,7 +45,7 @@ public class UserDAO {
 	public int register(String user_Id, String user_Password, String user_Name, String user_Birth1, String user_Birth2, String user_Birth3, String user_Email1, String user_Email2) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String SQL="INSERT INTO USER VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";     
+		String SQL="INSERT INTO USER VALUES (,?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";     
 		try {
 			pstmt = conn.prepareStatement(SQL);      							
 			pstmt.setString(1, user_Id);   

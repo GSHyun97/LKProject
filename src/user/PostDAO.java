@@ -159,19 +159,14 @@ public class PostDAO {
 		}
 		return -1;
 	}
-	public int write(PostDTO write) {
-        String SQL = "INSERT INTO POST VALUES (0, ? , ? , CURRENT_TIMESTAMP , 0 , 0 , 0)";
-
+	public int write(String post_Title, String post_Link, String post_Hashtag, int post_User) {
+        String SQL = "INSERT INTO POST VALUES (post_Number, ?, ?, ?, CURRENT_TIMESTAMP , 0 , 0 ,0, 1, ?)";
         try {
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1,write.getPost_count());
-            pstmt.setString(1,write.getPost_Title());
-            pstmt.setString(2,write.getPost_Link());
-            pstmt.setString(3,write.getPost_Hashtag());
-            pstmt.setInt(5,write.getPost_View());
-            pstmt.setInt(6,write.getPost_Like());
-            pstmt.setInt(7,write.getPost_Report());
-
+            pstmt.setString(1,post_Title);
+            pstmt.setString(2,post_Link);
+            pstmt.setString(3,post_Hashtag);
+            pstmt.setInt(4,post_User);
             return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -307,7 +302,7 @@ public class PostDAO {
 
 	
 	
-	public int[][] postnum(int mpn) {
+	public int[][]postnum(int mpn) {
 		String SQL ="SELECT post_Number FROM post WHERE post_seeState=1 ORDER BY post_Number";
 		int[][] post=new int[mpn][8];
 		try {
