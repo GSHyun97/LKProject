@@ -106,7 +106,7 @@ String[] hashrankView=hashDAO.HashRankingView(10);
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
 			<div class="row"> 
-				<%for(int i=1;i<=postDAO.dbCount("post");i++){
+				<%for(int i=1;i<=postDAO.dbCount();i++){
 					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
 					if( seeState==1){
 				String originalAddress=postDAO.seeVideo(i);
