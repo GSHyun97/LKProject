@@ -26,7 +26,7 @@ d-flex{
 
 body {
   font-family: 'hanna';
-  background: linear-gradient(135deg, var(--background-color1), var(--background-color4));
+  background: linear-gradient(90deg, var(--background-color1), var(--background-color4));
 }
 .navbar {
   margin-bottom: 0;

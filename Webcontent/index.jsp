@@ -28,10 +28,11 @@ ul{
 li{
 	display:inline-block;
 	padding: 10px;
+	font-size: 16px;
 }
 </style>
 </head>
-<body>
+<body style="background: linear-gradient(270deg, #fbcac9, #8ca6ce);">
 
 <%
 UserDAO userDAO = new UserDAO();
@@ -136,8 +137,8 @@ if(user_Number>0) headerSeeState=1;
 
 
 <!-- 태그 삽입 부분 -->
-<nav class="hot">
-	<span>Hot Trend</span>
+<nav class="hot" >
+	<span style="font-size: 30px;">Hot Trend</span>
 </nav>
 <nav>
 	<ul class="a">
@@ -146,72 +147,13 @@ if(user_Number>0) headerSeeState=1;
 	  <%} %>
     </ul>
 </nav>
-
-<!--  메인페이지 헤더 부분화면
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">로고</a>  
-    <div class="dropdown">
-	  <button class="navbar-toggler" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-	    <a class="dropdown-item" href="#">로그인</a>
-	    <a class="dropdown-item" href="#">회원가입</a>
-	    <a class="dropdown-item" href="#">비인칸</a>
-	  </div>
-	</div>
-   </div>
-</nav> -->
-<!-- 메인페이지 바디 검색 부분화면 
-<nav>
-	<div class="container" style="text-align: center; margin: 0auto;" > 
-	<div style="display: inline-block; padding-left:0;"> 
-	 	<form action="./index.jsp" method="get"
-		class="form-inline my-2 my-lg0">
-		<input type="text" class="form-control mr-sm-2" name="search"
-		placeholder="내용을 입력하세요." aria-label="search">
-		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-		</form>
-	</div> 
-	</div> -->
-	
-<!-- 중앙 바디 부분 
-</nav>
-	<section class="container">
-	<div class="container" style="text-align: center; margin: 0auto;" > 
-  	<div style="border: 1px solid; display: inline-block;"> 
-		<form method="get" action="./index.jsp" class="form-inline mt-3">
-			<select name="LectureDivide" class="form-control mx-1 mt-2">
-				<option value="전체">전체</option>
-				<option value="전공" >예1</option>
-				<option value="교양" >예2</option>
-
-			</select> 
-			<select name="searchType" class="form-control mx-1 mt-2">
-				<option value="최신순">최신순</option>
-				<option value="최신순">조회순</option>
-				<option value="최신순">좋아요순</option>
-			</select>
-			
-			<input type="text" name="search" class="form-control mx-1 mt-2"
-				placeholder="ex)#삼성#스마트폰">
-			<button type="submit" class="btn btn-primary mx-1 mt-2">검색</button>
-			<a class="btn btn-primary mx-1 mt-2" data-toggle="modal"
-				href="#registerModal">등록하기</a> <a class="btn btn-danger mx-1 mt-2"
-				data-toggle="modal" href="#reportModal">신고</a>
-		</form>
-	</div> 
-	</div>
-</section>
-	-->
 	<%
 		int postCount=postDAO.dbCount();
 		int mpn=(postCount%8==0)? postCount/8:postCount/8+1;
 	%>
 <section>	
-	<div class="container-fluid"> 
-		<div class="card-header bg-light">
+	<div class="container-fluid" style="background-color:transparent;"> 
+		<div class="card-header" style="background-color:transparent;">
 			<div class="row" id="post"> 
 				
 				<%
@@ -229,7 +171,7 @@ if(user_Number>0) headerSeeState=1;
 				String postLike=postDAO.seeLike(seei);
 				String postReport=postDAO.seeReport(seei);
 				%>
-				<div class="col-lg-3" style="border:1px solid gray; background-color:#eee;"> 
+				<div class="col-lg-3" style="border:1px solid gray; background-color:transparent;"> 
 		        <p></p>
 		        <div class='embed-container'>
 		        <iframe src=<%=playerAddress%>>
@@ -237,17 +179,22 @@ if(user_Number>0) headerSeeState=1;
 		        </div>
 		       
 		       
-		        <a onclick="openWin(<%=seei %>); refresh();"href=<%=originalAddress%> target="_blank"> <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
+		        <a onclick="openWin(<%=seei %>); refresh();"href=<%=originalAddress%> target="_blank" style="color:black;"> <%=postTitle%> </a> <!-- 09.29 현강섭,제목 클릭시 유튜브링크로 이동하면서 조회수 증가 -->
 		        
 				<p>                                                   <!-- 09.29 현강섭,해쉬태그 클릭시 검색 -->
 				<%String[] array=postHashtag.split("#"); %>
 					<% int j=1 ;%>
 					<%for(j=1;j<array.length;j++){%>
-					<a href="searchPage.jsp?search=<%=array[j]%>" >#<%=array[j]%></a>
+					<span
+					style="border-right: 2px solid rgba(0,0,0,0.2);
+				    border-left: 2px solid rgba(0,0,0,0.2);
+				    border-top: 2px solid rgba(0,0,0,0.2);
+				    border-bottom: 2px solid rgba(0,0,0,0.2); padding: 3px; border-radius: 15px;">
+					<a href="searchPage.jsp?search=<%=array[j]%>" style="color:black;" >#<%=array[j]%></a></span>
 					<%} %>
 				</p>
 				
-		        	<div class="col-sm-12" style="background-color:#eee;">
+		        	<div class="col-sm-12" style="background-color:transparent;">
 		        		<div class="row"> 
 		        		<div class="col-3 text-left" >
 		        		
@@ -277,7 +224,7 @@ if(user_Number>0) headerSeeState=1;
 					       		<%} %>
 					        <%} %>
 					        
-					        <a onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=seei%>"rel="noopener" target="_blank" moveTo(10000,1000)>신고</a>
+					        <a style="color:red;" onclick="if(!confirm('신고 하시겠습니까?')){return false;}" href="./reportAction.jsp?num=<%=seei%>"rel="noopener" target="_blank">신고</a>
 					        </div>
 		        		</div> 
 		        	</div>

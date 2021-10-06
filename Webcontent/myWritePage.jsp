@@ -32,7 +32,7 @@ li{
 
 </style>
 </head>
-<body>
+<body style="background: linear-gradient(270deg, #fbcac9, #8ca6ce);">
 <%
 UserDAO userDAO = new UserDAO();
 PostDAO postDAO = new PostDAO();
