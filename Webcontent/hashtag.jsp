@@ -30,7 +30,7 @@ ul{
         list-style: none;
 }
 li{
-	display:inline-block;
+	display:block;
 	padding: 10px;
 }
 body{
@@ -39,15 +39,17 @@ body{
 
 .jjj{
 	margin: 25px;
+	text-align: center;
+	font-size: 60px;
 }
-.kkk{
-	margin: 25px;
-}
+
 .rank{
 	text-align: center;
 	padding-top: 20px;
 	font-weight:bold;
-	
+}
+.bb{
+	font-size: 30px;
 }
 </style>
 </head>
@@ -76,7 +78,7 @@ String[] hashrankView=hashDAO.HashRankingView(10);
                     <div class="nav_list"> 
                     <a href="adminpage.jsp" class="nav_link"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">홈</span> </a> 
                     <!-- <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">회원 관리</span> </a> --> 
-                    <a href="hashtag.jsp" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">조회 수 관리</span> </a>
+                    <a href="hashtag.jsp" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">총 조회수</span> </a>
                 	</div>
                 </div>
             </nav>
@@ -90,42 +92,19 @@ String[] hashrankView=hashDAO.HashRankingView(10);
 </script>
 <!-- 헤더 부분-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand flex-grow-1" href="index.jsp"><span>HOT KEYWORD</span></a>
-        <div class="flex-grow-1 d-flex">
-            <form action="./searchPage.jsp" method="get"
-				class="form-inline my-2 my-lg0">
-				<input type="text" class="form-control mr-sm-2" name="search"
-					placeholder="내용을 입력하세요." aria-label="search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-			</form>
-        </div>
-        <div class="dropdown">
-        <button class="navbar-toggler" type="button" 
-        data-toggle="collapse" 
-        data-target="#navbarNavAltMarkup" 
-        aria-controls="navbarNavAltMarkup" 
-        aria-label="Toggle navigation" 
-        aria-expanded="false" >
-            <span class="navbar-toggler-icon" style="font-size:0.5rem;"></span>            
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-         </div>
-        </div>
-        </div>
+        <a class="navbar-brand" href="index.jsp"><span>HOT KEYWORD</span></a>
 </nav>
 	<h2 class="jjj">총 조회수 : <%=adminDAO.seeTotalView() %></h2>      <!--  //총조회수 -->  
-	<h4 class="kkk">태그 검색 수</h4>
 	
 	<div class="col-sm-12" style="background-color:#eee;">
 		<div class="row"> 
 			<div class="col-12 text-right">
-			<h5 class="rank">1 ~ 6위 (표시중)</h5>
-			<ul class="bb">	
+	<ul class="bb">	
 			
 	<%for(int i=0;i<6;i++){ %>
-      <li>#<%=hashrank[i] %>: <%=hashrankView[i] %>회</li>                <!-- 해시태그순위 -->
-	  <%} %>
+      <li><%=i+1%>위: #<%=hashrank[i] %>: <%=hashrankView[i] %>회</li>		 <!-- 해시태그순위 -->
+      <%} %>               
+	  
 	  
     </ul>			        
 			</div>
@@ -135,11 +114,10 @@ String[] hashrankView=hashDAO.HashRankingView(10);
 	<div class="col-sm-12" style="background-color: white;">
 		<div class="row"> 
 			<div class="col-12 text-right">
-
-	<h5 class="rank">7 ~ 10위</h5>
+			
 	<ul class="bb">
 	<%for(int i=6;i<10;i++){ %>
-      <li>#<%=hashrank[i] %>: <%=hashrankView[i] %>회</li>                <!-- 해시태그순위 -->
+      <li><%=i+1%>위 : #<%=hashrank[i] %>: <%=hashrankView[i] %>회</li>                <!-- 해시태그순위 -->
 	  <%} %>
     </ul>			        
 			</div>

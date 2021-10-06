@@ -63,7 +63,7 @@ String[] hashrankView=hashDAO.HashRankingView(10);
                     <div class="nav_list"> <a href="adminpage.jsp" class="nav_link active"> 
                     <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">홈</span> </a> 
                     <!-- <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">회원 관리</span> </a>  --> 
-                    <a href="hashtag.jsp" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">조회 수 관리</span> </a>
+                    <a href="hashtag.jsp" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">총 조회수</span> </a>
                 	</div>
                 </div>
             </nav>
@@ -77,29 +77,7 @@ String[] hashrankView=hashDAO.HashRankingView(10);
 </script>
 <!-- 헤더 부분-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand flex-grow-1" href="index.jsp"><span>HOT KEYWORD</span></a>
-        <div class="flex-grow-1 d-flex">
-            <form action="./searchPage.jsp" method="get"
-				class="form-inline my-2 my-lg0">
-				<input type="text" class="form-control mr-sm-2" name="search"
-					placeholder="내용을 입력하세요." aria-label="search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-			</form>
-        </div>
-        <div class="dropdown">
-        <button class="navbar-toggler" type="button" 
-        data-toggle="collapse" 
-        data-target="#navbarNavAltMarkup" 
-        aria-controls="navbarNavAltMarkup" 
-        aria-label="Toggle navigation" 
-        aria-expanded="false" >
-            <span class="navbar-toggler-icon" style="font-size:0.5rem;"></span>            
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-         </div>
-         </div>
-        </div>
+        <a class="navbar-brand" href="index.jsp"><span>HOT KEYWORD</span></a>     
 </nav>
 
 <section>	
