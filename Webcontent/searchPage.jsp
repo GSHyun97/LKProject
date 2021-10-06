@@ -68,6 +68,7 @@ function UnBookmarkopenWin(num,userNum){
 </script>
 
 <!-- 헤더 부분-->
+
 <%
 String user_Id = null;
 int user_Number=0;
@@ -143,7 +144,7 @@ if(user_Number>0) headerSeeState=1;
 	<div class="container-fluid"> 
 		<div class="card-header bg-light">
 			<div class="row" id="post"> 
-				<%for(int i=1;i<=postDAO.dbCount("post");i++){                    //모든 postDB탐색
+				<%for(int i=1;i<=postDAO.dbCount();i++){                    //모든 postDB탐색
 					int seeState=postDAO.seeState(i);                             //삭제유무 판별할 변수
 					int searchState=postDAO.searchPost(i,search);
 					if( seeState==1 && searchState==1){	

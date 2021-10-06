@@ -1,5 +1,5 @@
 package user;
-// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ database access object
+// ¿¬µ¿ ½ÃÅ°±â database access object
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,11 +8,11 @@ import java.sql.ResultSet;
 
 
 public class ReWriteDAO {
-   private Connection conn;                                  //DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Ã¼
-   private PreparedStatement pstmt;                             //SQLï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò°ï¿½ï¿½ï¿½
-   private ResultSet rs;                                     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+   private Connection conn;                                  //DB¿¡ Á¢±ÙÇÏ°Ô ÇØÁÖ´Â °´Ã¼
+   private PreparedStatement pstmt;                             //SQL¹®Àå »ğÀÔÇÒ°ÅÀÓ
+   private ResultSet rs;                                     //Á¤º¸¸¦ ´ãÀ» °´Ã¼
 
-   public ReWriteDAO() {                                          //ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+   public ReWriteDAO() {                                          //ÀÌ Å¬·¡½º°¡ »ı¼ºµÉ ¶§ DB¿Í ¿¬°á
       try {
          String dbURL="jdbc:mysql://localhost:3306/KProject";
          String dbID="root";
@@ -37,21 +37,22 @@ public class ReWriteDAO {
    }
    
    public void hashtagViewReWrite(int num) {
-	   System.out.println("í•´ì‰¬íƒœê·¸ë¦¬ë¡¸ì´íŠ¸ ì‹¤í–‰");
-      String[] array=(new PostDAO().seeHashtag(num)).split("#");
-      String SQL="UPDATE hashtag SET hashtag_View=hashtag_View+1 WHERE hashtag_Name=?";
-      
-      try {
-         for(int i=1;i<array.length;i++) {
-            pstmt=conn.prepareStatement(SQL);
-            pstmt.setString(1, array[i]);
-            pstmt.executeUpdate();
-         }
-         System.out.println("í•´ì‰¬íƒœê·¸ë¦¬ë¡¸ì´íŠ¸ ì¢…ë£Œ");
-      }catch(Exception e) {
-         e.printStackTrace();
-      }
+	      String[] array=(new PostDAO().seeHashtag(num)).split("#");
+	      String SQL=
+	    	"		UPDATE hashtag "
+	    	+ "		SET hashtag_View = hashtag_View + 1 "
+	    	+ "		WHERE hashtag_Name = ? ";
+	      try {
+	    	  pstmt=conn.prepareStatement(SQL);
+	         for(int i=1;i<array.length;i++) {
+	            pstmt.setString(1, array[i].trim());
+	            pstmt.executeUpdate();
+	         }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }
    }
+   
    public void ReportReWrite(int num) {
       String SQL ="UPDATE post SET post_Report= post_Report+1 WHERE post_Number=?";
       try {
@@ -67,7 +68,7 @@ public class ReWriteDAO {
    
    
    
-   //------------------------ï¿½ï¿½ï¿½Æ¿ï¿½----------------------------
+   //------------------------ÁÁ¾Æ¿ä----------------------------
    public void LikeReWrite(int num) {
       String SQL ="UPDATE post SET post_Like=post_Like+1 WHERE post_number=?";
       
@@ -130,9 +131,9 @@ public class ReWriteDAO {
       }
       return false;
    }
-   //------------------------------------ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½---------------------------------
+   //------------------------------------ÁÁ¾Æ¿ä ³¡---------------------------------
    
-   //------------------------------------ï¿½Ï¸ï¿½Å© ï¿½ï¿½ï¿½ï¿½-------------------------------
+   //------------------------------------ºÏ¸¶Å© ½ÃÀÛ-------------------------------
    public void BookmarkUserReWrite(int num,int userNum) {
 	      String SQL ="INSERT INTO postBookmarkUser VALUES(?,?)";
 	      

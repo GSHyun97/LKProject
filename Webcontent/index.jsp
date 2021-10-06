@@ -206,7 +206,7 @@ if(user_Number>0) headerSeeState=1;
 </section>
 	-->
 	<%
-		int postCount=postDAO.dbCount("post");
+		int postCount=postDAO.dbCount();
 		int mpn=(postCount%8==0)? postCount/8:postCount/8+1;
 	%>
 <section>	
@@ -216,11 +216,6 @@ if(user_Number>0) headerSeeState=1;
 				
 				<%
 					int[][] post=postDAO.postnum(mpn);
-				/*for(int i=0;i<mpn;i++) {
-					for(int j=0;j<8;j++) {
-						System.out.println("["+i+"]"+"["+j+"]:"+post[i][j]);
-					}
-				}*/
 				%>
 				
 				<%for(int i=0; i<8;i++){                    
